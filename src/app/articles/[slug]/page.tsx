@@ -7,6 +7,27 @@ import ArticleShareButton from "@/components/articles/ArticleShareButton";
 
 export const revalidate = 60;
 
+export async function generateMetadata({ params }: { params: { slug: string } }) {
+    const supabase = await createClient();
+    const { slug } = await params;
+
+    const { data: article } = await supabase
+        .from("articles")
+        .select("title")
+        .eq("id", slug)
+        .single();
+
+    if (!article) {
+        return {
+            title: "Artikel Tidak Ditemukan",
+        };
+    }
+
+    return {
+        title: article.title,
+    };
+}
+
 export default async function ArticlePage({ params }: { params: { slug: string } }) {
     const supabase = await createClient();
     const { slug } = await params;

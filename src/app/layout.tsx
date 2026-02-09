@@ -9,7 +9,10 @@ const jakartaSans = Plus_Jakarta_Sans({
 });
 
 export const metadata: Metadata = {
-  title: "Pusat Informasi",
+  title: {
+    template: "%s | HIMA PSTI",
+    default: "HIMA PSTI", // Fallback if no title is set in child pages
+  },
   description: "Pusat Informasi HIMA PSTI",
 };
 

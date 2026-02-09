@@ -6,6 +6,27 @@ import { notFound } from "next/navigation";
 
 export const revalidate = 60;
 
+export async function generateMetadata({ params }: { params: { slug: string } }) {
+    const supabase = await createClient();
+    const { slug } = await params;
+
+    const { data: category } = await supabase
+        .from("categories")
+        .select("title")
+        .eq("slug", slug)
+        .single();
+
+    if (!category) {
+        return {
+            title: "Kategori Tidak Ditemukan",
+        };
+    }
+
+    return {
+        title: category.title,
+    };
+}
+
 export default async function CategoryPage({ params }: { params: { slug: string } }) {
     const supabase = await createClient();
     const { slug } = await params;

@@ -6,6 +6,14 @@ import Link from "next/link";
 
 export const dynamic = 'force-dynamic'; // Force dynamic rendering for search
 
+export async function generateMetadata({ searchParams }: { searchParams: { q: string } }) {
+    const { q } = await searchParams;
+    const query = q || "Pencarian";
+    return {
+        title: `Pencarian: ${query}`,
+    };
+}
+
 export default async function SearchPage({ searchParams }: { searchParams: { q: string } }) {
     const supabase = await createClient();
     const { q } = await searchParams;
