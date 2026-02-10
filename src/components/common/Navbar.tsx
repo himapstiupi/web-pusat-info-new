@@ -28,6 +28,12 @@ export default function Navbar() {
                         >
                             Beranda
                         </Link>
+                        <Link
+                            href="https://www.himapstiupi.com/"
+                            className="text-text-main dark:text-gray-300 hover:text-primary dark:hover:text-primary transition-colors text-sm font-medium"
+                        >
+                            Official Website
+                        </Link>
                     </nav>
                     <div className="h-6 w-px bg-border-light dark:bg-border-dark"></div>
                     <Link
