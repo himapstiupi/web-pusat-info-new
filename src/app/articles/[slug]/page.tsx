@@ -4,6 +4,7 @@ import Footer from "@/components/common/Footer";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import ArticleShareButton from "@/components/articles/ArticleShareButton";
+import ArticleFeedback from "@/components/articles/ArticleFeedback";
 
 export const revalidate = 60;
 
@@ -124,19 +125,11 @@ export default async function ArticlePage({ params }: { params: { slug: string }
                     )}
 
                     {/* Feedback Section */}
-                    <div className="mt-16 pt-8 border-t border-border-light dark:border-border-dark text-center">
-                        <h4 className="text-lg font-bold text-text-main dark:text-white mb-4">Apakah artikel ini membantu?</h4>
-                        <div className="flex justify-center gap-4">
-                            <button className="flex items-center gap-2 px-6 py-2 rounded-full border border-border-light dark:border-border-dark hover:bg-green-50 hover:border-green-200 hover:text-green-600 dark:hover:bg-green-900/20 transition-all">
-                                <span className="material-symbols-outlined">thumb_up</span>
-                                Ya, membantu
-                            </button>
-                            <button className="flex items-center gap-2 px-6 py-2 rounded-full border border-border-light dark:border-border-dark hover:bg-red-50 hover:border-red-200 hover:text-red-600 dark:hover:bg-red-900/20 transition-all">
-                                <span className="material-symbols-outlined">thumb_down</span>
-                                Tidak
-                            </button>
-                        </div>
-                    </div>
+                    <ArticleFeedback
+                        slug={slug}
+                        initialLikes={article.likes || 0}
+                        initialDislikes={article.dislikes || 0}
+                    />
                 </article>
             </main>
             <Footer />

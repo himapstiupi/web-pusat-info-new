@@ -24,10 +24,14 @@ export default function EditCategoryPage() {
         const fetchCategory = async () => {
             setLoading(true);
             try {
+                // Use params.categoryId instead of params.id
+                const categoryId = params.categoryId;
+                if (!categoryId) throw new Error("Kategori tidak ditemukan");
+
                 const { data, error } = await supabase
                     .from("categories")
                     .select("*")
-                    .eq("id", params.id)
+                    .eq("id", categoryId)
                     .single();
 
                 if (error) throw error;
@@ -44,10 +48,10 @@ export default function EditCategoryPage() {
             }
         };
 
-        if (params.id) {
+        if (params.categoryId) {
             fetchCategory();
         }
-    }, [params.id]);
+    }, [params.categoryId]);
 
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
@@ -63,7 +67,7 @@ export default function EditCategoryPage() {
                     description,
                     icon,
                 })
-                .eq("id", params.id);
+                .eq("id", params.categoryId);
 
             if (updateError) throw updateError;
 

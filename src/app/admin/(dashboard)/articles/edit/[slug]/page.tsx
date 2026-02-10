@@ -59,10 +59,14 @@ export default function EditArticlePage() {
                 if (catData) setCategories(catData);
 
                 // Fetch article
+                // Note: params.slug is used here instead of params.id
+                const slug = params.slug;
+                if (!slug) throw new Error("Artikel tidak ditemukan");
+
                 const { data: articleData, error: articleError } = await supabase
                     .from("articles")
                     .select("*")
-                    .eq("id", params.id)
+                    .eq("id", slug) // Assumes 'id' column stores the slug
                     .single();
 
                 if (articleError) throw articleError;
@@ -94,10 +98,10 @@ export default function EditArticlePage() {
             }
         };
 
-        if (params.id) {
+        if (params.slug) {
             fetchData();
         }
-    }, [params.id]);
+    }, [params.slug]);
 
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
@@ -127,7 +131,7 @@ export default function EditArticlePage() {
                     created_at: createdAtUpdate,
                     is_published: isPublished,
                 })
-                .eq("id", params.id);
+                .eq("id", params.slug);
 
             if (updateError) throw updateError;
 
