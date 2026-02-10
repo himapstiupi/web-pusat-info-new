@@ -16,9 +16,9 @@ function LoginForm() {
     useEffect(() => {
         const errorType = searchParams.get("error");
         if (errorType === "account_suspended") {
-            setError("Akun Anda telah dinonaktifkan. Silakan hubungi administrator website untuk informasi lebih lanjut.");
+            setError("Akun Anda telah dinonaktifkan. Silakan hubungi Departemen Kominfo untuk informasi lebih lanjut.");
         } else if (errorType === "account_not_approved") {
-            setError("Akun Anda belum disetujui. Harap tunggu persetujuan Superadmin.");
+            setError("Akun Anda belum disetujui. Harap tunggu persetujuan atau hubungi Departemen Kominfo.");
         }
     }, [searchParams]);
 
@@ -50,12 +50,12 @@ function LoginForm() {
                     // Check Status
                     if (profile.status === 'pending') {
                         await supabase.auth.signOut();
-                        setError("Akun Anda masih menunggu persetujuan Superadmin.");
+                        setError("Akun Anda masih menunggu persetujuan.");
                         return;
                     }
                     if (profile.status === 'rejected') {
                         await supabase.auth.signOut();
-                        setError("Akun Anda telah ditolak.");
+                        setError("Akun Anda telah dihapus aksesnya. Silahkan hubungi Departemen Kominfo untuk informasi lebih lanjut.");
                         return;
                     }
 
@@ -80,11 +80,11 @@ function LoginForm() {
         <div className="relative z-10 w-full max-w-md px-4 sm:px-6">
             <div className="bg-surface-light dark:bg-surface-dark rounded-2xl shadow-xl border border-border-light dark:border-border-dark p-6 sm:p-8 md:p-10">
                 <div className="text-center mb-6 sm:mb-8">
-                    <div className="inline-flex items-center justify-center text-primary mb-4 bg-blue-50 dark:bg-primary/10 w-14 h-14 sm:w-16 sm:h-16 rounded-full">
-                        <span className="material-symbols-outlined text-3xl sm:text-4xl">local_library</span>
+                    <div className="inline-flex items-center justify-center mb-4 w-20 h-20 sm:w-24 sm:h-24">
+                        <img src="/hima-logo.png" alt="Logo HIMA PSTI" className="w-full h-full object-contain" />
                     </div>
-                    <h1 className="text-xl sm:text-2xl font-bold text-text-main dark:text-white tracking-tight">Selamat Datang Kembali</h1>
-                    <p className="text-text-sub dark:text-gray-400 text-xs sm:text-sm mt-2">Masuk ke akun Pusat Informasi Anda</p>
+                    <h1 className="text-xl sm:text-2xl font-bold text-text-main dark:text-white tracking-tight">Login ke Akun</h1>
+                    <p className="text-text-sub dark:text-gray-400 text-xs sm:text-sm mt-2">Masuk ke akun untuk mengelola website</p>
                 </div>
                 <form onSubmit={handleLogin} className="space-y-5 sm:space-y-6">
                     {error && (
@@ -112,7 +112,7 @@ function LoginForm() {
                         </div>
                     </div>
                     <div className="space-y-2">
-                        <label className="block text-xs sm:text-sm font-medium text-text-main dark:text-gray-200" htmlFor="password">Password</label>
+                        <label className="block text-xs sm:text-sm font-medium text-text-main dark:text-gray-200" htmlFor="password">Kata Sandi</label>
                         <div className="relative">
                             <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-text-sub dark:text-gray-500">
                                 <span className="material-symbols-outlined text-lg sm:text-xl">lock</span>
@@ -139,8 +139,8 @@ function LoginForm() {
                 </form>
                 <div className="mt-6 sm:mt-8 text-center">
                     <p className="text-xs sm:text-sm text-text-sub dark:text-gray-400">
-                        Belum punya akun?
-                        <Link className="font-semibold text-primary hover:text-primary-dark transition-colors ml-1" href="/admin/register">Daftar di sini</Link>
+                        Belum punya akun? Daftar
+                        <Link className="font-semibold text-primary hover:text-primary-dark transition-colors ml-1" href="/admin/register">di sini</Link>
                     </p>
                 </div>
             </div>

@@ -58,8 +58,8 @@ export default function RegisterPage() {
                     </div>
                     <h2 className="text-xl sm:text-2xl font-bold text-text-main dark:text-white">Pendaftaran Berhasil!</h2>
                     <p className="text-sm sm:text-base text-text-sub dark:text-gray-400">
-                        Akun Anda telah dibuat dan sedang menunggu persetujuan Superadmin.
-                        Silakan cek email Anda atau hubungi administrator.
+                        Akun Anda telah dibuat dan sedang dalam proses verifikasi oleh Departemen Kominfo.
+                        Silahkan coba login jika akun Anda telah disetujui.
                     </p>
                     <Link href="/admin/login" className="inline-block px-5 sm:px-6 py-2 sm:py-2.5 bg-primary text-white rounded-lg text-sm font-medium hover:bg-primary-dark transition-colors">
                         Kembali ke Login
@@ -110,7 +110,7 @@ export default function RegisterPage() {
                             </div>
                             <div className="space-y-1.5">
                                 <label className="block text-xs sm:text-sm font-semibold text-text-main dark:text-gray-200" htmlFor="password">
-                                    Password
+                                    Kata Sandi
                                 </label>
                                 <div className="relative">
                                     <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-gray-400">
@@ -121,7 +121,7 @@ export default function RegisterPage() {
                             </div>
                             <div className="space-y-1.5">
                                 <label className="block text-xs sm:text-sm font-semibold text-text-main dark:text-gray-200" htmlFor="confirm-password">
-                                    Konfirmasi Password
+                                    Konfirmasi Kata Sandi
                                 </label>
                                 <div className="relative">
                                     <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-gray-400">
@@ -144,7 +144,7 @@ export default function RegisterPage() {
                         </div>
                     </div>
                     <p className="mt-4 sm:mt-6 text-center text-xs text-text-sub dark:text-gray-500">
-                        © 2026 Pusat Informasi. Hak cipta dilindungi.
+                        © 2026 Departemen Kominfo - HIMA PSTI.
                     </p>
                 </div>
             </main>

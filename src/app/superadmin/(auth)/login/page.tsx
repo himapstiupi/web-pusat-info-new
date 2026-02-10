@@ -48,7 +48,7 @@ function SuperAdminLoginForm() {
                     router.push("/superadmin/dashboard");
                 } else {
                     await supabase.auth.signOut();
-                    setError("Akses Ditolak: Anda bukan Superadmin.");
+                    setError("Akses Ditolak! Anda bukan Superadmin.");
                 }
             }
         } catch (err: any) {
@@ -106,7 +106,7 @@ function SuperAdminLoginForm() {
                     </div>
 
                     <div className="space-y-2">
-                        <label className="text-xs font-bold text-[#ad92c9] uppercase tracking-wider ml-1" htmlFor="password">Password</label>
+                        <label className="text-xs font-bold text-[#ad92c9] uppercase tracking-wider ml-1" htmlFor="password">Kata Sandi</label>
                         <div className="relative group">
                             <span className="material-symbols-outlined absolute left-3 sm:left-4 top-1/2 -translate-y-1/2 text-[#ad92c9] text-lg sm:text-xl group-focus-within:text-[#660fbd] transition-colors">lock_open</span>
                             <input
@@ -124,14 +124,12 @@ function SuperAdminLoginForm() {
                         </div>
                     </div>
 
-                    {/* Authenticator Code section removed as requested */}
-
                     <button
                         type="submit"
                         disabled={loading}
                         className="w-full bg-[#660fbd] hover:bg-[#660fbd]/90 text-white font-bold py-3 sm:py-4 rounded-xl shadow-lg shadow-[#660fbd]/30 transition-all flex items-center justify-center gap-2 group mt-4 disabled:opacity-70 disabled:cursor-not-allowed text-sm sm:text-base"
                     >
-                        <span>{loading ? "Memverifikasi..." : "Masuk ke Panel Kontrol"}</span>
+                        <span>{loading ? "Memverifikasi..." : "Masuk"}</span>
                         {!loading && <span className="material-symbols-outlined text-lg sm:text-xl group-hover:translate-x-1 transition-transform">arrow_forward</span>}
                     </button>
                 </form>
