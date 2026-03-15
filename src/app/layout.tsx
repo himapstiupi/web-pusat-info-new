@@ -13,7 +13,7 @@ export const metadata: Metadata = {
     template: "%s | HIMA PSTI",
     default: "HIMA PSTI", // Fallback if no title is set in child pages
   },
-  description: "Pusat Informasi HIMA PSTI",
+  description: "Website resmi Himpunan Mahasiswa Program Studi Pendidikan Sistem dan Teknologi Informasi",
 };
 
 export default function RootLayout({

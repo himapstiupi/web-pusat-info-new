@@ -46,7 +46,7 @@ export default async function SearchPage({ searchParams }: { searchParams: { q: 
                     <div className="space-y-4">
                         {articles && articles.length > 0 ? (
                             articles.map((article) => (
-                                <Link key={article.id} href={`/articles/${article.id}`} className="block bg-surface-light dark:bg-surface-dark border border-border-light dark:border-border-dark rounded-xl p-6 hover:shadow-md hover:border-primary/50 transition-all group">
+                                <Link key={article.id} href={`/informasi/${(article.categories as any)?.slug || 'umum'}/${article.id}`} className="block bg-surface-light dark:bg-surface-dark border border-border-light dark:border-border-dark rounded-xl p-6 hover:shadow-md hover:border-primary/50 transition-all group">
                                     <div className="flex items-start justify-between gap-4">
                                         <div>
                                             <div className="flex items-center gap-2 mb-2">

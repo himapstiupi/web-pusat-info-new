@@ -15,7 +15,6 @@ export default function Navbar() {
                     </div>
                     <div>
                         <h1 className="text-text-main dark:text-white text-lg font-bold leading-none tracking-tight group-hover:text-primary transition-colors">HIMA PSTI</h1>
-                        <p className="text-text-sub dark:text-gray-400 text-xs font-medium">Pusat Informasi</p>
                     </div>
                 </Link>
 
@@ -26,13 +25,25 @@ export default function Navbar() {
                             href="/"
                             className="text-text-main dark:text-gray-300 hover:text-primary dark:hover:text-primary transition-colors text-sm font-medium"
                         >
-                            Beranda
+                            Home
                         </Link>
                         <Link
-                            href="https://www.himapstiupi.com/"
+                            href="/tentang-kami"
                             className="text-text-main dark:text-gray-300 hover:text-primary dark:hover:text-primary transition-colors text-sm font-medium"
                         >
-                            Official Website
+                            Tentang Kami
+                        </Link>
+                        <Link
+                            href="/struktur-organisasi"
+                            className="text-text-main dark:text-gray-300 hover:text-primary dark:hover:text-primary transition-colors text-sm font-medium"
+                        >
+                            Struktur Organisasi
+                        </Link>
+                        <Link
+                            href="/informasi"
+                            className="text-text-main dark:text-gray-300 hover:text-primary dark:hover:text-primary transition-colors text-sm font-medium"
+                        >
+                            Informasi
                         </Link>
                     </nav>
                     <div className="h-6 w-px bg-border-light dark:bg-border-dark"></div>
@@ -67,9 +78,31 @@ export default function Navbar() {
                                 className="text-text-main dark:text-gray-200 hover:text-primary dark:hover:text-primary font-medium text-base py-2 border-b border-gray-100 dark:border-gray-800"
                                 onClick={() => setIsMobileMenuOpen(false)}
                             >
-                                Beranda
+                                Home
+                            </Link>
+                            <Link
+                                href="/tentang-kami"
+                                className="text-text-main dark:text-gray-200 hover:text-primary dark:hover:text-primary font-medium text-base py-2 border-b border-gray-100 dark:border-gray-800"
+                                onClick={() => setIsMobileMenuOpen(false)}
+                            >
+                                Tentang Kami
+                            </Link>
+                            <Link
+                                href="/struktur-organisasi"
+                                className="text-text-main dark:text-gray-200 hover:text-primary dark:hover:text-primary font-medium text-base py-2 border-b border-gray-100 dark:border-gray-800"
+                                onClick={() => setIsMobileMenuOpen(false)}
+                            >
+                                Struktur Organisasi
+                            </Link>
+                            <Link
+                                href="/informasi"
+                                className="text-text-main dark:text-gray-200 hover:text-primary dark:hover:text-primary font-medium text-base py-2 border-b border-gray-100 dark:border-gray-800"
+                                onClick={() => setIsMobileMenuOpen(false)}
+                            >
+                                Informasi
                             </Link>
                         </nav>
+
                         <div className="pt-2">
                             <Link
                                 href="https://tr.ee/himapstiupi"

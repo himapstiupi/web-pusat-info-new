@@ -1,81 +1,114 @@
 import Navbar from "@/components/common/Navbar";
 import Footer from "@/components/common/Footer";
-import CategoryCard from "@/components/home/CategoryCard";
 import Link from "next/link";
-import { createClient } from "@/lib/supabase/server";
+import { getHomepageContent } from "@/actions/pages";
 
-import { Metadata } from "next";
+export const dynamic = "force-dynamic";
 
-export const revalidate = 60; // Revalidate every 60 seconds
-
-export const metadata: Metadata = {
+export const metadata = {
   title: "Beranda",
 };
 
 export default async function Home() {
-  const supabase = await createClient();
-
-  // Fetch Categories
-  const { data: categories } = await supabase
-    .from("categories")
-    .select("*")
-    .order("id", { ascending: true });
+  const c = await getHomepageContent();
 
   return (
     <div className="flex flex-col min-h-screen">
       <Navbar />
-      <main className="flex-grow flex flex-col w-full">
+      <main className="flex-grow">
         {/* Hero Section */}
-        <section className="relative w-full bg-surface-light dark:bg-background-dark overflow-hidden">
-          {/* Background Decoration */}
-          <div className="absolute inset-0 z-0 opacity-40 dark:opacity-20 pointer-events-none" data-alt="Abstract soft blue gradient blobs for background atmosphere" style={{ backgroundImage: "radial-gradient(circle at 10% 20%, rgba(19, 91, 236, 0.1) 0%, transparent 40%), radial-gradient(circle at 90% 80%, rgba(19, 91, 236, 0.1) 0%, transparent 40%)" }}></div>
-          <div className="relative z-10 max-w-7xl mx-auto px-4 md:px-10 py-16 md:py-24 flex flex-col items-center justify-center text-center">
-            <div className="mb-8 space-y-4 max-w-2xl">
-              <h2 className="text-4xl md:text-5xl font-black text-text-main dark:text-white tracking-tight leading-tight">
-                Apa yang bisa kami bantu?
-              </h2>
-              <p className="text-text-sub dark:text-gray-400 text-lg leading-relaxed">
-                Temukan jawaban mengenai PSTI di sini.
-              </p>
+        <section className="relative h-[400px] w-full overflow-hidden bg-primary/10">
+          <div className="absolute inset-0 bg-gradient-to-r from-primary/80 to-transparent z-10"></div>
+          <img
+            alt="Hero"
+            className="h-full w-full object-cover"
+            src={c.hero.image_url}
+          />
+          <div className="absolute inset-0 z-20 flex flex-col justify-center">
+            <div className="mx-auto max-w-[1200px] w-full px-6">
+              <div className="max-w-2xl">
+                <h1 className="text-4xl md:text-5xl font-bold text-white leading-tight">
+                  {c.hero.title}
+                </h1>
+                <p className="mt-4 text-lg text-white/90">{c.hero.description}</p>
+              </div>
             </div>
-            {/* Search Bar */}
-            <form action="/search" method="get" className="w-full max-w-2xl relative group">
-              <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none text-text-sub dark:text-gray-500 group-focus-within:text-primary transition-colors">
-                <span className="material-symbols-outlined">search</span>
-              </div>
-              <input
-                name="q"
-                className="block w-full h-14 pl-12 pr-32 rounded-xl border border-border-light dark:border-border-dark bg-white dark:bg-surface-dark text-text-main dark:text-white shadow-lg shadow-gray-200/50 dark:shadow-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all placeholder:text-gray-400 text-base"
-                placeholder="Cari topik, kata kunci, atau pertanyaan..."
-                type="text"
-              />
-              <div className="absolute inset-y-0 right-2 flex items-center">
-                <button type="submit" className="bg-primary hover:bg-primary-dark text-white text-sm font-bold h-10 px-6 rounded-lg transition-colors">
-                  Cari
-                </button>
-              </div>
-            </form>
           </div>
         </section>
-        {/* Main Content Area */}
-        <div className="max-w-7xl mx-auto w-full px-4 md:px-10 py-12 space-y-16">
-          {/* Categories Grid */}
-          <section>
-            <div className="flex items-center gap-2 mb-6">
-              <span className="material-symbols-outlined text-primary">grid_view</span>
-              <h3 className="text-2xl font-bold text-text-main dark:text-white tracking-tight leading-snug">Semua Kategori</h3>
+
+        {/* Mission & Vision */}
+        <section className="mx-auto max-w-[1200px] px-6 py-20">
+          <div className="grid md:grid-cols-2 gap-16 items-center">
+            <div className="flex flex-col">
+              <h2 className="text-3xl font-bold text-slate-900 dark:text-white mb-8">Visi &amp; Misi Kami</h2>
+              <div className="space-y-8">
+                <div className="flex gap-4">
+                  <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-primary/10 text-primary">
+                    <span className="material-symbols-outlined">visibility</span>
+                  </div>
+                  <div>
+                    <h3 className="text-xl font-bold">Visi</h3>
+                    <p className="mt-2 text-slate-600 dark:text-slate-400">{c.mission_vision.visi}</p>
+                  </div>
+                </div>
+                <div className="flex gap-4">
+                  <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-primary/10 text-primary">
+                    <span className="material-symbols-outlined">rocket_launch</span>
+                  </div>
+                  <div>
+                    <h3 className="text-xl font-bold">Misi</h3>
+                    <ul className="mt-2 list-disc list-inside space-y-2 text-slate-600 dark:text-slate-400">
+                      {c.mission_vision.misi.map((m, i) => <li key={i}>{m}</li>)}
+                    </ul>
+                  </div>
+                </div>
+              </div>
             </div>
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-              {categories && categories.length > 0 ? (
-                categories.map((cat) => (
-                  <CategoryCard key={cat.id} name={cat.title} slug={cat.slug} description={cat.description} icon={cat.icon} />
-                ))
-              ) : (
-                <p className="text-text-sub col-span-full text-center py-8">Belum ada kategori tersedia.</p>
-              )}
+            <div className="relative">
+              <div className="aspect-square rounded-2xl overflow-hidden shadow-2xl">
+                <img alt="Office" className="h-full w-full object-cover" src={c.mission_vision.image_url} />
+              </div>
             </div>
-          </section>
-        </div>
+          </div>
+        </section>
+
+        {/* Values */}
+        <section className="bg-slate-50 dark:bg-slate-900/50 py-20">
+          <div className="mx-auto max-w-[1200px] px-6">
+            <div className="text-center max-w-2xl mx-auto mb-16">
+              <h2 className="text-3xl font-bold">Nilai-Nilai Utama</h2>
+              <p className="mt-4 text-slate-600 dark:text-slate-400">Prinsip yang menjadi pondasi setiap layanan yang kami berikan kepada Anda.</p>
+            </div>
+            <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-8">
+              {c.values.map((v, i) => (
+                <div key={i} className="bg-white dark:bg-slate-800 p-8 rounded-2xl shadow-sm border border-slate-100 dark:border-slate-700 hover:border-primary/50 transition-colors">
+                  <span className="material-symbols-outlined text-4xl text-primary">{v.icon}</span>
+                  <h3 className="mt-4 text-xl font-bold">{v.title}</h3>
+                  <p className="mt-2 text-slate-600 dark:text-slate-400">{v.desc}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        {/* CTA */}
+        <section className="mx-auto max-w-[1200px] px-6 py-20 text-center">
+          <div className="bg-primary rounded-3xl p-12 text-white relative overflow-hidden">
+            <div className="absolute top-0 right-0 w-64 h-64 bg-white/10 rounded-full -mr-32 -mt-32"></div>
+            <div className="relative z-10">
+              <h2 className="text-3xl font-bold">{c.cta.title}</h2>
+              <p className="mt-4 text-white/80 max-w-xl mx-auto">{c.cta.description}</p>
+              <div className="mt-8 flex flex-col sm:flex-row justify-center gap-4">
+                <Link href={c.cta.primary_href} target={c.cta.primary_href.startsWith("http") ? "_blank" : undefined} rel="noopener noreferrer" className="px-8 py-3 bg-white text-primary font-bold rounded-lg hover:bg-slate-100 transition-colors">
+                  {c.cta.primary_label}
+                </Link>
+                <Link href={c.cta.secondary_href} className="px-8 py-3 border border-white/30 text-white font-bold rounded-lg hover:bg-white/10 transition-colors">
+                  {c.cta.secondary_label}
+                </Link>
+              </div>
+            </div>
+          </div>
+        </section>
       </main>
       <Footer />
     </div>

@@ -69,7 +69,7 @@ export default async function CategoryPage({ params }: { params: { slug: string 
                     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                         {articles && articles.length > 0 ? (
                             articles.map((article) => (
-                                <Link key={article.id} href={`/articles/${article.id}`} className="group bg-white dark:bg-surface-dark border border-border-light dark:border-border-dark rounded-xl p-6 hover:shadow-lg hover:border-primary/50 transition-all duration-300 flex flex-col h-full">
+                                <Link key={article.id} href={`/informasi/${category.slug}/${article.id}`} className="group bg-white dark:bg-surface-dark border border-border-light dark:border-border-dark rounded-xl p-6 hover:shadow-lg hover:border-primary/50 transition-all duration-300 flex flex-col h-full">
                                     <h3 className="text-xl font-bold text-text-main dark:text-white mb-3 group-hover:text-primary transition-colors line-clamp-2 leading-snug">
                                         {article.title}
                                     </h3>

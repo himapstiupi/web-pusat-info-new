@@ -120,6 +120,27 @@ export default function SuperSidebar({ isOpen = false, onClose }: SuperSidebarPr
                         <span className="text-sm font-medium">Manajemen Admin</span>
                     </Link>
                     <Link
+                        href="/superadmin/homepage"
+                        className={linkClass("/superadmin/homepage")}
+                    >
+                        <span className="material-symbols-outlined">home</span>
+                        <span className="text-sm font-medium">Edit Beranda</span>
+                    </Link>
+                    <Link
+                        href="/superadmin/tentang-kami"
+                        className={linkClass("/superadmin/tentang-kami")}
+                    >
+                        <span className="material-symbols-outlined">groups</span>
+                        <span className="text-sm font-medium">Edit Tentang Kami</span>
+                    </Link>
+                    <Link
+                        href="/superadmin/struktur-organisasi"
+                        className={linkClass("/superadmin/struktur-organisasi")}
+                    >
+                        <span className="material-symbols-outlined">account_tree</span>
+                        <span className="text-sm font-medium">Edit Struktur Org</span>
+                    </Link>
+                    <Link
                         href="/superadmin/categories"
                         className={linkClass("/superadmin/categories")}
                     >

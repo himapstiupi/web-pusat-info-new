@@ -33,7 +33,7 @@ export async function incrementArticleLike(slug: string) {
         return { error: "Failed to update like count" };
     }
 
-    revalidatePath(`/articles/${slug}`);
+    revalidatePath(`/informasi/[category]/[slug]`, 'page');
     return { success: true, likes: newLikes };
 }
 
@@ -61,6 +61,6 @@ export async function incrementArticleDislike(slug: string) {
         return { error: "Failed to update dislike count" };
     }
 
-    revalidatePath(`/articles/${slug}`);
+    revalidatePath(`/informasi/[category]/[slug]`, 'page');
     return { success: true, dislikes: newDislikes };
 }

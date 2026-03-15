@@ -10,7 +10,7 @@ interface CategoryCardProps {
 export default function CategoryCard({ name, description, icon, slug }: CategoryCardProps) {
     return (
         <Link
-            href={`/kategori/${slug}`}
+            href={`/informasi/kategori/${slug}`}
             className="group flex flex-col p-6 rounded-2xl bg-white dark:bg-surface-dark border border-border-light dark:border-border-dark hover:border-primary/50 dark:hover:border-primary/50 hover:shadow-xl hover:shadow-primary/5 dark:hover:shadow-none transition-all duration-300"
         >
             <div className="h-12 w-12 rounded-xl bg-blue-50 dark:bg-primary/10 flex items-center justify-center text-primary mb-4 group-hover:scale-110 transition-transform">
