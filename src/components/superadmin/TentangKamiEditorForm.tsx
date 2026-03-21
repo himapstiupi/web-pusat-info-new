@@ -108,7 +108,7 @@ export default function TentangKamiEditorForm({ initial }: Props) {
                 <button onClick={() => setData(d => ({ ...d, program_kerja: d.program_kerja.filter((_, j) => j !== i) }))} className="text-red-400 hover:text-red-300 text-xs transition-colors">Hapus</button>
               </div>
 
-              <div className="grid grid-cols-2 gap-3">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                 <div><label className={lClass}>Judul</label><input className={iClass} value={pk.title} onChange={e => updatePK(i, "title", e.target.value)} /></div>
                 <div>
                   <label className={lClass}>Ikon Material Symbol</label>
@@ -143,7 +143,7 @@ export default function TentangKamiEditorForm({ initial }: Props) {
         <div className="space-y-4">
           <div><label className={lClass}>Judul CTA</label><input className={iClass} value={data.cta.title} onChange={e => updateCta("title", e.target.value)} /></div>
           <div><label className={lClass}>Deskripsi CTA</label><textarea rows={3} className={iClass} value={data.cta.description} onChange={e => updateCta("description", e.target.value)} /></div>
-          <div className="grid grid-cols-2 gap-4">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             <div><label className={lClass}>Label Tombol Utama</label><input className={iClass} value={data.cta.primary_label} onChange={e => updateCta("primary_label", e.target.value)} /></div>
             <div><label className={lClass}>Link Tombol Utama</label><input className={iClass} value={data.cta.primary_href} onChange={e => updateCta("primary_href", e.target.value)} /></div>
             <div><label className={lClass}>Label Tombol Sekunder</label><input className={iClass} value={data.cta.secondary_label} onChange={e => updateCta("secondary_label", e.target.value)} /></div>

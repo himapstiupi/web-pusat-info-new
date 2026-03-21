@@ -132,7 +132,7 @@ export default function HomepageEditorForm({ initial }: Props) {
                 <span className="text-sm font-semibold text-white">Nilai #{i + 1}</span>
                 <button onClick={() => removeValue(i)} className="text-red-400 hover:text-red-300 text-xs transition-colors">Hapus</button>
               </div>
-              <div className="grid grid-cols-2 gap-3">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                 <div>
                   <label className={labelClass}>Ikon (Material Symbol)</label>
                   <input className={inputClass} value={v.icon} onChange={(e) => updateValue(i, "icon", e.target.value)} placeholder="mis: verified_user" />
@@ -166,7 +166,7 @@ export default function HomepageEditorForm({ initial }: Props) {
             <label className={labelClass}>Deskripsi CTA</label>
             <textarea rows={3} className={inputClass} value={data.cta.description} onChange={(e) => updateCta("description", e.target.value)} />
           </div>
-          <div className="grid grid-cols-2 gap-4">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             <div>
               <label className={labelClass}>Label Tombol Utama</label>
               <input className={inputClass} value={data.cta.primary_label} onChange={(e) => updateCta("primary_label", e.target.value)} />
@@ -176,7 +176,7 @@ export default function HomepageEditorForm({ initial }: Props) {
               <input className={inputClass} value={data.cta.primary_href} onChange={(e) => updateCta("primary_href", e.target.value)} />
             </div>
           </div>
-          <div className="grid grid-cols-2 gap-4">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             <div>
               <label className={labelClass}>Label Tombol Sekunder</label>
               <input className={inputClass} value={data.cta.secondary_label} onChange={(e) => updateCta("secondary_label", e.target.value)} />

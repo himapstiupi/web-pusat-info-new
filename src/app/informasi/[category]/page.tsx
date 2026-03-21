@@ -6,39 +6,39 @@ import { notFound } from "next/navigation";
 
 export const revalidate = 60;
 
-export async function generateMetadata({ params }: { params: { slug: string } }) {
+export async function generateMetadata({ params }: { params: { category: string } }) {
     const supabase = await createClient();
-    const { slug } = await params;
+    const { category } = await params;
 
-    const { data: category } = await supabase
+    const { data: cat } = await supabase
         .from("categories")
         .select("title")
-        .eq("slug", slug)
+        .eq("slug", category)
         .single();
 
-    if (!category) {
+    if (!cat) {
         return {
             title: "Kategori Tidak Ditemukan",
         };
     }
 
     return {
-        title: category.title,
+        title: cat.title,
     };
 }
 
-export default async function CategoryPage({ params }: { params: { slug: string } }) {
+export default async function CategoryPage({ params }: { params: { category: string } }) {
     const supabase = await createClient();
-    const { slug } = await params;
+    const { category } = await params;
 
     // Fetch Category
-    const { data: category } = await supabase
+    const { data: cat } = await supabase
         .from("categories")
         .select("*")
-        .eq("slug", slug)
+        .eq("slug", category)
         .single();
 
-    if (!category) {
+    if (!cat) {
         notFound();
     }
 
@@ -46,7 +46,7 @@ export default async function CategoryPage({ params }: { params: { slug: string 
     const { data: articles } = await supabase
         .from("articles")
         .select("*")
-        .eq("category_id", category.id)
+        .eq("category_id", cat.id)
         .order("created_at", { ascending: false });
 
     return (
@@ -57,10 +57,10 @@ export default async function CategoryPage({ params }: { params: { slug: string 
                 <header className="bg-surface-light dark:bg-surface-dark border-b border-border-light dark:border-border-dark py-12 md:py-20">
                     <div className="max-w-7xl mx-auto px-4 md:px-10 text-center">
                         <div className="mx-auto w-16 h-16 bg-blue-50 dark:bg-primary/10 rounded-2xl flex items-center justify-center text-primary mb-6">
-                            <span className="material-symbols-outlined text-4xl">{category.icon}</span>
+                            <span className="material-symbols-outlined text-4xl">{cat.icon}</span>
                         </div>
-                        <h1 className="text-3xl md:text-4xl font-black text-text-main dark:text-white capitalize mb-4 leading-tight">{category.title}</h1>
-                        <p className="text-lg text-text-sub dark:text-gray-400 max-w-2xl mx-auto leading-relaxed">{category.description}</p>
+                        <h1 className="text-3xl md:text-4xl font-black text-text-main dark:text-white capitalize mb-4 leading-tight">{cat.title}</h1>
+                        <p className="text-lg text-text-sub dark:text-gray-400 max-w-2xl mx-auto leading-relaxed">{cat.description}</p>
                     </div>
                 </header>
 
@@ -69,12 +69,11 @@ export default async function CategoryPage({ params }: { params: { slug: string 
                     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                         {articles && articles.length > 0 ? (
                             articles.map((article) => (
-                                <Link key={article.id} href={`/informasi/${category.slug}/${article.id}`} className="group bg-white dark:bg-surface-dark border border-border-light dark:border-border-dark rounded-xl p-6 hover:shadow-lg hover:border-primary/50 transition-all duration-300 flex flex-col h-full">
+                                <Link key={article.id} href={`/informasi/${cat.slug}/${article.id}`} className="group bg-white dark:bg-surface-dark border border-border-light dark:border-border-dark rounded-xl p-6 hover:shadow-lg hover:border-primary/50 transition-all duration-300 flex flex-col h-full">
                                     <h3 className="text-xl font-bold text-text-main dark:text-white mb-3 group-hover:text-primary transition-colors line-clamp-2 leading-snug">
                                         {article.title}
                                     </h3>
                                     <div className="mt-auto pt-4 flex items-center text-sm text-text-sub dark:text-gray-500 gap-4">
-
                                         <div className="flex items-center gap-1">
                                             <span className="material-symbols-outlined text-base">calendar_today</span>
                                             {new Date(article.created_at).toLocaleDateString("id-ID", {

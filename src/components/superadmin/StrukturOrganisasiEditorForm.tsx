@@ -130,13 +130,13 @@ export default function StrukturOrganisasiEditorForm({ initial }: Props) {
                 <label className={lClass}>Daftar Staff</label>
                 <div className="space-y-2">
                   {unit.staff.map((s, si) => (
-                    <div key={si} className="flex gap-2 items-center">
-                      <input className={`${iClass} flex-1`} value={s.nama} placeholder="Nama"
+                    <div key={si} className="flex flex-col sm:flex-row gap-2 items-start sm:items-center">
+                      <input className={`${iClass} w-full sm:flex-1`} value={s.nama} placeholder="Nama"
                         onChange={e => updateStaff(section, i, si, "nama", e.target.value)} />
-                      <input className={`${iClass} flex-1`} value={s.jabatan || ""} placeholder="Jabatan (opsional)"
+                      <input className={`${iClass} w-full sm:flex-1`} value={s.jabatan || ""} placeholder="Jabatan (opsional)"
                         onChange={e => updateStaff(section, i, si, "jabatan", e.target.value)} />
                       <button onClick={() => removeStaff(section, i, si)}
-                        className="text-red-400 hover:text-red-300 px-2 shrink-0 transition-colors">✕</button>
+                        className="text-red-400 hover:text-red-300 px-2 shrink-0 transition-colors self-end sm:self-auto">✕</button>
                     </div>
                   ))}
                 </div>

@@ -1,6 +1,7 @@
 "use client";
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import { createPortal } from 'react-dom';
 
 interface ShareModalProps {
     isOpen: boolean;
@@ -11,8 +12,14 @@ interface ShareModalProps {
 
 export default function ShareModal({ isOpen, onClose, url, title }: ShareModalProps) {
     const [copied, setCopied] = useState(false);
+    const [mounted, setMounted] = useState(false);
 
-    if (!isOpen) return null;
+    useEffect(() => {
+        setMounted(true);
+        return () => setMounted(false);
+    }, []);
+
+    if (!isOpen || !mounted) return null;
 
     const encodedUrl = encodeURIComponent(url);
     const encodedTitle = encodeURIComponent(title);
@@ -20,13 +27,13 @@ export default function ShareModal({ isOpen, onClose, url, title }: ShareModalPr
     const shareLinks = [
         {
             name: "WhatsApp",
-            icon: "chat", // using material symbol for simplicity, ideally use brand icons
+            icon: "chat",
             color: "bg-green-500",
             action: () => window.open(`https://wa.me/?text=${encodedTitle}%20${encodedUrl}`, '_blank')
         },
         {
             name: "Twitter",
-            icon: "post", // simplistic fallback
+            icon: "post",
             color: "bg-black",
             action: () => window.open(`https://twitter.com/intent/tweet?text=${encodedTitle}&url=${encodedUrl}`, '_blank')
         },
@@ -42,7 +49,6 @@ export default function ShareModal({ isOpen, onClose, url, title }: ShareModalPr
             color: "bg-black",
             action: () => window.open(`https://threads.net/intent/post?text=${encodedTitle}%20${encodedUrl}`, '_blank')
         },
-        // For platforms without direct web share intent for content, we copy link
         {
             name: "Instagram",
             icon: "photo_camera",
@@ -67,15 +73,17 @@ export default function ShareModal({ isOpen, onClose, url, title }: ShareModalPr
         navigator.clipboard.writeText(url);
         setCopied(true);
         setTimeout(() => setCopied(false), 2000);
-        if (platform) {
-            // Optional: You could show a specialized toast here
-            // alert(`Link disalin! Buka ${platform} untuk membagikan.`);
-        }
     };
 
-    return (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/50 backdrop-blur-sm" onClick={onClose}>
-            <div className="bg-white dark:bg-surface-dark rounded-2xl w-full max-w-md p-6 shadow-xl transform transition-all" onClick={e => e.stopPropagation()}>
+    const modal = (
+        <div
+            className="fixed inset-0 z-[9999] flex items-center justify-center p-4 bg-black/50 backdrop-blur-sm"
+            onClick={onClose}
+        >
+            <div
+                className="bg-white dark:bg-surface-dark rounded-2xl w-full max-w-md p-6 shadow-xl"
+                onClick={e => e.stopPropagation()}
+            >
                 <div className="flex justify-between items-center mb-6">
                     <h3 className="text-xl font-bold text-text-main dark:text-white">Bagikan Artikel</h3>
                     <button onClick={onClose} className="p-1 rounded-full hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors">
@@ -91,7 +99,6 @@ export default function ShareModal({ isOpen, onClose, url, title }: ShareModalPr
                             className="flex flex-col items-center gap-2 group"
                         >
                             <div className={`${link.color} text-white w-12 h-12 rounded-full flex items-center justify-center shadow-lg transform group-hover:scale-110 transition-transform`}>
-                                {/* Note: Real brand icons (SVG) are recommended here. Using material symbols as placeholders/fallbacks */}
                                 <span className="material-symbols-outlined">{link.icon}</span>
                             </div>
                             <span className="text-xs text-text-sub dark:text-gray-400 font-medium">{link.name}</span>
@@ -119,4 +126,6 @@ export default function ShareModal({ isOpen, onClose, url, title }: ShareModalPr
             </div>
         </div>
     );
+
+    return createPortal(modal, document.body);
 }

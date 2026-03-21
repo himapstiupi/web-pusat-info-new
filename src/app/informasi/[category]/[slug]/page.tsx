@@ -70,7 +70,7 @@ export default async function ArticlePage({ params }: { params: { category: stri
                         <span className="mx-2">/</span>
                         <Link href="/informasi" className="hover:text-primary transition-colors">Informasi</Link>
                         <span className="mx-2">/</span>
-                        <Link href={`/informasi/kategori/${categorySlug}`} className="hover:text-primary transition-colors">{(article.categories as any)?.title}</Link>
+                        <Link href={`/informasi/${categorySlug}`} className="hover:text-primary transition-colors">{(article.categories as any)?.title}</Link>
                         <span className="mx-2">/</span>
                         <span className="text-text-main dark:text-gray-200 truncate max-w-[200px]">{article.title}</span>
                     </nav>

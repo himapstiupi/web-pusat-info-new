@@ -17,7 +17,7 @@ export default async function Home() {
       <Navbar />
       <main className="flex-grow">
         {/* Hero Section */}
-        <section className="relative h-[400px] w-full overflow-hidden bg-primary/10">
+        <section className="relative h-[300px] md:h-[400px] w-full overflow-hidden bg-primary/10">
           <div className="absolute inset-0 bg-gradient-to-r from-primary/80 to-transparent z-10"></div>
           <img
             alt="Hero"
@@ -37,7 +37,7 @@ export default async function Home() {
         </section>
 
         {/* Mission & Vision */}
-        <section className="mx-auto max-w-[1200px] px-6 py-20">
+        <section className="mx-auto max-w-[1200px] px-6 py-12 md:py-20">
           <div className="grid md:grid-cols-2 gap-16 items-center">
             <div className="flex flex-col">
               <h2 className="text-3xl font-bold text-slate-900 dark:text-white mb-8">Visi &amp; Misi Kami</h2>
@@ -73,7 +73,7 @@ export default async function Home() {
         </section>
 
         {/* Values */}
-        <section className="bg-slate-50 dark:bg-slate-900/50 py-20">
+        <section className="bg-slate-50 dark:bg-slate-900/50 py-12 md:py-20">
           <div className="mx-auto max-w-[1200px] px-6">
             <div className="text-center max-w-2xl mx-auto mb-16">
               <h2 className="text-3xl font-bold">Nilai-Nilai Utama</h2>
@@ -92,8 +92,8 @@ export default async function Home() {
         </section>
 
         {/* CTA */}
-        <section className="mx-auto max-w-[1200px] px-6 py-20 text-center">
-          <div className="bg-primary rounded-3xl p-12 text-white relative overflow-hidden">
+        <section className="mx-auto max-w-[1200px] px-6 py-12 md:py-20 text-center">
+          <div className="bg-primary rounded-3xl p-8 md:p-12 text-white relative overflow-hidden">
             <div className="absolute top-0 right-0 w-64 h-64 bg-white/10 rounded-full -mr-32 -mt-32"></div>
             <div className="relative z-10">
               <h2 className="text-3xl font-bold">{c.cta.title}</h2>

@@ -17,7 +17,7 @@ export default async function TentangKamiPage() {
       <Navbar />
       <main className="flex-1">
         {/* Hero Section */}
-        <section className="relative h-[400px] flex items-center justify-center overflow-hidden">
+        <section className="relative h-[280px] md:h-[400px] flex items-center justify-center overflow-hidden">
           <div className="absolute inset-0 bg-primary/10 dark:bg-primary/5">
             <div className="absolute inset-0 opacity-20" style={{ backgroundImage: "radial-gradient(circle at 2px 2px, #135bec 1px, transparent 0)", backgroundSize: "40px 40px" }}></div>
           </div>
@@ -96,7 +96,7 @@ export default async function TentangKamiPage() {
           </section>
 
           {/* CTA */}
-          <section className="bg-primary rounded-3xl p-12 text-center text-white overflow-hidden relative">
+          <section className="bg-primary rounded-3xl p-8 md:p-12 text-center text-white overflow-hidden relative">
             <div className="absolute top-0 right-0 -mr-20 -mt-20 w-64 h-64 bg-white/10 rounded-full blur-3xl"></div>
             <div className="absolute bottom-0 left-0 -ml-20 -mb-20 w-64 h-64 bg-white/10 rounded-full blur-3xl"></div>
             <div className="relative z-10">
