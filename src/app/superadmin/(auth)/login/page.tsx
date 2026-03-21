@@ -4,6 +4,7 @@ import { createClient } from "@/lib/supabase/client";
 import { useRouter, useSearchParams } from "next/navigation";
 import { useState, Suspense, useEffect } from "react";
 import Link from "next/link";
+import NProgress from "nprogress";
 
 function SuperAdminLoginForm() {
     const router = useRouter();
@@ -45,6 +46,7 @@ function SuperAdminLoginForm() {
                     .single();
 
                 if (profile && profile.role === "superadmin") {
+                    NProgress.start();
                     router.push("/superadmin/dashboard");
                 } else {
                     await supabase.auth.signOut();

@@ -53,42 +53,76 @@ export default async function CategoryPage({ params }: { params: { category: str
         <div className="flex flex-col min-h-screen">
             <Navbar />
             <main className="flex-grow bg-background-light dark:bg-background-dark">
-                {/* Header */}
-                <header className="bg-surface-light dark:bg-surface-dark border-b border-border-light dark:border-border-dark py-12 md:py-20">
-                    <div className="max-w-7xl mx-auto px-4 md:px-10 text-center">
-                        <div className="mx-auto w-16 h-16 bg-blue-50 dark:bg-primary/10 rounded-2xl flex items-center justify-center text-primary mb-6">
+                {/* Header Section */}
+                <section className="relative overflow-hidden bg-primary/5 dark:bg-primary/10 pt-16 pb-20 md:pt-24 md:pb-28 border-b border-primary/10">
+                    <div className="absolute inset-x-0 top-0 h-40 bg-gradient-to-b from-primary/10 to-transparent pointer-events-none"></div>
+                    <div className="relative z-10 max-w-4xl mx-auto px-6 text-center">
+                        <Link href="/informasi" className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white dark:bg-surface-dark shadow-sm border border-slate-200 dark:border-slate-800 text-sm font-semibold text-slate-600 dark:text-slate-300 hover:text-primary dark:hover:text-primary hover:border-primary/30 transition-colors mb-8">
+                            <span className="material-symbols-outlined text-sm">arrow_back</span>
+                            Kembali ke Pusat Informasi
+                        </Link>
+                        
+                        <div className="mx-auto w-20 h-20 bg-white dark:bg-surface-dark shadow-md rounded-2xl flex items-center justify-center text-primary mb-6 border border-primary/10 transform -rotate-3 hover:rotate-0 transition-transform duration-300">
                             <span className="material-symbols-outlined text-4xl">{cat.icon}</span>
                         </div>
-                        <h1 className="text-3xl md:text-4xl font-black text-text-main dark:text-white capitalize mb-4 leading-tight">{cat.title}</h1>
-                        <p className="text-lg text-text-sub dark:text-gray-400 max-w-2xl mx-auto leading-relaxed">{cat.description}</p>
+                        <h1 className="text-4xl md:text-5xl font-black text-slate-900 dark:text-white capitalize mb-6 leading-tight tracking-tight">
+                            {cat.title}
+                        </h1>
+                        <p className="text-lg md:text-xl text-slate-600 dark:text-slate-400 max-w-2xl mx-auto leading-relaxed">
+                            {cat.description}
+                        </p>
                     </div>
-                </header>
+                </section>
 
-                {/* Content */}
-                <div className="max-w-7xl mx-auto px-4 md:px-10 py-12">
-                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                {/* Content / Article List */}
+                <div className="max-w-7xl mx-auto px-6 lg:px-8 py-16 md:py-24">
+                    <div className="mb-10 flex items-center justify-between">
+                        <h2 className="text-2xl font-bold text-slate-800 dark:text-white flex items-center gap-3">
+                            <span className="material-symbols-outlined text-primary">article</span>
+                            Daftar Artikel
+                        </h2>
+                        <span className="text-sm font-medium px-3 py-1 bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-400 rounded-full">
+                            {articles?.length || 0} Artikel
+                        </span>
+                    </div>
+
+                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
                         {articles && articles.length > 0 ? (
                             articles.map((article) => (
-                                <Link key={article.id} href={`/informasi/${cat.slug}/${article.id}`} className="group bg-white dark:bg-surface-dark border border-border-light dark:border-border-dark rounded-xl p-6 hover:shadow-lg hover:border-primary/50 transition-all duration-300 flex flex-col h-full">
-                                    <h3 className="text-xl font-bold text-text-main dark:text-white mb-3 group-hover:text-primary transition-colors line-clamp-2 leading-snug">
-                                        {article.title}
-                                    </h3>
-                                    <div className="mt-auto pt-4 flex items-center text-sm text-text-sub dark:text-gray-500 gap-4">
-                                        <div className="flex items-center gap-1">
-                                            <span className="material-symbols-outlined text-base">calendar_today</span>
-                                            {new Date(article.created_at).toLocaleDateString("id-ID", {
-                                                day: "numeric",
-                                                month: "short",
-                                                year: "numeric"
-                                            })}
+                                <Link 
+                                    key={article.id} 
+                                    href={`/informasi/${cat.slug}/${article.id}`} 
+                                    className="group relative bg-white dark:bg-surface-dark border border-slate-200 dark:border-slate-800 rounded-2xl p-6 md:p-8 hover:-translate-y-1 hover:shadow-xl hover:shadow-primary/5 hover:border-primary/30 transition-all duration-300 flex flex-col h-full overflow-hidden"
+                                >
+                                    {/* Decorative Top Border on Hover */}
+                                    <div className="absolute top-0 left-0 w-full h-1.5 bg-gradient-to-r from-primary to-blue-400 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                                    
+                                    <div className="flex justify-between items-start gap-4 mb-4">
+                                        <h3 className="text-xl font-bold text-slate-900 dark:text-white group-hover:text-primary transition-colors leading-snug">
+                                            {article.title}
+                                        </h3>
+                                        <div className="shrink-0 w-8 h-8 rounded-full bg-slate-50 dark:bg-slate-800 flex items-center justify-center group-hover:bg-primary group-hover:text-white text-slate-400 transition-colors duration-300">
+                                            <span className="material-symbols-outlined text-sm">arrow_outward</span>
                                         </div>
+                                    </div>
+                                    
+                                    <div className="mt-auto pt-6 flex items-center text-sm text-slate-500 dark:text-slate-400 gap-2 font-medium border-t border-slate-100 dark:border-slate-800">
+                                        <span className="material-symbols-outlined text-base text-primary/70">event</span>
+                                        {new Date(article.created_at).toLocaleDateString("id-ID", {
+                                            day: "numeric",
+                                            month: "long",
+                                            year: "numeric"
+                                        })}
                                     </div>
                                 </Link>
                             ))
                         ) : (
-                            <div className="col-span-full text-center py-20">
-                                <span className="material-symbols-outlined text-6xl text-gray-300 dark:text-gray-700 mb-4 block">post</span>
-                                <p className="text-text-sub dark:text-gray-500 text-lg">Belum ada artikel di kategori ini.</p>
+                            <div className="col-span-full flex flex-col items-center justify-center text-center py-24 bg-slate-50 dark:bg-surface-dark/50 rounded-3xl border border-slate-200 dark:border-slate-800 border-dashed">
+                                <div className="w-20 h-20 mb-6 bg-white dark:bg-slate-800 rounded-full flex items-center justify-center shadow-sm">
+                                    <span className="material-symbols-outlined text-5xl text-slate-300 dark:text-slate-600">post_add</span>
+                                </div>
+                                <h3 className="text-2xl font-bold text-slate-800 dark:text-white mb-3">Belum Ada Artikel</h3>
+                                <p className="text-slate-500 dark:text-slate-400 text-lg max-w-md">Kategori ini masih kosong. Silakan kembali lagi nanti untuk melihat pembaruan informasi.</p>
                             </div>
                         )}
                     </div>

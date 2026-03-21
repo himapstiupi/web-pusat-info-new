@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Plus_Jakarta_Sans } from "next/font/google";
+import NextTopLoader from "nextjs-toploader";
 import "./globals.css";
 import ScrollToTop from "@/components/common/ScrollToTop";
 
@@ -28,6 +29,7 @@ export default function RootLayout({
         <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet" />
       </head>
       <body className={`${jakartaSans.variable} bg-background-light dark:bg-background-dark text-text-main dark:text-white font-sans min-h-screen flex flex-col overflow-x-hidden antialiased transition-colors duration-300`}>
+        <NextTopLoader color="#2563eb" showSpinner={false} />
         <ScrollToTop />
         {children}
       </body>

@@ -201,12 +201,6 @@ export default function HomepageEditorForm({ initial }: Props) {
       <div className="mt-8 flex items-center justify-end">
         <div className="flex gap-3">
           <button
-            onClick={() => setData(DEFAULT_HOMEPAGE)}
-            className="px-4 py-2 text-sm text-[#ad92c9] hover:text-white border border-[#3b2a6e] rounded-lg transition-colors"
-          >
-            Reset Default
-          </button>
-          <button
             onClick={handleSave}
             disabled={saving}
             className="px-6 py-2 bg-primary-purple text-white text-sm font-bold rounded-lg hover:bg-[#56298b] transition-colors disabled:opacity-50"

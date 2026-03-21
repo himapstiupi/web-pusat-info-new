@@ -191,10 +191,6 @@ export default function StrukturOrganisasiEditorForm({ initial }: Props) {
       {/* Footer */}
       <div className="mt-8 flex items-center justify-end">
         <div className="flex gap-3">
-          <button onClick={() => setData(DEFAULT_STRUKTUR)}
-            className="px-4 py-2 text-sm text-[#ad92c9] hover:text-white border border-[#3b2a6e] rounded-lg transition-colors">
-            Reset Default
-          </button>
           <button onClick={handleSave} disabled={saving}
             className="px-6 py-2 bg-primary-purple text-white text-sm font-bold rounded-lg hover:bg-[#56298b] transition-colors disabled:opacity-50">
             {saving ? "Menyimpan..." : "Simpan Perubahan"}

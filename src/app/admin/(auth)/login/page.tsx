@@ -4,6 +4,7 @@ import { createClient } from "@/lib/supabase/client";
 import { useRouter, useSearchParams } from "next/navigation";
 import { useState, useEffect, Suspense } from "react";
 import Link from "next/link";
+import NProgress from "nprogress";
 
 function LoginForm() {
     const router = useRouter();
@@ -61,10 +62,13 @@ function LoginForm() {
 
                     // Role based redirect
                     if (profile.role === "superadmin") {
+                        NProgress.start();
                         router.push("/superadmin/dashboard");
                     } else if (profile.role === "admin") {
+                        NProgress.start();
                         router.push("/admin/dashboard");
                     } else {
+                        NProgress.start();
                         router.push("/");
                     }
                 }

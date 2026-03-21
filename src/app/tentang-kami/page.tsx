@@ -1,6 +1,7 @@
 import Navbar from "@/components/common/Navbar";
 import Footer from "@/components/common/Footer";
 import Link from "next/link";
+import ProgramKerjaClient from "@/components/tentang-kami/ProgramKerjaClient";
 import { getTentangKamiContent } from "@/actions/pages";
 
 export const dynamic = "force-dynamic";
@@ -40,7 +41,7 @@ export default async function TentangKamiPage() {
           {/* Sejarah — full width text only */}
           <section>
             <h2 className="text-3xl font-bold text-slate-900 dark:text-white mb-6 relative inline-block">
-              Sejarah Kami
+              Sejarah
               <span className="absolute -bottom-2 left-0 w-12 h-1 bg-primary rounded-full"></span>
             </h2>
             <div className="space-y-4 text-slate-600 dark:text-slate-400 leading-relaxed text-lg">
@@ -82,21 +83,7 @@ export default async function TentangKamiPage() {
             <p className="text-slate-600 dark:text-slate-400 mb-12 max-w-2xl mx-auto">
               Program dan kegiatan unggulan yang kami jalankan untuk memberikan dampak nyata.
             </p>
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-              {c.program_kerja.map((item, i) => (
-                <div key={i} className="group p-8 rounded-2xl bg-white dark:bg-slate-900 border border-slate-100 dark:border-slate-800 transition-all hover:shadow-xl hover:-translate-y-1">
-                  <div className="inline-flex items-center justify-center w-14 h-14 rounded-2xl bg-slate-100 dark:bg-slate-800 group-hover:bg-primary group-hover:text-white mb-6 transition-all overflow-hidden">
-                    {item.image_url ? (
-                      <img src={item.image_url} alt={item.title} className="w-full h-full object-cover" />
-                    ) : (
-                      <span className="material-symbols-outlined text-slate-600 dark:text-slate-400 group-hover:text-white transition-colors">{item.icon}</span>
-                    )}
-                  </div>
-                  <h4 className="text-lg font-bold text-slate-900 dark:text-white mb-2">{item.title}</h4>
-                  <p className="text-sm text-slate-500 dark:text-slate-400">{item.desc}</p>
-                </div>
-              ))}
-            </div>
+            <ProgramKerjaClient programs={c.program_kerja} />
           </section>
 
           {/* CTA */}

@@ -45,6 +45,7 @@ export default async function Home() {
               </div>
               <input
                 name="q"
+                autoComplete="off"
                 className="block w-full h-14 pl-12 pr-32 rounded-xl border border-border-light dark:border-border-dark bg-white dark:bg-surface-dark text-text-main dark:text-white shadow-lg shadow-gray-200/50 dark:shadow-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all placeholder:text-gray-400 text-base"
                 placeholder="Cari topik, kata kunci, atau pertanyaan..."
                 type="text"
