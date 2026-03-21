@@ -4,6 +4,7 @@ import { useState } from "react";
 import { upsertTentangKamiContent } from "@/actions/pages";
 import { TentangKamiContent, DEFAULT_TENTANG_KAMI, ProgramKerjaItem } from "@/lib/tentang-kami";
 import { toast } from "react-hot-toast";
+import ImageUploadInput from "@/components/superadmin/ImageUploadInput";
 
 interface Props { initial: TentangKamiContent }
 
@@ -65,18 +66,34 @@ export default function TentangKamiEditorForm({ initial }: Props) {
           <div><label className={lClass}>Teks Badge</label><input className={iClass} value={data.hero.badge} onChange={e => updateHero("badge", e.target.value)} /></div>
           <div><label className={lClass}>Judul Halaman</label><input className={iClass} value={data.hero.title} onChange={e => updateHero("title", e.target.value)} /></div>
           <div><label className={lClass}>Deskripsi Hero</label><textarea rows={3} className={iClass} value={data.hero.description} onChange={e => updateHero("description", e.target.value)} /></div>
+          <div>
+            <label className={lClass}>URL Gambar Hero</label>
+            <ImageUploadInput
+              value={data.sejarah.image_url}
+              onChange={(url) => updateSejarah("image_url", url)}
+              inputClass={iClass}
+              bucket="images"
+            />
+          </div>
         </div>
       )}
 
       {/* Sejarah */}
       {activeTab === "sejarah" && (
         <div className="space-y-4">
-          <div><label className={lClass}>Paragraf 1</label><textarea rows={4} className={iClass} value={data.sejarah.paragraf1} onChange={e => updateSejarah("paragraf1", e.target.value)} /></div>
-          <div><label className={lClass}>Paragraf 2</label><textarea rows={4} className={iClass} value={data.sejarah.paragraf2} onChange={e => updateSejarah("paragraf2", e.target.value)} /></div>
           <div>
-            <label className={lClass}>URL Gambar Sejarah</label>
-            <input className={iClass} value={data.sejarah.image_url} onChange={e => updateSejarah("image_url", e.target.value)} />
-            {data.sejarah.image_url && <img src={data.sejarah.image_url} alt="preview" className="mt-2 rounded-lg h-32 object-cover w-full opacity-70" />}
+            <label className={lClass}>Deskripsi Sejarah</label>
+            <textarea
+              rows={12}
+              className={iClass}
+              value={[data.sejarah.paragraf1, data.sejarah.paragraf2].filter(Boolean).join("\n\n")}
+              onChange={e => {
+                updateSejarah("paragraf1", e.target.value);
+                updateSejarah("paragraf2", "");
+              }}
+              placeholder="Tulis sejarah lengkap di sini. Pisahkan paragraf dengan baris kosong."
+            />
+            <p className="text-xs text-slate-500 mt-1">Pisahkan antar paragraf dengan satu baris kosong (tekan Enter dua kali).</p>
           </div>
         </div>
       )}

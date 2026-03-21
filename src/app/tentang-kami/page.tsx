@@ -16,34 +16,38 @@ export default async function TentangKamiPage() {
     <div className="flex flex-col min-h-screen">
       <Navbar />
       <main className="flex-1">
-        {/* Hero Section */}
-        <section className="relative h-[280px] md:h-[400px] flex items-center justify-center overflow-hidden">
-          <div className="absolute inset-0 bg-primary/10 dark:bg-primary/5">
-            <div className="absolute inset-0 opacity-20" style={{ backgroundImage: "radial-gradient(circle at 2px 2px, #135bec 1px, transparent 0)", backgroundSize: "40px 40px" }}></div>
+        {/* Hero Section — full image like homepage */}
+        <section className="relative h-[300px] md:h-[420px] w-full overflow-hidden bg-primary/10">
+          <div className="absolute inset-0 bg-gradient-to-r from-primary/80 to-transparent z-10"></div>
+          {c.sejarah.image_url && (
+            <img
+              alt="Tentang Kami"
+              className="h-full w-full object-cover"
+              src={`/api/img-proxy?url=${encodeURIComponent(c.sejarah.image_url)}`}
+            />
+          )}
+          <div className="absolute inset-0 z-20 flex flex-col justify-center">
+            <div className="max-w-6xl mx-auto w-full px-6 lg:px-8">
+              <h1 className="text-3xl md:text-5xl font-black text-white leading-tight max-w-2xl">
+                {c.hero.title}
+              </h1>
+              <p className="mt-4 text-base md:text-lg text-white/90 max-w-xl">{c.hero.description}</p>
+            </div>
           </div>
-          <div className="relative z-10 text-center px-4 max-w-3xl mx-auto">
-            <span className="inline-block px-4 py-1.5 mb-6 text-xs font-bold tracking-widest uppercase bg-primary/10 text-primary rounded-full">{c.hero.badge}</span>
-            <h1 className="text-4xl md:text-6xl font-black text-slate-900 dark:text-white mb-6 leading-tight">{c.hero.title}</h1>
-            <p className="text-lg md:text-xl text-slate-600 dark:text-slate-400 font-medium">{c.hero.description}</p>
-          </div>
-          <div className="absolute bottom-0 left-0 right-0 h-24 bg-gradient-to-t from-background-light dark:from-background-dark to-transparent"></div>
         </section>
 
         <div className="max-w-6xl mx-auto px-6 lg:px-8 py-12 space-y-24">
-          {/* Sejarah */}
-          <section className="grid md:grid-cols-2 gap-12 items-center">
-            <div>
-              <h2 className="text-3xl font-bold text-slate-900 dark:text-white mb-6 relative inline-block">
-                Sejarah Kami
-                <span className="absolute -bottom-2 left-0 w-12 h-1 bg-primary rounded-full"></span>
-              </h2>
-              <div className="space-y-4 text-slate-600 dark:text-slate-400 leading-relaxed text-lg">
-                <p>{c.sejarah.paragraf1}</p>
-                <p>{c.sejarah.paragraf2}</p>
-              </div>
-            </div>
-            <div className="relative rounded-2xl overflow-hidden shadow-2xl">
-              <img alt="Sejarah kami" className="w-full h-full object-cover aspect-video" src={c.sejarah.image_url} />
+          {/* Sejarah — full width text only */}
+          <section>
+            <h2 className="text-3xl font-bold text-slate-900 dark:text-white mb-6 relative inline-block">
+              Sejarah Kami
+              <span className="absolute -bottom-2 left-0 w-12 h-1 bg-primary rounded-full"></span>
+            </h2>
+            <div className="space-y-4 text-slate-600 dark:text-slate-400 leading-relaxed text-lg">
+              {c.sejarah.paragraf1.split(/\n\n+/).filter(Boolean).map((p, i) => (
+                <p key={i}>{p.trim()}</p>
+              ))}
+              {c.sejarah.paragraf2 && <p>{c.sejarah.paragraf2}</p>}
             </div>
           </section>
 

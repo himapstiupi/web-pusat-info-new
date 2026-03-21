@@ -4,6 +4,7 @@ import { useState } from "react";
 import { upsertHomepageContent } from "@/actions/pages";
 import { HomepageContent, DEFAULT_HOMEPAGE } from "@/lib/homepage";
 import { toast } from "react-hot-toast";
+import ImageUploadInput from "@/components/superadmin/ImageUploadInput";
 
 interface Props {
   initial: HomepageContent;
@@ -91,10 +92,12 @@ export default function HomepageEditorForm({ initial }: Props) {
           </div>
           <div>
             <label className={labelClass}>URL Gambar Hero</label>
-            <input className={inputClass} value={data.hero.image_url} onChange={(e) => updateHero("image_url", e.target.value)} />
-            {data.hero.image_url && (
-              <img src={data.hero.image_url} alt="preview" className="mt-2 rounded-lg h-32 object-cover w-full opacity-70" />
-            )}
+            <ImageUploadInput
+              value={data.hero.image_url}
+              onChange={(url) => updateHero("image_url", url)}
+              inputClass={inputClass}
+              bucket="images"
+            />
           </div>
         </div>
       )}
@@ -118,7 +121,12 @@ export default function HomepageEditorForm({ initial }: Props) {
           </div>
           <div>
             <label className={labelClass}>URL Gambar Misi & Visi</label>
-            <input className={inputClass} value={data.mission_vision.image_url} onChange={(e) => updateMV("image_url", e.target.value)} />
+            <ImageUploadInput
+              value={data.mission_vision.image_url}
+              onChange={(url) => updateMV("image_url", url)}
+              inputClass={inputClass}
+              bucket="images"
+            />
           </div>
         </div>
       )}

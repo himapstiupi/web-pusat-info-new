@@ -4,7 +4,7 @@ import Navbar from "@/components/common/Navbar";
 import Footer from "@/components/common/Footer";
 import Link from "next/link";
 
-export const dynamic = 'force-dynamic'; // Force dynamic rendering for search
+export const dynamic = 'force-dynamic';
 
 export async function generateMetadata({ searchParams }: { searchParams: { q: string } }) {
     const { q } = await searchParams;

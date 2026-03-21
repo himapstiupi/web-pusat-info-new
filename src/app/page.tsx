@@ -22,7 +22,7 @@ export default async function Home() {
           <img
             alt="Hero"
             className="h-full w-full object-cover"
-            src={c.hero.image_url}
+            src={`/api/img-proxy?url=${encodeURIComponent(c.hero.image_url)}`}
           />
           <div className="absolute inset-0 z-20 flex flex-col justify-center">
             <div className="mx-auto max-w-[1200px] w-full px-6">

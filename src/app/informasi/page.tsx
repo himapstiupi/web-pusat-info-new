@@ -39,7 +39,7 @@ export default async function Home() {
               </p>
             </div>
             {/* Search Bar */}
-            <form action="/search" method="get" className="w-full max-w-2xl relative group">
+            <form action="/informasi/search" method="get" className="w-full max-w-2xl relative group">
               <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none text-text-sub dark:text-gray-500 group-focus-within:text-primary transition-colors">
                 <span className="material-symbols-outlined">search</span>
               </div>
