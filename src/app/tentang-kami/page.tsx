@@ -116,17 +116,16 @@ export default async function TentangKamiPage() {
           </section>
 
           {/* CTA */}
-          <section className="bg-primary rounded-3xl p-8 md:p-12 text-center text-white overflow-hidden relative">
-            <div className="absolute top-0 right-0 -mr-20 -mt-20 w-64 h-64 bg-white/10 rounded-full blur-3xl"></div>
-            <div className="absolute bottom-0 left-0 -ml-20 -mb-20 w-64 h-64 bg-white/10 rounded-full blur-3xl"></div>
+          <section className="bg-primary rounded-3xl p-8 md:p-12 text-center text-white relative overflow-hidden">
+            <div className="absolute top-0 right-0 w-64 h-64 bg-white/10 rounded-full -mr-32 -mt-32"></div>
             <div className="relative z-10">
-              <h2 className="text-3xl font-bold mb-4">{c.cta.title}</h2>
-              <p className="mb-8 max-w-xl mx-auto opacity-90">{c.cta.description}</p>
-              <div className="flex flex-wrap justify-center gap-4">
-                <Link href={c.cta.primary_href} target={c.cta.primary_href.startsWith("http") ? "_blank" : undefined} rel="noopener noreferrer" className="bg-white text-primary px-8 py-3 rounded-lg font-bold hover:bg-slate-100 transition-colors">
+              <h2 className="text-3xl font-bold">{c.cta.title}</h2>
+              <p className="mt-4 text-white/80 max-w-xl mx-auto">{c.cta.description}</p>
+              <div className="mt-8 flex flex-col sm:flex-row justify-center gap-4">
+                <Link href={c.cta.primary_href} target={c.cta.primary_href.startsWith("http") ? "_blank" : undefined} rel="noopener noreferrer" className="px-8 py-3 bg-white text-primary font-bold rounded-lg hover:bg-slate-100 transition-colors">
                   {c.cta.primary_label}
                 </Link>
-                <Link href={c.cta.secondary_href} className="border border-white/20 text-white px-8 py-3 rounded-lg font-bold hover:bg-white/20 transition-colors">
+                <Link href={c.cta.secondary_href} className="px-8 py-3 border border-white/30 text-white font-bold rounded-lg hover:bg-white/10 transition-colors">
                   {c.cta.secondary_label}
                 </Link>
               </div>

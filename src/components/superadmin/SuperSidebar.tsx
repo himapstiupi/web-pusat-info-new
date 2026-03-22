@@ -84,7 +84,7 @@ export default function SuperSidebar({ isOpen = false, onClose }: SuperSidebarPr
                     <span className="material-symbols-outlined">close</span>
                 </button>
             </div>
-            <div className="flex flex-col gap-6 p-6">
+            <div className="flex flex-col gap-6 p-6 flex-1 overflow-y-auto custom-scrollbar">
                 {/* Branding */}
                 <div className="flex items-center gap-3">
                     <div className="size-10 rounded-xl bg-white/10 flex items-center justify-center overflow-hidden border border-white/10 shrink-0">

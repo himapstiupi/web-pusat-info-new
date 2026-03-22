@@ -69,7 +69,6 @@ export default function TentangKamiEditorForm({ initial }: Props) {
       {/* Hero */}
       {activeTab === "hero" && (
         <div className="space-y-4">
-          <div><label className={lClass}>Teks Badge</label><input className={iClass} value={data.hero.badge} onChange={e => updateHero("badge", e.target.value)} /></div>
           <div><label className={lClass}>Judul Halaman</label><input className={iClass} value={data.hero.title} onChange={e => updateHero("title", e.target.value)} /></div>
           <div><label className={lClass}>Deskripsi Hero</label><textarea rows={3} className={iClass} value={data.hero.description} onChange={e => updateHero("description", e.target.value)} /></div>
           <div>
