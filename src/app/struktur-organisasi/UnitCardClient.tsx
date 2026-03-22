@@ -62,7 +62,7 @@ export default function UnitCardClient({ unit }: { unit: OrganizationUnit }) {
              <div className="w-9 h-9 sm:w-10 sm:h-10 rounded-full bg-primary/10 flex items-center justify-center">
                 <span className="material-symbols-outlined text-primary text-base sm:text-lg">groups</span>
              </div>
-             Daftar Staff ({unit.staff.length})
+             Daftar Pengurus ({unit.staff.length})
            </h4>
            <ul className="space-y-3 sm:space-y-4">
              {unit.staff.map((s, i) => (
@@ -101,8 +101,9 @@ export default function UnitCardClient({ unit }: { unit: OrganizationUnit }) {
               onClick={() => setIsOpen(true)}
               className="mt-auto w-full py-2.5 bg-primary/10 hover:bg-primary/20 text-primary dark:text-blue-400 font-semibold rounded-xl text-xs sm:text-sm transition-colors flex items-center justify-center gap-1.5"
             >
-              Lihat Selengkapnya
-              <span className="material-symbols-outlined text-sm">visibility</span>
+              <span className="hidden leading-tight sm:inline">Lihat Selengkapnya</span>
+              <span className="inline leading-tight sm:hidden">Detail</span>
+              <span className="material-symbols-outlined text-base">visibility</span>
             </button>
           ) : (
             <div className="mt-auto w-full py-2.5 flex items-center justify-center text-xs text-slate-400 bg-slate-50 dark:bg-slate-800/50 rounded-xl">
