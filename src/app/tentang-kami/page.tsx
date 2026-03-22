@@ -52,8 +52,37 @@ export default async function TentangKamiPage() {
             </div>
           </section>
 
+          {/* Nama Kabinet */}
+          {(c.kabinet?.nama || c.kabinet?.deskripsi || c.kabinet?.image_url) && (
+            <section>
+              <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+                <div className="order-2 lg:order-1 space-y-6">
+                  <h2 className="text-3xl font-bold text-slate-900 dark:text-white relative inline-block">
+                    {c.kabinet.nama || "Nama Kabinet"}
+                    <span className="absolute -bottom-2 left-0 w-12 h-1 bg-primary rounded-full"></span>
+                  </h2>
+                  <div className="text-slate-600 dark:text-slate-400 leading-relaxed text-lg whitespace-pre-line">
+                    {c.kabinet.deskripsi}
+                  </div>
+                </div>
+                
+                {c.kabinet.image_url && (
+                  <div className="order-1 lg:order-2">
+                    <div className="relative rounded-2xl overflow-hidden aspect-[4/3] bg-slate-100 dark:bg-slate-800 shadow-lg">
+                      <img 
+                        src={c.kabinet.image_url} 
+                        alt={c.kabinet.nama} 
+                        className="w-full h-full object-cover transition-transform duration-500 hover:scale-105"
+                      />
+                    </div>
+                  </div>
+                )}
+              </div>
+            </section>
+          )}
+
           {/* Visi & Misi */}
-          <section className="grid md:grid-cols-2 gap-8">
+          <section className="grid grid-cols-1 md:grid-cols-2 gap-12">
             <div className="bg-white dark:bg-slate-900 p-10 rounded-2xl border border-slate-100 dark:border-slate-800 shadow-sm hover:border-primary/50 transition-colors">
               <div className="w-14 h-14 bg-primary/10 text-primary rounded-xl flex items-center justify-center mb-6">
                 <span className="material-symbols-outlined text-3xl">visibility</span>

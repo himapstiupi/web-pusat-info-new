@@ -62,22 +62,26 @@ export default async function ArticlePage({ params }: { params: { category: stri
     return (
         <div className="flex flex-col min-h-screen bg-background-light dark:bg-background-dark">
             <Navbar />
-            <main className="flex-grow pt-24 pb-16">
-                <article className="max-w-4xl mx-auto px-4 md:px-8">
+            <main className="flex-grow pt-8 md:pt-12 pb-10 md:pb-16">
+                <article className="max-w-4xl mx-auto px-5 md:px-8">
                     {/* Breadcrumb */}
-                    <nav className="flex items-center text-sm text-text-sub dark:text-gray-400 mb-8">
-                        <Link href="/" className="hover:text-primary transition-colors">Beranda</Link>
-                        <span className="mx-2">/</span>
-                        <Link href="/informasi" className="hover:text-primary transition-colors">Informasi</Link>
-                        <span className="mx-2">/</span>
-                        <Link href={`/informasi/${categorySlug}`} className="hover:text-primary transition-colors">{(article.categories as any)?.title}</Link>
-                        <span className="mx-2">/</span>
-                        <span className="text-text-main dark:text-gray-200 truncate max-w-[200px]">{article.title}</span>
+                    <nav className="flex flex-wrap items-center text-xs md:text-sm text-text-sub dark:text-gray-400 mb-6 md:mb-8 gap-y-1">
+                        <Link href="/" className="hover:text-primary transition-colors whitespace-nowrap">Beranda</Link>
+                        <span className="mx-2 text-gray-300 dark:text-gray-600">/</span>
+                        <Link href="/informasi" className="hover:text-primary transition-colors whitespace-nowrap">Informasi</Link>
+                        <span className="mx-2 text-gray-300 dark:text-gray-600">/</span>
+                        <Link href={`/informasi/${categorySlug}`} className="hover:text-primary transition-colors whitespace-nowrap">
+                            {(article.categories as any)?.title}
+                        </Link>
+                        <span className="mx-2 text-gray-300 dark:text-gray-600">/</span>
+                        <span className="text-text-main dark:text-gray-200 truncate max-w-[140px] sm:max-w-[200px]">
+                            {article.title}
+                        </span>
                     </nav>
 
                     {/* Header */}
-                    <header className="mb-10">
-                        <h1 className="text-3xl md:text-5xl font-black text-text-main dark:text-white mb-6 leading-tight">
+                    <header className="mb-8 md:mb-10">
+                        <h1 className="text-2xl sm:text-3xl md:text-5xl font-black text-text-main dark:text-white mb-6 leading-snug md:leading-tight">
                             {article.title}
                         </h1>
                         <div className="flex flex-wrap items-center justify-between gap-4">

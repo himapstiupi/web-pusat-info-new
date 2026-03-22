@@ -9,9 +9,12 @@ import ImageUploadInput from "@/components/superadmin/ImageUploadInput";
 interface Props { initial: TentangKamiContent }
 
 export default function TentangKamiEditorForm({ initial }: Props) {
-  const [data, setData] = useState<TentangKamiContent>(initial);
+  const [data, setData] = useState<TentangKamiContent>({ 
+    ...initial, 
+    kabinet: initial.kabinet || DEFAULT_TENTANG_KAMI.kabinet 
+  });
   const [saving, setSaving] = useState(false);
-  const [activeTab, setActiveTab] = useState<"hero" | "sejarah" | "visi_misi" | "program_kerja" | "cta">("hero");
+  const [activeTab, setActiveTab] = useState<"hero" | "sejarah" | "kabinet" | "visi_misi" | "program_kerja" | "cta">("hero");
 
   const handleSave = async () => {
     setSaving(true);
@@ -28,6 +31,8 @@ export default function TentangKamiEditorForm({ initial }: Props) {
     setData(d => ({ ...d, hero: { ...d.hero, [f]: v } }));
   const updateSejarah = (f: keyof TentangKamiContent["sejarah"], v: string) =>
     setData(d => ({ ...d, sejarah: { ...d.sejarah, [f]: v } }));
+  const updateKabinet = (f: keyof TentangKamiContent["kabinet"], v: string) =>
+    setData(d => ({ ...d, kabinet: { ...d.kabinet, [f]: v } }));
   const updateVM = (f: keyof TentangKamiContent["visi_misi"], v: any) =>
     setData(d => ({ ...d, visi_misi: { ...d.visi_misi, [f]: v } }));
   const updateMisi = (i: number, v: string) => {
@@ -49,10 +54,11 @@ export default function TentangKamiEditorForm({ initial }: Props) {
     <div>
       {/* Tabs */}
       <div className="flex flex-wrap gap-2 mb-6">
-        {(["hero", "sejarah", "visi_misi", "program_kerja", "cta"] as const).map(t => (
+        {(["hero", "sejarah", "kabinet", "visi_misi", "program_kerja", "cta"] as const).map(t => (
           <button key={t} onClick={() => setActiveTab(t)} className={tabClass(t)}>
             {t === "hero" && "Hero"}
             {t === "sejarah" && "Sejarah"}
+            {t === "kabinet" && "Kabinet"}
             {t === "visi_misi" && "Visi & Misi"}
             {t === "program_kerja" && "Program Kerja"}
             {t === "cta" && "CTA"}
@@ -94,6 +100,23 @@ export default function TentangKamiEditorForm({ initial }: Props) {
               placeholder="Tulis sejarah lengkap di sini. Pisahkan paragraf dengan baris kosong."
             />
             <p className="text-xs text-slate-500 mt-1">Pisahkan antar paragraf dengan satu baris kosong (tekan Enter dua kali).</p>
+          </div>
+        </div>
+      )}
+
+      {/* Kabinet */}
+      {activeTab === "kabinet" && (
+        <div className="space-y-4">
+          <div><label className={lClass}>Nama Kabinet</label><input className={iClass} value={data.kabinet?.nama || ""} onChange={e => updateKabinet("nama", e.target.value)} /></div>
+          <div><label className={lClass}>Deskripsi Kabinet</label><textarea rows={5} className={iClass} value={data.kabinet?.deskripsi || ""} onChange={e => updateKabinet("deskripsi", e.target.value)} placeholder="Tuliskan filosofi atau penjelasan tentang kabinet..." /></div>
+          <div>
+            <label className={lClass}>URL Gambar Logo/Kabinet</label>
+            <ImageUploadInput
+              value={data.kabinet?.image_url || ""}
+              onChange={(url) => updateKabinet("image_url", url)}
+              inputClass={iClass}
+              bucket="images"
+            />
           </div>
         </div>
       )}
