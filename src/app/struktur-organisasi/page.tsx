@@ -2,6 +2,7 @@ import Navbar from "@/components/common/Navbar";
 import Footer from "@/components/common/Footer";
 import { getStrukturOrganisasiContent } from "@/actions/pages";
 import { OrganizationUnit } from "@/lib/struktur-organisasi";
+import UnitCardClient from "./UnitCardClient";
 
 export const dynamic = "force-dynamic";
 
@@ -9,38 +10,7 @@ export const metadata = {
   title: "Struktur Organisasi",
 };
 
-function UnitCard({ unit }: { unit: OrganizationUnit }) {
-  return (
-    <div className="bg-white dark:bg-slate-900 rounded-2xl overflow-hidden shadow-sm border border-slate-100 dark:border-slate-800 hover:shadow-md transition-shadow flex flex-col">
-      {/* Foto */}
-      <div className="aspect-square w-full bg-slate-100 dark:bg-slate-800 overflow-hidden">
-        {unit.image_url ? (
-          <img src={unit.image_url} alt={unit.nama} className="w-full h-full object-cover" />
-        ) : (
-          <div className="w-full h-full flex items-center justify-center">
-            <span className="material-symbols-outlined text-5xl text-slate-300 dark:text-slate-600">person</span>
-          </div>
-        )}
-      </div>
-      {/* Info */}
-      <div className="p-4 flex flex-col flex-1">
-        <h4 className="text-slate-900 dark:text-white font-bold text-sm text-center mb-3">{unit.nama}</h4>
-        {unit.staff.length > 0 && (
-          <ul className="space-y-1.5 mt-auto">
-            {unit.staff.map((s, i) => (
-              <li key={i} className="flex flex-col text-center">
-                <span className="text-slate-800 dark:text-slate-200 text-sm font-medium">{s.nama}</span>
-                {s.jabatan && (
-                  <span className="text-slate-500 dark:text-slate-400 text-xs">{s.jabatan}</span>
-                )}
-              </li>
-            ))}
-          </ul>
-        )}
-      </div>
-    </div>
-  );
-}
+
 
 export default async function StrukturOrganisasiPage() {
   const c = await getStrukturOrganisasiContent();
@@ -70,9 +40,9 @@ export default async function StrukturOrganisasiPage() {
               </div>
               <div className="h-px bg-slate-200 dark:bg-slate-800 flex-1"></div>
             </div>
-            <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-5">
+            <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-5 items-start">
               {c.legislatif.map((unit, i) => (
-                <UnitCard key={i} unit={unit} />
+                <UnitCardClient key={i} unit={unit} />
               ))}
             </div>
           </section>
@@ -87,9 +57,9 @@ export default async function StrukturOrganisasiPage() {
               </div>
               <div className="h-px bg-slate-200 dark:bg-slate-800 flex-1"></div>
             </div>
-            <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-5">
+            <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-5 items-start">
               {c.eksekutif.map((unit, i) => (
-                <UnitCard key={i} unit={unit} />
+                <UnitCardClient key={i} unit={unit} />
               ))}
             </div>
           </section>
