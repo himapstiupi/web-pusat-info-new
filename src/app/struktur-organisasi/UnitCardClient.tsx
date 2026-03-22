@@ -106,7 +106,7 @@ export default function UnitCardClient({ unit }: { unit: OrganizationUnit }) {
             </button>
           ) : (
             <div className="mt-auto w-full py-2.5 flex items-center justify-center text-xs text-slate-400 bg-slate-50 dark:bg-slate-800/50 rounded-xl">
-               Belum ada data anggota
+               Belum ada data pengurus
             </div>
           )}
         </div>
