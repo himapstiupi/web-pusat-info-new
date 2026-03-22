@@ -3,6 +3,7 @@ import { Plus_Jakarta_Sans } from "next/font/google";
 import NextTopLoader from "nextjs-toploader";
 import "./globals.css";
 import ScrollToTop from "@/components/common/ScrollToTop";
+import GlobalAnnouncementsWrapper from "@/components/common/GlobalAnnouncementsWrapper";
 
 const jakartaSans = Plus_Jakarta_Sans({
   subsets: ["latin"],
@@ -31,6 +32,9 @@ export default function RootLayout({
       <body className={`${jakartaSans.variable} bg-background-light dark:bg-background-dark text-text-main dark:text-white font-sans min-h-screen flex flex-col overflow-x-hidden antialiased transition-colors duration-300`}>
         <NextTopLoader color="#2563eb" showSpinner={false} />
         <ScrollToTop />
+        <div id="global-announcements-wrapper">
+          <GlobalAnnouncementsWrapper />
+        </div>
         {children}
       </body>
     </html>

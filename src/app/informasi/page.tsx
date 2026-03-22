@@ -9,7 +9,7 @@ import { Metadata } from "next";
 export const revalidate = 60; // Revalidate every 60 seconds
 
 export const metadata: Metadata = {
-  title: "Informasi",
+  title: "Pusat Informasi Mahasiswa PSTI",
 };
 
 export default async function Home() {

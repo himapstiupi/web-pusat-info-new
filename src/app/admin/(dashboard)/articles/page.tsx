@@ -28,7 +28,8 @@ export default function AdminArticlesPage() {
             .select(`
                 *,
                 categories (
-                    title
+                    title,
+                    slug
                 )
             `)
             .order("created_at", { ascending: false });
@@ -117,6 +118,14 @@ export default function AdminArticlesPage() {
                                             })}
                                         </td>
                                         <td className="px-6 py-4 text-right flex justify-end gap-2">
+                                            <Link 
+                                                href={`/informasi/${(article.categories as any)?.slug || 'public'}/${article.id}`} 
+                                                target="_blank"
+                                                className="p-1.5 text-text-sub hover:text-blue-500 transition-colors rounded-md hover:bg-blue-50 dark:hover:bg-blue-900/20"
+                                                title="Lihat Artikel"
+                                            >
+                                                <span className="material-symbols-outlined text-xl">visibility</span>
+                                            </Link>
                                             <Link href={`/admin/articles/edit/${article.id}`} className="p-1.5 text-text-sub hover:text-primary transition-colors rounded-md hover:bg-blue-50 dark:hover:bg-primary/10">
                                                 <span className="material-symbols-outlined text-xl">edit</span>
                                             </Link>

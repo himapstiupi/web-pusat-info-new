@@ -164,12 +164,11 @@ export default function SuperAdminEditArticlePage() {
                                 <div>
                                     <label className="block text-sm font-medium text-[#ad92c9] mb-1">Kategori</label>
                                     <select
-                                        required
                                         value={categoryId}
-                                        onChange={(e) => setCategoryId(Number(e.target.value))}
+                                        onChange={(e) => setCategoryId(e.target.value ? Number(e.target.value) : "")}
                                         className="w-full px-4 py-2 border border-[#362348] rounded-lg bg-[#2a1f36] text-white focus:outline-none focus:ring-2 focus:ring-primary-purple/50"
                                     >
-                                        <option value="">Pilih Kategori</option>
+                                        <option value="">Public (Tanpa Kategori)</option>
                                         {categories.map((cat) => (
                                             <option key={cat.id} value={cat.id}>
                                                 {cat.title}

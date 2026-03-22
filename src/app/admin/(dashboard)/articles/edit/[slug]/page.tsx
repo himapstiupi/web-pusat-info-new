@@ -179,12 +179,11 @@ export default function EditArticlePage() {
                                 <div>
                                     <label className="block text-sm font-medium text-text-main dark:text-gray-200 mb-1">Kategori</label>
                                     <select
-                                        required
                                         value={categoryId}
-                                        onChange={(e) => setCategoryId(Number(e.target.value))}
+                                        onChange={(e) => setCategoryId(e.target.value ? Number(e.target.value) : "")}
                                         className="w-full px-4 py-2 border border-border-light dark:border-border-dark rounded-lg bg-background-light dark:bg-background-dark text-text-main dark:text-white focus:outline-none focus:ring-2 focus:ring-primary/50"
                                     >
-                                        <option value="">Pilih Kategori</option>
+                                        <option value="">Public (Tanpa Kategori)</option>
                                         {categories.map((cat) => (
                                             <option key={cat.id} value={cat.id}>
                                                 {cat.title}

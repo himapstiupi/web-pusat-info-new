@@ -134,12 +134,11 @@ export default function SuperAdminCreateArticlePage() {
                                 <div>
                                     <label className="block text-sm font-medium text-white mb-1">Kategori</label>
                                     <select
-                                        required
                                         value={categoryId}
-                                        onChange={(e) => setCategoryId(Number(e.target.value))}
+                                        onChange={(e) => setCategoryId(e.target.value ? Number(e.target.value) : "")}
                                         className="w-full px-4 py-2 border border-[#362348] rounded-lg bg-[#150d1c] text-white focus:outline-none focus:ring-2 focus:ring-primary-purple/50"
                                     >
-                                        <option value="" className="bg-[#150d1c]">Pilih Kategori</option>
+                                        <option value="" className="bg-[#150d1c]">Public (Tanpa Kategori)</option>
                                         {categories.map((cat) => (
                                             <option key={cat.id} value={cat.id} className="bg-[#150d1c]">
                                                 {cat.title}

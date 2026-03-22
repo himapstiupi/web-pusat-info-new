@@ -101,6 +101,13 @@ export default function AdminSidebar({ isOpen = false, onClose }: AdminSidebarPr
                         Kategori
                     </Link>
                     <Link
+                        href="/admin/announcements"
+                        className={linkClass("/admin/announcements")}
+                    >
+                        <span className="material-symbols-outlined">campaign</span>
+                        Pengumuman
+                    </Link>
+                    <Link
                         href="/admin/articles"
                         className={linkClass("/admin/articles")}
                     >

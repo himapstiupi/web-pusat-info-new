@@ -70,10 +70,14 @@ export default async function ArticlePage({ params }: { params: { category: stri
                         <span className="mx-2 text-gray-300 dark:text-gray-600">/</span>
                         <Link href="/informasi" className="hover:text-primary transition-colors whitespace-nowrap">Informasi</Link>
                         <span className="mx-2 text-gray-300 dark:text-gray-600">/</span>
-                        <Link href={`/informasi/${categorySlug}`} className="hover:text-primary transition-colors whitespace-nowrap">
-                            {(article.categories as any)?.title}
-                        </Link>
-                        <span className="mx-2 text-gray-300 dark:text-gray-600">/</span>
+                        {(article.categories as any)?.title && (
+                            <>
+                                <Link href={`/informasi/${categorySlug}`} className="hover:text-primary transition-colors whitespace-nowrap">
+                                    {(article.categories as any)?.title}
+                                </Link>
+                                <span className="mx-2 text-gray-300 dark:text-gray-600">/</span>
+                            </>
+                        )}
                         <span className="text-text-main dark:text-gray-200 truncate max-w-[140px] sm:max-w-[200px]">
                             {article.title}
                         </span>
