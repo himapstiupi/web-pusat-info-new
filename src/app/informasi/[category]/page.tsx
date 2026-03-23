@@ -27,9 +27,21 @@ export async function generateMetadata({ params }: { params: { category: string 
     };
 }
 
-export default async function CategoryPage({ params }: { params: { category: string } }) {
+export default async function CategoryPage({ 
+    params,
+    searchParams 
+}: { 
+    params: { category: string },
+    searchParams: Promise<{ page?: string }>
+}) {
     const supabase = await createClient();
     const { category } = await params;
+    
+    // Pagination logic
+    const resolvedSearchParams = await searchParams;
+    const page = parseInt(resolvedSearchParams.page || "1", 10);
+    const limit = 15;
+    const offset = (page - 1) * limit;
 
     // Fetch Category
     const { data: cat } = await supabase
@@ -42,12 +54,21 @@ export default async function CategoryPage({ params }: { params: { category: str
         notFound();
     }
 
+    // Fetch count of Articles in Category
+    const { count } = await supabase
+        .from("articles")
+        .select("*", { count: "exact", head: true })
+        .eq("category_id", cat.id);
+
+    const totalPages = Math.ceil((count || 0) / limit);
+
     // Fetch Articles in Category
     const { data: articles } = await supabase
         .from("articles")
         .select("*")
         .eq("category_id", cat.id)
-        .order("created_at", { ascending: false });
+        .order("created_at", { ascending: false })
+        .range(offset, offset + limit - 1);
 
     return (
         <div className="flex flex-col min-h-screen">
@@ -82,7 +103,7 @@ export default async function CategoryPage({ params }: { params: { category: str
                             Daftar Artikel
                         </h2>
                         <span className="text-sm font-medium px-3 py-1 bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-400 rounded-full">
-                            {articles?.length || 0} Artikel
+                            {count || 0} Artikel
                         </span>
                     </div>
 
@@ -126,6 +147,45 @@ export default async function CategoryPage({ params }: { params: { category: str
                             </div>
                         )}
                     </div>
+
+                    {/* Pagination Controls */}
+                    {totalPages > 1 && (
+                        <div className="mt-16 flex items-center justify-center gap-2">
+                            {page > 1 ? (
+                                <Link 
+                                    href={`/informasi/${cat.slug}?page=${page - 1}`}
+                                    className="flex items-center gap-2 px-4 py-2 bg-white dark:bg-surface-dark border border-slate-200 dark:border-slate-800 rounded-full text-sm font-medium text-slate-600 dark:text-slate-300 hover:text-primary dark:hover:text-primary hover:border-primary/30 transition-all"
+                                >
+                                    <span className="material-symbols-outlined text-sm">chevron_left</span>
+                                    Sebelumnya
+                                </Link>
+                            ) : (
+                                <button disabled className="flex items-center gap-2 px-4 py-2 bg-slate-50 dark:bg-surface-dark/50 border border-slate-200 dark:border-slate-800 rounded-full text-sm font-medium text-slate-400 dark:text-slate-500 cursor-not-allowed">
+                                    <span className="material-symbols-outlined text-sm">chevron_left</span>
+                                    Sebelumnya
+                                </button>
+                            )}
+                            
+                            <div className="px-4 py-2 text-sm font-medium text-slate-600 dark:text-slate-400">
+                                Halaman <span className="text-slate-900 dark:text-white font-bold">{page}</span> dari <span className="text-slate-900 dark:text-white font-bold">{totalPages}</span>
+                            </div>
+
+                            {page < totalPages ? (
+                                <Link 
+                                    href={`/informasi/${cat.slug}?page=${page + 1}`}
+                                    className="flex items-center gap-2 px-4 py-2 bg-white dark:bg-surface-dark border border-slate-200 dark:border-slate-800 rounded-full text-sm font-medium text-slate-600 dark:text-slate-300 hover:text-primary dark:hover:text-primary hover:border-primary/30 transition-all"
+                                >
+                                    Selanjutnya
+                                    <span className="material-symbols-outlined text-sm">chevron_right</span>
+                                </Link>
+                            ) : (
+                                <button disabled className="flex items-center gap-2 px-4 py-2 bg-slate-50 dark:bg-surface-dark/50 border border-slate-200 dark:border-slate-800 rounded-full text-sm font-medium text-slate-400 dark:text-slate-500 cursor-not-allowed">
+                                    Selanjutnya
+                                    <span className="material-symbols-outlined text-sm">chevron_right</span>
+                                </button>
+                            )}
+                        </div>
+                    )}
                 </div>
             </main>
             <Footer />

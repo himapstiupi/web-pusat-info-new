@@ -6,18 +6,32 @@ import Link from "next/link";
 
 export const dynamic = 'force-dynamic';
 
-export async function generateMetadata({ searchParams }: { searchParams: { q: string } }) {
-    const { q } = await searchParams;
-    const query = q || "Pencarian";
+export async function generateMetadata({ searchParams }: { searchParams: Promise<{ q?: string }> }) {
+    const resolvedSearchParams = await searchParams;
+    const query = resolvedSearchParams.q || "Pencarian";
     return {
         title: `Pencarian: ${query}`,
     };
 }
 
-export default async function SearchPage({ searchParams }: { searchParams: { q: string } }) {
+export default async function SearchPage({ searchParams }: { searchParams: Promise<{ q?: string; page?: string }> }) {
     const supabase = await createClient();
-    const { q } = await searchParams;
-    const query = q || "";
+    const resolvedSearchParams = await searchParams;
+    const query = resolvedSearchParams.q || "";
+
+    // Pagination logic
+    const page = parseInt(resolvedSearchParams.page || "1", 10);
+    const limit = 10;
+    const offset = (page - 1) * limit;
+
+    // Fetch total count
+    const { count } = await supabase
+        .from("articles")
+        .select("*", { count: "exact", head: true })
+        .eq("is_published", true)
+        .ilike("title", `%${query}%`);
+
+    const totalPages = Math.ceil((count || 0) / limit);
 
     // Fetch Search Results
     const { data: articles } = await supabase
@@ -31,7 +45,8 @@ export default async function SearchPage({ searchParams }: { searchParams: { q: 
         `)
         .eq("is_published", true)
         .ilike("title", `%${query}%`)
-        .order("views", { ascending: false });
+        .order("views", { ascending: false })
+        .range(offset, offset + limit - 1);
 
     return (
         <div className="flex flex-col min-h-screen">
@@ -78,6 +93,45 @@ export default async function SearchPage({ searchParams }: { searchParams: { q: 
                             </div>
                         )}
                     </div>
+
+                    {/* Pagination Controls */}
+                    {totalPages > 1 && (
+                        <div className="mt-12 flex items-center justify-center gap-2">
+                            {page > 1 ? (
+                                <Link 
+                                    href={`/informasi/search?q=${query}&page=${page - 1}`}
+                                    className="flex items-center gap-2 px-4 py-2 bg-surface-light dark:bg-surface-dark border border-border-light dark:border-border-dark rounded-full text-sm font-medium text-text-sub dark:text-gray-300 hover:text-primary dark:hover:text-primary hover:border-primary/50 transition-all"
+                                >
+                                    <span className="material-symbols-outlined text-sm">chevron_left</span>
+                                    Sebelumnya
+                                </Link>
+                            ) : (
+                                <button disabled className="flex items-center gap-2 px-4 py-2 bg-gray-50 dark:bg-surface-dark/50 border border-border-light dark:border-border-dark rounded-full text-sm font-medium text-gray-400 dark:text-gray-500 cursor-not-allowed">
+                                    <span className="material-symbols-outlined text-sm">chevron_left</span>
+                                    Sebelumnya
+                                </button>
+                            )}
+                            
+                            <div className="px-4 py-2 text-sm font-medium text-text-sub dark:text-gray-400">
+                                Halaman <span className="text-text-main dark:text-white font-bold">{page}</span> dari <span className="text-text-main dark:text-white font-bold">{totalPages}</span>
+                            </div>
+
+                            {page < totalPages ? (
+                                <Link 
+                                    href={`/informasi/search?q=${query}&page=${page + 1}`}
+                                    className="flex items-center gap-2 px-4 py-2 bg-surface-light dark:bg-surface-dark border border-border-light dark:border-border-dark rounded-full text-sm font-medium text-text-sub dark:text-gray-300 hover:text-primary dark:hover:text-primary hover:border-primary/50 transition-all"
+                                >
+                                    Selanjutnya
+                                    <span className="material-symbols-outlined text-sm">chevron_right</span>
+                                </Link>
+                            ) : (
+                                <button disabled className="flex items-center gap-2 px-4 py-2 bg-gray-50 dark:bg-surface-dark/50 border border-border-light dark:border-border-dark rounded-full text-sm font-medium text-gray-400 dark:text-gray-500 cursor-not-allowed">
+                                    Selanjutnya
+                                    <span className="material-symbols-outlined text-sm">chevron_right</span>
+                                </button>
+                            )}
+                        </div>
+                    )}
                 </div>
             </main>
             <Footer />
