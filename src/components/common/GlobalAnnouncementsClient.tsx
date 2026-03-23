@@ -92,7 +92,7 @@ export default function GlobalAnnouncementsClient({ announcements }: { announcem
         <>
             {/* 1. Running Text (Top-level) */}
             {runningTexts.length > 0 && (
-                <div className="bg-red-600 text-white text-xs md:text-sm font-semibold overflow-hidden flex items-center h-10 shrink-0">
+                <div className="bg-yellow-400 text-black text-xs md:text-sm font-semibold overflow-hidden flex items-center h-10 shrink-0">
                     <div 
                         className="whitespace-nowrap flex items-center animate-[marquee_20s_linear_infinite] px-4 w-fit"
                         style={{ animationDuration: calculatedDuration }}
