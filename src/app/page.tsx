@@ -76,8 +76,8 @@ export default async function Home() {
         <section className="bg-slate-50 dark:bg-slate-900/50 py-12 md:py-20">
           <div className="mx-auto max-w-[1200px] px-6">
             <div className="text-center max-w-2xl mx-auto mb-16">
-              <h2 className="text-3xl font-bold">Nilai-Nilai Utama</h2>
-              <p className="mt-4 text-slate-600 dark:text-slate-400">Prinsip yang menjadi pondasi setiap layanan yang kami berikan kepada Anda.</p>
+              <h2 className="text-3xl font-bold">Nilai & Prinsip</h2>
+              <p className="mt-4 text-slate-600 dark:text-slate-400">Nilai dan Prinsip yang menjadi pondasi HIMA PSTI.</p>
             </div>
             <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-8">
               {c.values.map((v, i) => (
