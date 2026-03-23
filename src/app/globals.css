@@ -2,12 +2,68 @@
 @tailwind components;
 @tailwind utilities;
 
+/* ============================================================
+   KEYFRAMES
+   ============================================================ */
+
+/* Page-enter: smooth spring-like fade + subtle lift + blur */
+@keyframes pageEnter {
+  from {
+    opacity: 0;
+    transform: translateY(14px);
+    filter: blur(4px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+    filter: blur(0px);
+  }
+}
+
+/* Generic scroll-triggered fade-up (used by AnimateOnScroll) */
 @keyframes fadeInUp {
   from {
     opacity: 0;
-    transform: translateY(20px);
+    transform: translateY(28px);
   }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
 
+/* Fade-in from left */
+@keyframes fadeInLeft {
+  from {
+    opacity: 0;
+    transform: translateX(-28px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+/* Scale-in for modals / cards */
+@keyframes scaleIn {
+  from {
+    opacity: 0;
+    transform: scale(0.94) translateY(12px);
+    filter: blur(6px);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+    filter: blur(0px);
+  }
+}
+
+/* Slide-down for hero text */
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-18px);
+  }
   to {
     opacity: 1;
     transform: translateY(0);
@@ -75,9 +131,52 @@
     word-wrap: break-word;
   }
 
+  /* ============================================================
+     PAGE TRANSITION
+     ============================================================ */
   .animate-enter {
-    animation: fadeInUp 0.5s ease-out forwards;
+    animation: pageEnter 0.65s cubic-bezier(0.16, 1, 0.3, 1) forwards;
   }
+
+  /* ============================================================
+     SCROLL-TRIGGERED ANIMATIONS
+     Elements start invisible; JS adds .is-visible to trigger animation.
+     ============================================================ */
+  .animate-on-scroll {
+    opacity: 0;
+    transform: translateY(28px);
+    transition:
+      opacity 0.65s cubic-bezier(0.16, 1, 0.3, 1),
+      transform 0.65s cubic-bezier(0.16, 1, 0.3, 1),
+      filter 0.65s cubic-bezier(0.16, 1, 0.3, 1);
+    filter: blur(2px);
+  }
+
+  .animate-on-scroll.from-left {
+    transform: translateX(-28px);
+  }
+
+  .animate-on-scroll.from-right {
+    transform: translateX(28px);
+  }
+
+  .animate-on-scroll.scale-up {
+    transform: scale(0.95) translateY(16px);
+  }
+
+  .animate-on-scroll.is-visible {
+    opacity: 1;
+    transform: translateY(0) translateX(0) scale(1);
+    filter: blur(0);
+  }
+
+  /* Stagger delays for grid cards */
+  .stagger-1 { transition-delay: 0.05s; }
+  .stagger-2 { transition-delay: 0.12s; }
+  .stagger-3 { transition-delay: 0.19s; }
+  .stagger-4 { transition-delay: 0.26s; }
+  .stagger-5 { transition-delay: 0.33s; }
+  .stagger-6 { transition-delay: 0.40s; }
 
   /* Quill alignment support */
   .ql-align-left {

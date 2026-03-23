@@ -157,8 +157,8 @@ export default function GlobalAnnouncementsClient({ announcements }: { announcem
                         </div>
 
                         {/* Footer Section */}
-                        <div className="flex-shrink-0 px-8 py-6 text-center relative z-10 bg-white/50 dark:bg-[#1a1025]/50 backdrop-blur-md border-t border-slate-100/50 dark:border-white/5 w-full">
-                            {popup.button_link && popup.button_label ? (
+                        <div className="flex-shrink-0 px-8 py-6 text-center relative z-10 bg-white/50 dark:bg-[#1a1025]/50 backdrop-blur-md border-t border-slate-100/50 dark:border-white/5 w-full flex flex-col gap-3">
+                            {popup.button_link && popup.button_label && (
                                 <Link 
                                     href={popup.button_link}
                                     onClick={() => handleClosePopup(popup)}
@@ -170,14 +170,13 @@ export default function GlobalAnnouncementsClient({ announcements }: { announcem
                                         <span className="material-symbols-outlined text-[18px] group-hover:translate-x-1 transition-transform">arrow_forward</span>
                                     </div>
                                 </Link>
-                            ) : (
-                                <button 
-                                    onClick={() => handleClosePopup(popup)}
-                                    className="w-full px-8 py-[14px] bg-slate-100 hover:bg-slate-200 dark:bg-slate-800 dark:hover:bg-slate-700 text-slate-700 dark:text-white font-bold rounded-xl transition-colors text-[15px]"
-                                >
-                                    Tutup
-                                </button>
                             )}
+                            <button 
+                                onClick={() => handleClosePopup(popup)}
+                                className="w-full px-8 py-[14px] bg-slate-100 hover:bg-slate-200 dark:bg-slate-800 dark:hover:bg-slate-700 text-slate-700 dark:text-white font-bold rounded-xl transition-colors text-[15px]"
+                            >
+                                {popup.button_link && popup.button_label ? 'Tutup' : 'OK Mengerti'}
+                            </button>
                         </div>
                     </div>
                 </div>
