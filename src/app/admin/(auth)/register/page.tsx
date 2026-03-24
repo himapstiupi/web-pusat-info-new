@@ -121,7 +121,7 @@ export default function RegisterPage() {
                             </div>
                             <div className="space-y-1.5">
                                 <label className="block text-xs sm:text-sm font-semibold text-text-main dark:text-gray-200" htmlFor="confirm-password">
-                                    Konfirmasi Kata Sandi
+                                    Ulangi Kata Sandi
                                 </label>
                                 <div className="relative">
                                     <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-gray-400">
