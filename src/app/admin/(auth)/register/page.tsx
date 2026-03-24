@@ -77,7 +77,7 @@ export default function RegisterPage() {
                 <div className="w-full max-w-md relative z-10">
                     <div className="bg-surface-light dark:bg-surface-dark rounded-2xl shadow-xl border border-border-light dark:border-border-dark overflow-hidden p-6 sm:p-8 md:p-10">
                         <div className="text-center mb-6 sm:mb-8">
-                            <h2 className="text-xl sm:text-2xl font-bold text-text-main dark:text-white tracking-tight mb-2">Buat Akun Baru</h2>
+                            <h2 className="text-xl sm:text-2xl font-bold text-text-main dark:text-white tracking-tight mb-2">Daftar Akun</h2>
                             <p className="text-text-sub dark:text-gray-400 text-xs sm:text-sm">Buat akun untuk mengakses website HIMA PSTI.</p>
                         </div>
                         <form className="space-y-4 sm:space-y-5" onSubmit={handleSubmit}>
