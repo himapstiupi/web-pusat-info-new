@@ -17,7 +17,7 @@ function LoginForm() {
     useEffect(() => {
         const errorType = searchParams.get("error");
         if (errorType === "account_suspended") {
-            setError("Pendaftaran akun Anda belum disetujui atau akun telah dinonaktifkan. Silahkan login untuk mengetahui status akun Anda.");
+            setError("Pendaftaran akun Anda sedang diverifikasi atau akun Anda telah dinonaktifkan. Silahkan login untuk mengetahui status akun Anda.");
         } else if (errorType === "account_not_approved") {
             setError("Akun Anda belum disetujui. Harap tunggu persetujuan atau hubungi Departemen Kominfo.");
         }
