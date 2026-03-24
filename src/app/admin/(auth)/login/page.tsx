@@ -87,7 +87,7 @@ function LoginForm() {
                     <div className="inline-flex items-center justify-center mb-4 w-20 h-20 sm:w-24 sm:h-24">
                         <img src="/hima-logo.png" alt="Logo HIMA PSTI" className="w-full h-full object-contain" />
                     </div>
-                    <h1 className="text-xl sm:text-2xl font-bold text-text-main dark:text-white tracking-tight">Login ke Akun</h1>
+                    <h1 className="text-xl sm:text-2xl font-bold text-text-main dark:text-white tracking-tight">Masuk ke Akun</h1>
                     <p className="text-text-sub dark:text-gray-400 text-xs sm:text-sm mt-2">Masuk ke akun untuk mengelola website</p>
                 </div>
                 <form onSubmit={handleLogin} className="space-y-5 sm:space-y-6">
