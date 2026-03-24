@@ -78,7 +78,7 @@ export default function RegisterPage() {
                     <div className="bg-surface-light dark:bg-surface-dark rounded-2xl shadow-xl border border-border-light dark:border-border-dark overflow-hidden p-6 sm:p-8 md:p-10">
                         <div className="text-center mb-6 sm:mb-8">
                             <h2 className="text-xl sm:text-2xl font-bold text-text-main dark:text-white tracking-tight mb-2">Buat Akun Baru</h2>
-                            <p className="text-text-sub dark:text-gray-400 text-xs sm:text-sm">Bergabunglah untuk mengakses pusat bantuan lengkap.</p>
+                            <p className="text-text-sub dark:text-gray-400 text-xs sm:text-sm">Buat akun untuk mengakses website HIMA PSTI.</p>
                         </div>
                         <form className="space-y-4 sm:space-y-5" onSubmit={handleSubmit}>
                             {error && (
@@ -94,7 +94,7 @@ export default function RegisterPage() {
                                     <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-gray-400">
                                         <span className="material-symbols-outlined text-lg sm:text-[20px]">person</span>
                                     </div>
-                                    <input className="block w-full pl-10 pr-3 py-2.5 text-sm border border-border-light dark:border-border-dark rounded-lg bg-background-light dark:bg-background-dark text-text-main dark:text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary transition-all" id="fullname" name="fullname" placeholder="Contoh: Budi Santoso" required type="text" />
+                                    <input className="block w-full pl-10 pr-3 py-2.5 text-sm border border-border-light dark:border-border-dark rounded-lg bg-background-light dark:bg-background-dark text-text-main dark:text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary transition-all" id="fullname" name="fullname" placeholder="Contoh : Fahri Bintang Maulana" required type="text" />
                                 </div>
                             </div>
                             <div className="space-y-1.5">
@@ -116,7 +116,7 @@ export default function RegisterPage() {
                                     <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-gray-400">
                                         <span className="material-symbols-outlined text-lg sm:text-[20px]">lock</span>
                                     </div>
-                                    <input className="block w-full pl-10 pr-3 py-2.5 text-sm border border-border-light dark:border-border-dark rounded-lg bg-background-light dark:bg-background-dark text-text-main dark:text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary transition-all" id="password" name="password" placeholder="Minimal 8 karakter" required type="password" />
+                                    <input className="block w-full pl-10 pr-3 py-2.5 text-sm border border-border-light dark:border-border-dark rounded-lg bg-background-light dark:bg-background-dark text-text-main dark:text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary transition-all" id="password" name="password" placeholder="Buat Kata Sandi yang Unik" required type="password" />
                                 </div>
                             </div>
                             <div className="space-y-1.5">
@@ -127,7 +127,7 @@ export default function RegisterPage() {
                                     <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-gray-400">
                                         <span className="material-symbols-outlined text-lg sm:text-[20px]">lock_reset</span>
                                     </div>
-                                    <input className="block w-full pl-10 pr-3 py-2.5 text-sm border border-border-light dark:border-border-dark rounded-lg bg-background-light dark:bg-background-dark text-text-main dark:text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary transition-all" id="confirm-password" name="confirm-password" placeholder="Ulangi password anda" required type="password" />
+                                    <input className="block w-full pl-10 pr-3 py-2.5 text-sm border border-border-light dark:border-border-dark rounded-lg bg-background-light dark:bg-background-dark text-text-main dark:text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary transition-all" id="confirm-password" name="confirm-password" placeholder="Ulangi Kata Sandi" required type="password" />
                                 </div>
                             </div>
 

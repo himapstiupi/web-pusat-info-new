@@ -17,7 +17,7 @@ function LoginForm() {
     useEffect(() => {
         const errorType = searchParams.get("error");
         if (errorType === "account_suspended") {
-            setError("Akun Anda telah dinonaktifkan. Silakan hubungi Departemen Kominfo untuk informasi lebih lanjut.");
+            setError("Pendaftaran akun Anda belum disetujui atau akun telah dinonaktifkan. Silahkan login untuk mengetahui status akun Anda.");
         } else if (errorType === "account_not_approved") {
             setError("Akun Anda belum disetujui. Harap tunggu persetujuan atau hubungi Departemen Kominfo.");
         }
@@ -51,12 +51,12 @@ function LoginForm() {
                     // Check Status
                     if (profile.status === 'pending') {
                         await supabase.auth.signOut();
-                        setError("Akun Anda masih menunggu persetujuan.");
+                        setError("Akun Anda masih menunggu persetujuan. Silahkan hubungi Departemen Kominfo untuk informasi lebih lanjut.");
                         return;
                     }
                     if (profile.status === 'rejected') {
                         await supabase.auth.signOut();
-                        setError("Akun Anda telah dihapus aksesnya. Silahkan hubungi Departemen Kominfo untuk informasi lebih lanjut.");
+                        setError("Akses admin pada akun Anda telah dinonaktifkan. Silahkan hubungi Departemen Kominfo untuk informasi lebih lanjut.");
                         return;
                     }
 
@@ -107,7 +107,7 @@ function LoginForm() {
                                 className="block w-full pl-10 pr-3 py-2.5 sm:py-3 text-sm border border-border-light dark:border-border-dark rounded-lg bg-white dark:bg-background-dark text-text-main dark:text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all"
                                 id="email"
                                 name="email"
-                                placeholder="nama@perusahaan.com"
+                                placeholder="namakamu@email.com"
                                 required
                                 type="email"
                                 value={email}
