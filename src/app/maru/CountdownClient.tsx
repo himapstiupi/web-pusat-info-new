@@ -55,7 +55,7 @@ function CountdownBox({ item }: { item: CountdownTarget }) {
       ) : (
         /* ── Live Countdown ── */
         <>
-          <div className="flex gap-1.5 md:gap-3 items-end">
+          <div className="flex gap-3 items-end justify-center">
             {[
               { value: mounted ? pad(timeLeft.days) : "00", unit: "Hari" },
               { value: mounted ? pad(timeLeft.hours) : "00", unit: "Jam" },
@@ -63,10 +63,10 @@ function CountdownBox({ item }: { item: CountdownTarget }) {
               { value: mounted ? pad(timeLeft.seconds) : "00", unit: "Detik" },
             ].map(({ value, unit }, i) => (
               <div key={i} className="flex flex-col items-center">
-                <div className="bg-primary/10 dark:bg-primary/20 rounded-lg md:rounded-xl px-1.5 md:px-3 py-1.5 md:py-2 min-w-[36px] md:min-w-[54px] text-center">
-                  <span className="text-xl md:text-3xl font-black text-primary tabular-nums leading-none">{value}</span>
+                <div className="bg-primary/10 dark:bg-primary/20 rounded-xl px-3 py-2 min-w-[52px] text-center">
+                  <span className="text-3xl font-black text-primary tabular-nums leading-none">{value}</span>
                 </div>
-                <span className="text-[9px] md:text-xs text-slate-500 dark:text-slate-400 mt-1 font-medium">{unit}</span>
+                <span className="text-xs text-slate-500 dark:text-slate-400 mt-1 font-medium">{unit}</span>
               </div>
             ))}
           </div>
@@ -84,7 +84,7 @@ interface Props {
 
 export default function CountdownClient({ snbp, snbt, mandiri }: Props) {
   return (
-    <div className="grid grid-cols-3 gap-3 md:gap-6">
+    <div className="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-6">
       <CountdownBox item={snbp} />
       <CountdownBox item={snbt} />
       <CountdownBox item={mandiri} />

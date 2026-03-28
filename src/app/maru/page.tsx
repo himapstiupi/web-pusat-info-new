@@ -50,10 +50,10 @@ export default async function MahasiswaBaruPage() {
             <AnimateOnScroll>
               <div className="text-center mb-8 md:mb-10">
                 <h2 className="text-xl sm:text-2xl md:text-3xl font-bold text-text-main dark:text-white">
-                  Hitung Mundur Pengumuman
+                  Hitung Mundur Penerimaan
                 </h2>
                 <p className="mt-2 text-slate-500 dark:text-slate-400 text-sm md:text-base">
-                  Yuk pantau waktu pengumuman setiap jalur nya!
+                  Yuk pantau waktu penerimaan setiap jalur nya!
                 </p>
               </div>
             </AnimateOnScroll>
