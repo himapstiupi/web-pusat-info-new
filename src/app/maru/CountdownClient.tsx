@@ -70,14 +70,6 @@ function CountdownBox({ item }: { item: CountdownTarget }) {
               </div>
             ))}
           </div>
-          <p className="mt-2 md:mt-4 text-[10px] md:text-xs text-slate-400 dark:text-slate-500 text-center">
-            Target:{" "}
-            {new Date(item.date).toLocaleDateString("id-ID", {
-              day: "numeric",
-              month: "short",
-              year: "numeric",
-            })}
-          </p>
         </>
       )}
     </div>
