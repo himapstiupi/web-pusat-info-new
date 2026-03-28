@@ -134,6 +134,13 @@ export default function SuperSidebar({ isOpen = false, onClose }: SuperSidebarPr
                         <span className="text-sm font-medium">Edit Beranda</span>
                     </Link>
                     <Link
+                        href="/superadmin/mahasiswa-baru"
+                        className={linkClass("/superadmin/mahasiswa-baru")}
+                    >
+                        <span className="material-symbols-outlined">school</span>
+                        <span className="text-sm font-medium">Edit Mhs Baru</span>
+                    </Link>
+                    <Link
                         href="/superadmin/tentang-kami"
                         className={linkClass("/superadmin/tentang-kami")}
                     >
