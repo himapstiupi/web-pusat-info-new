@@ -40,18 +40,17 @@ function CountdownBox({ item }: { item: CountdownTarget }) {
   const pad = (n: number) => String(n).padStart(2, "0");
 
   return (
-    <div className="bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-2xl p-5 flex flex-col items-center shadow-sm">
+    <div className="bg-primary rounded-2xl p-5 flex flex-col items-center shadow-md">
       {/* Label */}
-      <div className="flex items-center gap-1.5 mb-4">
-        <div className={`w-2 h-2 rounded-full shrink-0 ${item.active ? "bg-primary animate-pulse" : "bg-slate-300 dark:bg-slate-600"}`} />
-        <span className="font-bold text-base text-text-main dark:text-white">{item.label}</span>
+      <div className="flex items-center justify-center mb-4">
+        <span className="font-bold text-base text-white">{item.label}</span>
       </div>
 
       {!item.active ? (
         /* ── Segera Hadir ── */
         <div className="flex flex-col items-center gap-2 py-4">
-          <span className="material-symbols-outlined text-4xl text-slate-300 dark:text-slate-600">schedule</span>
-          <span className="text-sm font-bold text-slate-400 dark:text-slate-500">Segera Hadir</span>
+          <span className="material-symbols-outlined text-4xl text-white/40">schedule</span>
+          <span className="text-sm font-bold text-white/60">Segera Hadir</span>
         </div>
       ) : (
         /* ── Live Countdown ── */
@@ -63,10 +62,10 @@ function CountdownBox({ item }: { item: CountdownTarget }) {
             { value: mounted ? pad(timeLeft.seconds) : "00", unit: "Detik" },
           ].map(({ value, unit }, i) => (
             <div key={i} className="flex flex-col items-center flex-1">
-              <div className="bg-primary/10 dark:bg-primary/20 rounded-xl w-full py-2.5 text-center">
-                <span className="text-2xl sm:text-3xl font-black text-primary tabular-nums leading-none">{value}</span>
+              <div className="bg-white/20 rounded-xl w-full py-2.5 text-center">
+                <span className="text-2xl sm:text-3xl font-black text-white tabular-nums leading-none">{value}</span>
               </div>
-              <span className="text-[10px] sm:text-xs text-slate-500 dark:text-slate-400 mt-1.5 font-medium">{unit}</span>
+              <span className="text-[10px] sm:text-xs text-white/70 mt-1.5 font-medium">{unit}</span>
             </div>
           ))}
         </div>
