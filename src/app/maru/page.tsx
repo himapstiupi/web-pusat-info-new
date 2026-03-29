@@ -97,7 +97,7 @@ export default async function MahasiswaBaruPage() {
                 <div className="flex items-center gap-2 mb-5 md:mb-8">
                   <span className="material-symbols-outlined text-primary text-xl">recommend</span>
                   <h2 className="text-lg sm:text-2xl font-bold text-text-main dark:text-white">
-                    Artikel Rekomendasi
+                    Rekomendasi Artikel
                   </h2>
                 </div>
               </AnimateOnScroll>
