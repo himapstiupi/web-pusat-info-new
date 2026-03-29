@@ -4,6 +4,7 @@ import AnimateOnScroll from "@/components/common/AnimateOnScroll";
 import Link from "next/link";
 import { getMahasiswaBaruContent, getArticlesByCategories } from "@/actions/pages";
 import CountdownClient from "./CountdownClient";
+import ArticleCarousel from "./ArticleCarousel";
 
 export const dynamic = "force-dynamic";
 
@@ -101,40 +102,9 @@ export default async function MahasiswaBaruPage() {
                   </h2>
                 </div>
               </AnimateOnScroll>
-              {/* Mobile: horizontal scroll list; sm+: grid */}
-              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 md:gap-6">
-                {recommendedArticles.map((article, i) => (
-                  <AnimateOnScroll key={article.id} stagger={((i % 6) + 1) as 1 | 2 | 3 | 4 | 5 | 6} variant="scale-up">
-                    <Link
-                      href={`/informasi/${article.category_slug}/${article.id}`}
-                      className="group flex flex-row sm:flex-col h-full bg-white dark:bg-slate-800 border border-slate-100 dark:border-slate-700 rounded-xl sm:rounded-2xl overflow-hidden shadow-sm hover:shadow-md hover:-translate-y-0.5 transition-all duration-300"
-                    >
-                      {/* Thumbnail — side on mobile, top on sm+ */}
-                      {article.image_url ? (
-                        <div className="w-24 shrink-0 sm:w-full h-auto sm:h-40 overflow-hidden">
-                          <img
-                            src={`/api/img-proxy?url=${encodeURIComponent(article.image_url)}`}
-                            alt={article.title}
-                            className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                          />
-                        </div>
-                      ) : (
-                        <div className="w-24 shrink-0 sm:w-full h-auto sm:h-40 bg-primary/10 flex items-center justify-center">
-                          <span className="material-symbols-outlined text-3xl text-primary/40">article</span>
-                        </div>
-                      )}
-                      <div className="flex-1 p-3 md:p-5">
-                        <h3 className="font-semibold text-text-main dark:text-white group-hover:text-primary transition-colors line-clamp-2 sm:line-clamp-3 text-sm md:text-base leading-snug">
-                          {article.title}
-                        </h3>
-                        <span className="mt-2 inline-flex items-center gap-1 text-primary text-xs font-semibold">
-                          Baca
-                          <span className="material-symbols-outlined text-xs">arrow_forward</span>
-                        </span>
-                      </div>
-                    </Link>
-                  </AnimateOnScroll>
-                ))}
+              {/* Extra px on md+ to leave room for the arrow buttons */}
+              <div className="md:px-7">
+                <ArticleCarousel articles={recommendedArticles} />
               </div>
             </div>
           </section>

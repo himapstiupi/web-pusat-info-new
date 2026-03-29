@@ -129,7 +129,9 @@ export default async function TentangKamiPage() {
               <p className="text-slate-600 dark:text-slate-400 mb-12 max-w-2xl mx-auto">
                 Program dan kegiatan unggulan yang kami jalankan untuk memberikan dampak nyata.
               </p>
-              <ProgramKerjaClient programs={c.program_kerja} />
+              <div className="md:px-6">
+                <ProgramKerjaClient programs={c.program_kerja} />
+              </div>
             </section>
           </AnimateOnScroll>
 
