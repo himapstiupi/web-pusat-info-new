@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 
 interface CountdownTarget {
   label: string;
-  date: string; // ISO datetime string
+  date: string;
   active: boolean;
 }
 
@@ -40,37 +40,36 @@ function CountdownBox({ item }: { item: CountdownTarget }) {
   const pad = (n: number) => String(n).padStart(2, "0");
 
   return (
-    <div className="bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-2xl p-4 md:p-6 flex flex-col items-center shadow-sm hover:shadow-md hover:-translate-y-1 transition-all duration-300">
-      <div className="mb-3 md:mb-4 flex items-center gap-1.5">
+    <div className="bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-2xl p-5 flex flex-col items-center shadow-sm">
+      {/* Label */}
+      <div className="flex items-center gap-1.5 mb-4">
         <div className={`w-2 h-2 rounded-full shrink-0 ${item.active ? "bg-primary animate-pulse" : "bg-slate-300 dark:bg-slate-600"}`} />
-        <span className="font-extrabold text-sm md:text-lg text-text-main dark:text-white tracking-tight text-center leading-tight">{item.label}</span>
+        <span className="font-bold text-base text-text-main dark:text-white">{item.label}</span>
       </div>
 
       {!item.active ? (
         /* ── Segera Hadir ── */
-        <div className="flex flex-col items-center gap-2 py-3">
-          <span className="material-symbols-outlined text-3xl md:text-4xl text-slate-300 dark:text-slate-600">schedule</span>
-          <span className="text-xs md:text-base font-bold text-slate-400 dark:text-slate-500 tracking-wide">Segera Hadir</span>
+        <div className="flex flex-col items-center gap-2 py-4">
+          <span className="material-symbols-outlined text-4xl text-slate-300 dark:text-slate-600">schedule</span>
+          <span className="text-sm font-bold text-slate-400 dark:text-slate-500">Segera Hadir</span>
         </div>
       ) : (
         /* ── Live Countdown ── */
-        <>
-          <div className="flex gap-3 items-end justify-center">
-            {[
-              { value: mounted ? pad(timeLeft.days) : "00", unit: "Hari" },
-              { value: mounted ? pad(timeLeft.hours) : "00", unit: "Jam" },
-              { value: mounted ? pad(timeLeft.minutes) : "00", unit: "Menit" },
-              { value: mounted ? pad(timeLeft.seconds) : "00", unit: "Detik" },
-            ].map(({ value, unit }, i) => (
-              <div key={i} className="flex flex-col items-center">
-                <div className="bg-primary/10 dark:bg-primary/20 rounded-xl px-3 py-2 min-w-[52px] text-center">
-                  <span className="text-3xl font-black text-primary tabular-nums leading-none">{value}</span>
-                </div>
-                <span className="text-xs text-slate-500 dark:text-slate-400 mt-1 font-medium">{unit}</span>
+        <div className="flex gap-2 sm:gap-3 items-end justify-center w-full">
+          {[
+            { value: mounted ? pad(timeLeft.days) : "00", unit: "Hari" },
+            { value: mounted ? pad(timeLeft.hours) : "00", unit: "Jam" },
+            { value: mounted ? pad(timeLeft.minutes) : "00", unit: "Menit" },
+            { value: mounted ? pad(timeLeft.seconds) : "00", unit: "Detik" },
+          ].map(({ value, unit }, i) => (
+            <div key={i} className="flex flex-col items-center flex-1">
+              <div className="bg-primary/10 dark:bg-primary/20 rounded-xl w-full py-2.5 text-center">
+                <span className="text-2xl sm:text-3xl font-black text-primary tabular-nums leading-none">{value}</span>
               </div>
-            ))}
-          </div>
-        </>
+              <span className="text-[10px] sm:text-xs text-slate-500 dark:text-slate-400 mt-1.5 font-medium">{unit}</span>
+            </div>
+          ))}
+        </div>
       )}
     </div>
   );
@@ -84,7 +83,7 @@ interface Props {
 
 export default function CountdownClient({ snbp, snbt, mandiri }: Props) {
   return (
-    <div className="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-6">
+    <div className="grid grid-cols-1 md:grid-cols-3 gap-3 md:gap-6">
       <CountdownBox item={snbp} />
       <CountdownBox item={snbt} />
       <CountdownBox item={mandiri} />
