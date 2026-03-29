@@ -40,21 +40,21 @@ function CountdownBox({ item }: { item: CountdownTarget }) {
   const pad = (n: number) => String(n).padStart(2, "0");
 
   return (
-    <div className="bg-primary rounded-2xl p-5 flex flex-col items-center shadow-md">
+    <div className="bg-primary rounded-2xl p-5 flex flex-col items-center h-full shadow-md">
       {/* Label */}
-      <div className="flex items-center justify-center mb-4">
-        <span className="font-bold text-base text-white">{item.label}</span>
+      <div className="flex items-center justify-center mb-5 w-full">
+        <span className="font-bold text-base text-white text-center w-full">{item.label}</span>
       </div>
 
       {!item.active ? (
         /* ── Segera Hadir ── */
-        <div className="flex flex-col items-center gap-2 py-4">
+        <div className="flex flex-col items-center justify-center gap-2 flex-1 w-full pb-2">
           <span className="material-symbols-outlined text-4xl text-white/40">schedule</span>
-          <span className="text-sm font-bold text-white/60">Segera Hadir</span>
+          <span className="text-sm font-bold text-white/60 text-center">Segera Hadir</span>
         </div>
       ) : (
         /* ── Live Countdown ── */
-        <div className="flex gap-2 sm:gap-3 items-end justify-center w-full">
+        <div className="flex gap-2 sm:gap-3 items-end justify-center w-full flex-1">
           {[
             { value: mounted ? pad(timeLeft.days) : "00", unit: "Hari" },
             { value: mounted ? pad(timeLeft.hours) : "00", unit: "Jam" },
