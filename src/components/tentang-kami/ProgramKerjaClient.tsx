@@ -88,8 +88,7 @@ export default function ProgramKerjaClient({ programs }: Props) {
                 style={{ width: `${100 / perView}%` }}
               >
                 <div
-                  className="group p-6 rounded-2xl bg-white dark:bg-slate-900 border border-slate-100 dark:border-slate-800 transition-all hover:shadow-xl hover:-translate-y-1 flex flex-col h-full cursor-pointer"
-                  onClick={() => setSelectedProgram(item)}
+                  className="group p-6 rounded-2xl bg-white dark:bg-slate-900 border border-slate-100 dark:border-slate-800 transition-all hover:shadow-xl hover:-translate-y-1 flex flex-col h-full"
                 >
                   {/* Icon / Image */}
                   <div className="inline-flex items-center justify-center w-14 h-14 rounded-2xl bg-slate-100 dark:bg-slate-800 group-hover:bg-primary group-hover:text-white mb-5 transition-all overflow-hidden shrink-0 mx-auto">
@@ -109,10 +108,13 @@ export default function ProgramKerjaClient({ programs }: Props) {
                     {item.desc}
                   </p>
 
-                  <div className="pt-4 flex items-center justify-center text-sm font-semibold text-primary gap-1 border-t border-slate-100 dark:border-slate-800">
+                  <button
+                    onClick={() => setSelectedProgram(item)}
+                    className="pt-4 flex items-center justify-center text-sm font-semibold text-primary gap-1 border-t border-slate-100 dark:border-slate-800 w-full hover:text-primary-dark transition-colors cursor-pointer"
+                  >
                     Lihat selengkapnya
                     <span className="material-symbols-outlined text-base">arrow_forward</span>
-                  </div>
+                  </button>
                 </div>
               </div>
             ))}
