@@ -4,6 +4,7 @@ import NextTopLoader from "nextjs-toploader";
 import "./globals.css";
 import ScrollToTop from "@/components/common/ScrollToTop";
 import GlobalAnnouncementsWrapper from "@/components/common/GlobalAnnouncementsWrapper";
+import { ThemeProvider } from "@/components/providers/ThemeProvider";
 
 const jakartaSans = Plus_Jakarta_Sans({
   subsets: ["latin"],
@@ -24,18 +25,20 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  return (
-    <html lang="id" className="light">
+    return (
+        <html lang="id" suppressHydrationWarning>
       <head>
         <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet" />
       </head>
       <body className={`${jakartaSans.variable} bg-background-light dark:bg-background-dark text-text-main dark:text-white font-sans min-h-screen flex flex-col overflow-x-hidden antialiased transition-colors duration-300`}>
         <NextTopLoader color="#2563eb" showSpinner={false} />
         <ScrollToTop />
-        <div id="global-announcements-wrapper">
-          <GlobalAnnouncementsWrapper />
-        </div>
-        {children}
+        <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
+            <div id="global-announcements-wrapper">
+            <GlobalAnnouncementsWrapper />
+            </div>
+            {children}
+        </ThemeProvider>
       </body>
     </html>
   );

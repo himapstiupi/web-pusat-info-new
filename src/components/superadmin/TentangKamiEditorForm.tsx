@@ -46,9 +46,9 @@ export default function TentangKamiEditorForm({ initial }: Props) {
     setData(d => ({ ...d, cta: { ...d.cta, [f]: v } }));
 
   const tabClass = (t: string) =>
-    `px-4 py-2 rounded-lg text-sm font-semibold transition-colors ${activeTab === t ? "bg-primary-purple text-white" : "text-[#ad92c9] hover:bg-white/5"}`;
-  const iClass = "w-full px-3 py-2 bg-[#1f1535] border border-[#3b2a6e] rounded-lg text-white placeholder-[#7a6ba0] text-sm focus:outline-none focus:ring-2 focus:ring-primary-purple/50";
-  const lClass = "block text-xs font-semibold text-[#ad92c9] uppercase tracking-wider mb-1";
+    `px-4 py-2 rounded-lg text-sm font-semibold transition-colors ${activeTab === t ? "bg-primary-purple text-white" : "text-text-sub dark:text-[#ad92c9] hover:bg-black/5 dark:hover:bg-white/5"}`;
+  const iClass = "w-full px-3 py-2 bg-background-light dark:bg-[#1f1535] border border-border-light dark:border-[#3b2a6e] rounded-lg text-text-main dark:text-white placeholder-gray-400 dark:placeholder-[#7a6ba0] text-sm focus:outline-none focus:ring-2 focus:ring-primary-purple/50";
+  const lClass = "block text-xs font-semibold text-text-sub dark:text-[#ad92c9] uppercase tracking-wider mb-1";
 
   return (
     <div>
@@ -141,10 +141,10 @@ export default function TentangKamiEditorForm({ initial }: Props) {
       {activeTab === "program_kerja" && (
         <div className="space-y-4">
           {data.program_kerja.map((pk, i) => (
-            <div key={i} className="p-4 bg-[#1f1535] border border-[#3b2a6e] rounded-xl space-y-3">
+            <div key={i} className="p-4 bg-background-light dark:bg-[#1f1535] border border-border-light dark:border-[#3b2a6e] rounded-xl space-y-3">
               <div className="flex justify-between items-center">
-                <span className="text-sm font-semibold text-white">Program #{i + 1}</span>
-                <button onClick={() => setData(d => ({ ...d, program_kerja: d.program_kerja.filter((_, j) => j !== i) }))} className="text-red-400 hover:text-red-300 text-xs transition-colors">Hapus</button>
+                <span className="text-sm font-semibold text-text-main dark:text-white">Program #{i + 1}</span>
+                <button onClick={() => setData(d => ({ ...d, program_kerja: d.program_kerja.filter((_, j) => j !== i) }))} className="text-red-500 dark:text-red-400 hover:text-red-600 dark:hover:text-red-300 text-xs transition-colors">Hapus</button>
               </div>
 
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
@@ -152,7 +152,7 @@ export default function TentangKamiEditorForm({ initial }: Props) {
                 <div>
                   <label className={lClass}>Ikon Material Symbol</label>
                   <input className={iClass} value={pk.icon} onChange={e => updatePK(i, "icon", e.target.value)} placeholder="mis: campaign" />
-                  <p className="text-[#7a6ba0] text-xs mt-1">Dipakai jika URL gambar kosong</p>
+                  <p className="text-gray-500 dark:text-[#7a6ba0] text-xs mt-1">Dipakai jika URL gambar kosong</p>
                 </div>
               </div>
 
@@ -161,8 +161,8 @@ export default function TentangKamiEditorForm({ initial }: Props) {
                 <input className={iClass} value={pk.image_url || ""} onChange={e => updatePK(i, "image_url", e.target.value)} placeholder="https://..." />
                 {pk.image_url && (
                   <div className="mt-2 flex items-center gap-3">
-                    <img src={pk.image_url} alt="preview" className="h-12 w-12 object-cover rounded-xl border border-[#3b2a6e]" />
-                    <span className="text-[#7a6ba0] text-xs">Preview gambar ikon</span>
+                    <img src={pk.image_url} alt="preview" className="h-12 w-12 object-cover rounded-xl border border-border-light dark:border-[#3b2a6e]" />
+                    <span className="text-gray-500 dark:text-[#7a6ba0] text-xs">Preview gambar ikon</span>
                   </div>
                 )}
               </div>
@@ -172,7 +172,7 @@ export default function TentangKamiEditorForm({ initial }: Props) {
           ))}
           <button
             onClick={() => setData(d => ({ ...d, program_kerja: [...d.program_kerja, { icon: "star", image_url: "", title: "", desc: "" }] }))}
-            className="w-full py-3 border border-dashed border-[#3b2a6e] rounded-xl text-[#ad92c9] hover:border-primary-purple hover:text-white transition-colors text-sm"
+            className="w-full py-3 border border-dashed border-border-light dark:border-[#3b2a6e] rounded-xl text-text-sub dark:text-[#ad92c9] hover:border-primary-purple hover:text-text-main dark:hover:text-white transition-colors text-sm"
           >+ Tambah Program Kerja</button>
         </div>
       )}

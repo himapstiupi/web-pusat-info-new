@@ -88,25 +88,25 @@ export default function AdminApprovalList() {
         }
     };
 
-    if (loading) return <div className="text-white">Loading request...</div>;
+    if (loading) return <div className="text-text-main dark:text-white">Loading request...</div>;
 
     if (admins.length === 0) {
         return (
-            <div className="bg-surface-super-dark rounded-2xl p-6 border border-[#362348] text-center">
-                <p className="text-[#ad92c9]">Tidak ada permintaan pendaftaran admin baru.</p>
+            <div className="bg-surface-light dark:bg-surface-super-dark rounded-2xl p-6 border border-border-light dark:border-[#362348] text-center">
+                <p className="text-text-sub dark:text-[#ad92c9]">Tidak ada permintaan pendaftaran admin baru.</p>
             </div>
         );
     }
 
     return (
-        <div className="bg-surface-super-dark rounded-2xl border border-[#362348] overflow-hidden">
-            <div className="p-6 border-b border-[#362348]">
-                <h3 className="text-white text-lg font-bold">Permintaan Pendaftaran Admin</h3>
+        <div className="bg-surface-light dark:bg-surface-super-dark rounded-2xl border border-border-light dark:border-[#362348] overflow-hidden">
+            <div className="p-6 border-b border-border-light dark:border-[#362348]">
+                <h3 className="text-text-main dark:text-white text-lg font-bold">Permintaan Pendaftaran Admin</h3>
             </div>
             <div className="overflow-x-auto">
                 <table className="w-full text-left text-sm">
                     {/* ... (table content) ... */}
-                    <thead className="bg-[#1e1528] text-[#ad92c9]">
+                    <thead className="bg-background-light dark:bg-[#1e1528] text-text-sub dark:text-[#ad92c9]">
                         <tr>
                             <th className="px-6 py-3 font-medium">Nama</th>
                             <th className="px-6 py-3 font-medium">Email</th>
@@ -114,12 +114,12 @@ export default function AdminApprovalList() {
                             <th className="px-6 py-3 font-medium text-right">Aksi</th>
                         </tr>
                     </thead>
-                    <tbody className="divide-y divide-[#362348]">
+                    <tbody className="divide-y divide-border-light dark:divide-[#362348]">
                         {admins.map((admin) => (
-                            <tr key={admin.id} className="hover:bg-[#2a1f36] transition-colors">
-                                <td className="px-6 py-4 text-white font-medium">{admin.full_name || "Tanpa Nama"}</td>
-                                <td className="px-6 py-4 text-[#ad92c9]">{admin.email}</td>
-                                <td className="px-6 py-4 text-[#ad92c9]">
+                            <tr key={admin.id} className="hover:bg-black/5 dark:hover:bg-[#2a1f36] transition-colors">
+                                <td className="px-6 py-4 text-text-main dark:text-white font-medium">{admin.full_name || "Tanpa Nama"}</td>
+                                <td className="px-6 py-4 text-text-sub dark:text-[#ad92c9]">{admin.email}</td>
+                                <td className="px-6 py-4 text-text-sub dark:text-[#ad92c9]">
                                     {new Date(admin.created_at).toLocaleDateString("id-ID", {
                                         day: "numeric",
                                         month: "long",
@@ -129,7 +129,7 @@ export default function AdminApprovalList() {
                                 <td className="px-6 py-4 text-right space-x-2">
                                     <button
                                         onClick={() => openStatusConfirm(admin.id, admin.full_name, 'rejected')}
-                                        className="inline-flex items-center px-3 py-1.5 rounded-lg border border-red-500/30 text-red-400 hover:bg-red-500/10 transition-colors text-xs font-bold"
+                                        className="inline-flex items-center px-3 py-1.5 rounded-lg border border-red-500/30 text-red-500 dark:text-red-400 hover:bg-red-500/10 transition-colors text-xs font-bold"
                                     >
                                         Tolak
                                     </button>

@@ -6,6 +6,7 @@ import { createClient } from '@/lib/supabase/client'
 import { useRouter, usePathname } from 'next/navigation'
 import { useState, useEffect } from 'react'
 import ConfirmationModal from '@/components/common/ConfirmationModal'
+import ThemeToggle from '@/components/common/ThemeToggle'
 
 interface SuperSidebarProps {
     isOpen?: boolean;
@@ -27,7 +28,7 @@ export default function SuperSidebar({ isOpen = false, onClose }: SuperSidebarPr
         const active = isActive(path);
         const baseClass = "flex items-center gap-3 px-4 py-3 rounded-xl transition-all duration-200";
         const activeClass = "bg-primary-purple text-white shadow-md shadow-primary-purple/20 hover:bg-primary-purple/90";
-        const inactiveClass = "text-[#ad92c9] hover:bg-[#362348]/50 hover:text-white";
+        const inactiveClass = "text-text-sub dark:text-[#ad92c9] hover:bg-black/5 dark:hover:bg-[#362348]/50 hover:text-primary-purple dark:hover:text-white";
 
         return `${baseClass} ${active ? activeClass : inactiveClass}`;
     };
@@ -75,19 +76,19 @@ export default function SuperSidebar({ isOpen = false, onClose }: SuperSidebarPr
     }, [router]);
 
     return (
-        <aside className={`w-72 bg-surface-super-dark/50 dark:bg-[#150d1c] border-r border-[#362348] flex-col justify-between shrink-0 transition-all duration-300
-            ${isOpen ? 'fixed inset-y-0 left-0 z-50 flex h-full bg-[#150d1c] shadow-2xl' : 'hidden md:flex'}
+        <aside className={`w-72 bg-surface-light dark:bg-surface-super-dark/50 border-r border-border-light dark:border-[#362348] flex-col justify-between shrink-0 transition-all duration-300
+            ${isOpen ? 'fixed inset-y-0 left-0 z-50 flex h-full bg-surface-light dark:bg-[#150d1c] shadow-2xl' : 'hidden md:flex'}
         `}>
             {/* Mobile Close Button */}
             <div className="md:hidden absolute top-4 right-4 z-50">
-                <button onClick={onClose} className="text-[#ad92c9] hover:text-white p-1">
+                <button onClick={onClose} className="text-text-sub dark:text-[#ad92c9] hover:text-text-main dark:hover:text-white p-1">
                     <span className="material-symbols-outlined">close</span>
                 </button>
             </div>
             <div className="flex flex-col gap-6 p-6 flex-1 overflow-y-auto custom-scrollbar">
                 {/* Branding */}
                 <div className="flex items-center gap-3">
-                    <div className="size-10 rounded-xl bg-white/10 flex items-center justify-center overflow-hidden border border-white/10 shrink-0">
+                    <div className="size-10 rounded-xl bg-black/5 dark:bg-white/10 flex items-center justify-center overflow-hidden border border-black/10 dark:border-white/10 shrink-0">
                         <NextImage
                             src="/hima-logo.png"
                             alt="HIMA PSTI Logo"
@@ -97,10 +98,10 @@ export default function SuperSidebar({ isOpen = false, onClose }: SuperSidebarPr
                         />
                     </div>
                     <div className="flex flex-col">
-                        <h1 className="text-white text-lg font-bold leading-none tracking-tight">
+                        <h1 className="text-text-main dark:text-white text-lg font-bold leading-none tracking-tight">
                             HIMA PSTI
                         </h1>
-                        <p className="text-[#ad92c9] text-xs font-medium mt-1">Superadmin</p>
+                        <p className="text-text-sub dark:text-[#ad92c9] text-xs font-medium mt-1">Superadmin</p>
                     </div>
                 </div>
                 {/* Navigation */}
@@ -180,15 +181,18 @@ export default function SuperSidebar({ isOpen = false, onClose }: SuperSidebarPr
                 </nav>
             </div>
 
-            <div className="p-6 border-t border-[#362348] bg-[#1a1025]/50">
+            <div className="p-6 border-t border-border-light dark:border-[#362348] bg-surface-light dark:bg-[#1a1025]/50 flex items-center justify-between">
                 <div className="flex items-center gap-3">
-                    <div className="size-10 rounded-full bg-white/10 flex items-center justify-center border-2 border-primary-purple shrink-0 text-white">
+                    <div className="size-10 rounded-full bg-black/5 dark:bg-white/10 flex items-center justify-center border-2 border-primary-purple shrink-0 text-text-main dark:text-white">
                         <span className="material-symbols-outlined">person</span>
                     </div>
                     <div className="flex flex-col min-w-0">
-                        <p className="text-white text-sm font-bold truncate">{userProfile?.name || "Loading..."}</p>
-                        <p className="text-[#ad92c9] text-xs truncate max-w-[150px]">{userProfile?.email || "Superadmin"}</p>
+                        <p className="text-text-main dark:text-white text-sm font-bold truncate">{userProfile?.name || "Loading..."}</p>
+                        <p className="text-text-sub dark:text-[#ad92c9] text-xs truncate max-w-[150px]">{userProfile?.email || "Superadmin"}</p>
                     </div>
+                </div>
+                <div className="md:block">
+                    <ThemeToggle placement="top" />
                 </div>
             </div>
 

@@ -75,18 +75,18 @@ export default function StrukturOrganisasiEditorForm({ initial }: Props) {
     });
   };
 
-  const iClass = "w-full px-3 py-2 bg-[#1f1535] border border-[#3b2a6e] rounded-lg text-white placeholder-[#7a6ba0] text-sm focus:outline-none focus:ring-2 focus:ring-primary-purple/50";
-  const lClass = "block text-xs font-semibold text-[#ad92c9] uppercase tracking-wider mb-1";
+  const iClass = "w-full px-3 py-2 bg-background-light dark:bg-[#1f1535] border border-border-light dark:border-[#3b2a6e] rounded-lg text-text-main dark:text-white placeholder-gray-400 dark:placeholder-[#7a6ba0] text-sm focus:outline-none focus:ring-2 focus:ring-primary-purple/50";
+  const lClass = "block text-xs font-semibold text-text-sub dark:text-[#ad92c9] uppercase tracking-wider mb-1";
   const tabClass = (t: string) =>
-    `px-4 py-2 rounded-lg text-sm font-semibold transition-colors ${activeTab === t ? "bg-primary-purple text-white" : "text-[#ad92c9] hover:bg-white/5"}`;
+    `px-4 py-2 rounded-lg text-sm font-semibold transition-colors ${activeTab === t ? "bg-primary-purple text-white" : "text-text-sub dark:text-[#ad92c9] hover:bg-black/5 dark:hover:bg-white/5"}`;
 
   const renderSection = (section: "legislatif" | "eksekutif") => (
     <div className="space-y-3">
       {data[section].map((unit, i) => (
-        <div key={i} className="border border-[#3b2a6e] rounded-xl overflow-hidden">
+        <div key={i} className="border border-border-light dark:border-[#3b2a6e] rounded-xl overflow-hidden">
           {/* Unit header / accordion toggle */}
           <div
-            className="flex items-center justify-between p-4 cursor-pointer bg-[#1f1535] hover:bg-[#2a1a4a] transition-colors"
+            className="flex items-center justify-between p-4 cursor-pointer bg-background-light dark:bg-[#1f1535] hover:bg-black/5 dark:hover:bg-[#2a1a4a] transition-colors"
             onClick={() => setOpenUnit(openUnit === i ? null : i)}
           >
             <div className="flex items-center gap-3">
@@ -94,13 +94,13 @@ export default function StrukturOrganisasiEditorForm({ initial }: Props) {
                 <div className="size-8 rounded-full bg-center bg-cover flex-shrink-0 border border-primary/20"
                   style={{ backgroundImage: `url("${unit.image_url}")` }} />
               )}
-              <span className="text-white text-sm font-semibold">{unit.nama || `Unit #${i + 1}`}</span>
-              <span className="text-[#7a6ba0] text-xs">{unit.staff.length} staff</span>
+              <span className="text-text-main dark:text-white text-sm font-semibold">{unit.nama || `Unit #${i + 1}`}</span>
+              <span className="text-gray-400 dark:text-[#7a6ba0] text-xs">{unit.staff.length} staff</span>
             </div>
             <div className="flex items-center gap-2">
               <button onClick={(e) => { e.stopPropagation(); removeUnit(section, i); }}
-                className="text-red-400 hover:text-red-300 text-xs px-2 py-1 rounded transition-colors">Hapus</button>
-              <span className="material-symbols-outlined text-[#ad92c9] text-sm">
+                className="text-red-500 dark:text-red-400 hover:text-red-600 dark:hover:text-red-300 text-xs px-2 py-1 rounded transition-colors">Hapus</button>
+              <span className="material-symbols-outlined text-text-sub dark:text-[#ad92c9] text-sm">
                 {openUnit === i ? "expand_less" : "expand_more"}
               </span>
             </div>
@@ -108,7 +108,7 @@ export default function StrukturOrganisasiEditorForm({ initial }: Props) {
 
           {/* Unit detail */}
           {openUnit === i && (
-            <div className="p-4 space-y-4 bg-[#150c28]">
+            <div className="p-4 space-y-4 bg-surface-light dark:bg-[#150c28]">
               <div>
                 <label className={lClass}>Nama Badan / Departemen</label>
                 <input className={iClass} value={unit.nama}
@@ -121,7 +121,7 @@ export default function StrukturOrganisasiEditorForm({ initial }: Props) {
                   placeholder="https://..." />
                 {unit.image_url && (
                   <img src={unit.image_url} alt="preview"
-                    className="mt-2 h-24 w-24 object-cover rounded-xl border border-[#3b2a6e]" />
+                    className="mt-2 h-24 w-24 object-cover rounded-xl border border-border-light dark:border-[#3b2a6e]" />
                 )}
               </div>
 
@@ -136,7 +136,7 @@ export default function StrukturOrganisasiEditorForm({ initial }: Props) {
                       <input className={`${iClass} w-full sm:flex-1`} value={s.jabatan || ""} placeholder="Jabatan (opsional)"
                         onChange={e => updateStaff(section, i, si, "jabatan", e.target.value)} />
                       <button onClick={() => removeStaff(section, i, si)}
-                        className="text-red-400 hover:text-red-300 px-2 shrink-0 transition-colors self-end sm:self-auto">✕</button>
+                        className="text-red-500 dark:text-red-400 hover:text-red-600 dark:hover:text-red-300 px-2 shrink-0 transition-colors self-end sm:self-auto">✕</button>
                     </div>
                   ))}
                 </div>
@@ -151,7 +151,7 @@ export default function StrukturOrganisasiEditorForm({ initial }: Props) {
       ))}
 
       <button onClick={() => addUnit(section)}
-        className="w-full py-3 border border-dashed border-[#3b2a6e] rounded-xl text-[#ad92c9] hover:border-primary-purple hover:text-white transition-colors text-sm">
+        className="w-full py-3 border border-dashed border-border-light dark:border-[#3b2a6e] rounded-xl text-text-sub dark:text-[#ad92c9] hover:border-primary-purple hover:text-text-main dark:hover:text-white transition-colors text-sm">
         + Tambah Badan / Departemen
       </button>
     </div>

@@ -7,6 +7,8 @@ import Link from "next/link";
 type DashboardStats = {
     totalArticles: number;
     totalViews: number;
+    totalLikes?: number;
+    totalDislikes?: number;
 };
 
 type ActivityLog = {
@@ -18,7 +20,7 @@ type ActivityLog = {
 };
 
 export default function AdminDashboard() {
-    const [stats, setStats] = useState<DashboardStats>({ totalArticles: 0, totalViews: 0 });
+    const [stats, setStats] = useState<DashboardStats>({ totalArticles: 0, totalViews: 0, totalLikes: 0, totalDislikes: 0 });
     const [activities, setActivities] = useState<ActivityLog[]>([]);
     const [loading, setLoading] = useState(true);
     const supabase = createClient();
@@ -41,12 +43,24 @@ export default function AdminDashboard() {
 
                 if (catError) throw catError;
 
+                // 3. Fetch Total Likes and Dislikes
+                const { data: likesData, error: likesError } = await supabase
+                    .from("articles")
+                    .select("likes, dislikes");
+
+                if (likesError) throw likesError;
+
+                const totalLikes = likesData?.reduce((acc, curr) => acc + (curr.likes || 0), 0) || 0;
+                const totalDislikes = likesData?.reduce((acc, curr) => acc + (curr.dislikes || 0), 0) || 0;
+
                 setStats({
                     totalArticles: articlesCount || 0,
                     totalViews: categoryCount || 0, // Using totalViews field for categories count temporarily
+                    totalLikes,
+                    totalDislikes,
                 });
 
-                // 3. Fetch Recent Activity (Latest Articles)
+                // 4. Fetch Recent Activity (Latest Articles)
                 const { data: activityData, error: activityError } = await supabase
                     .from("articles")
                     .select(`
@@ -106,7 +120,7 @@ export default function AdminDashboard() {
         <main className="flex-1 overflow-x-hidden overflow-y-auto bg-background-light dark:bg-background-dark p-4 md:p-8">
 
 
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-6 mb-8">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
                 <div className="bg-surface-light dark:bg-surface-dark p-6 rounded-xl border border-border-light dark:border-border-dark shadow-sm hover:shadow-md transition-shadow">
                     <div className="flex items-center justify-between mb-4">
                         <div className="h-12 w-12 rounded-lg bg-blue-50 dark:bg-primary/20 flex items-center justify-center text-primary">
@@ -127,6 +141,30 @@ export default function AdminDashboard() {
                     <p className="text-text-sub dark:text-gray-400 text-sm font-medium">Total Kategori</p>
                     <h3 className="text-3xl font-bold text-text-main dark:text-white mt-1">
                         {loading ? "..." : stats.totalViews.toLocaleString()}
+                    </h3>
+                </div>
+
+                <div className="bg-surface-light dark:bg-surface-dark p-6 rounded-xl border border-border-light dark:border-border-dark shadow-sm hover:shadow-md transition-shadow">
+                    <div className="flex items-center justify-between mb-4">
+                        <div className="h-12 w-12 rounded-lg bg-green-50 dark:bg-green-900/30 flex items-center justify-center text-green-600 dark:text-green-400">
+                            <span className="material-symbols-outlined">thumb_up</span>
+                        </div>
+                    </div>
+                    <p className="text-text-sub dark:text-gray-400 text-sm font-medium">Total Like</p>
+                    <h3 className="text-3xl font-bold text-text-main dark:text-white mt-1">
+                        {loading ? "..." : stats.totalLikes?.toLocaleString() || 0}
+                    </h3>
+                </div>
+
+                <div className="bg-surface-light dark:bg-surface-dark p-6 rounded-xl border border-border-light dark:border-border-dark shadow-sm hover:shadow-md transition-shadow">
+                    <div className="flex items-center justify-between mb-4">
+                        <div className="h-12 w-12 rounded-lg bg-red-50 dark:bg-red-900/30 flex items-center justify-center text-red-600 dark:text-red-400">
+                            <span className="material-symbols-outlined">thumb_down</span>
+                        </div>
+                    </div>
+                    <p className="text-text-sub dark:text-gray-400 text-sm font-medium">Total Dislike</p>
+                    <h3 className="text-3xl font-bold text-text-main dark:text-white mt-1">
+                        {loading ? "..." : stats.totalDislikes?.toLocaleString() || 0}
                     </h3>
                 </div>
             </div>

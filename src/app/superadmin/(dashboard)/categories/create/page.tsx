@@ -45,64 +45,64 @@ export default function SuperAdminCreateCategoryPage() {
         <main className="flex-1 overflow-x-hidden overflow-y-auto p-4 md:p-8">
             <div className="max-w-2xl mx-auto">
                 <div className="mb-6">
-                    <Link href="/superadmin/categories" className="text-sm text-[#ad92c9] hover:text-primary-purple mb-2 inline-block transition-colors">
+                    <Link href="/superadmin/categories" className="text-sm text-text-sub dark:text-[#ad92c9] hover:text-primary-purple mb-2 inline-block transition-colors">
                         &larr; Kembali ke Daftar Kategori
                     </Link>
-                    <h1 className="text-2xl font-bold text-white">Tambah Kategori Baru</h1>
+                    <h1 className="text-2xl font-bold text-text-main dark:text-white">Tambah Kategori Baru</h1>
                 </div>
 
-                <div className="bg-surface-super-dark rounded-xl shadow-sm border border-[#362348] p-6">
+                <div className="bg-surface-light dark:bg-surface-super-dark rounded-xl shadow-sm border border-border-light dark:border-[#362348] p-6">
                     {error && (
-                        <div className="mb-4 p-3 bg-red-500/10 text-red-400 text-sm rounded-lg border border-red-500/20">
+                        <div className="mb-4 p-3 bg-red-500/10 text-red-500 dark:text-red-400 text-sm rounded-lg border border-red-500/20">
                             {error}
                         </div>
                     )}
                     <form onSubmit={handleSubmit} className="space-y-4">
                         <div>
-                            <label className="block text-sm font-medium text-white mb-1">Nama Kategori</label>
+                            <label className="block text-sm font-medium text-text-main dark:text-white mb-1">Nama Kategori</label>
                             <input
                                 name="title"
                                 type="text"
                                 required
-                                className="w-full px-4 py-2 border border-[#362348] rounded-lg bg-[#150d1c] text-white focus:outline-none focus:ring-2 focus:ring-primary-purple/50 placeholder-[#ad92c9]/50"
+                                className="w-full px-4 py-2 border border-border-light dark:border-[#362348] rounded-lg bg-background-light dark:bg-[#150d1c] text-text-main dark:text-white focus:outline-none focus:ring-2 focus:ring-primary-purple/50 placeholder-gray-400 dark:placeholder-[#ad92c9]/50"
                                 placeholder="Contoh: Akun & Keamanan"
                             />
                         </div>
                         <div>
-                            <label className="block text-sm font-medium text-white mb-1">Slug URL</label>
+                            <label className="block text-sm font-medium text-text-main dark:text-white mb-1">Slug URL</label>
                             <input
                                 name="slug"
                                 type="text"
                                 required
-                                className="w-full px-4 py-2 border border-[#362348] rounded-lg bg-[#150d1c] text-white focus:outline-none focus:ring-2 focus:ring-primary-purple/50 placeholder-[#ad92c9]/50"
+                                className="w-full px-4 py-2 border border-border-light dark:border-[#362348] rounded-lg bg-background-light dark:bg-[#150d1c] text-text-main dark:text-white focus:outline-none focus:ring-2 focus:ring-primary-purple/50 placeholder-gray-400 dark:placeholder-[#ad92c9]/50"
                                 placeholder="Contoh: akun-keamanan"
                             />
-                            <p className="text-xs text-[#ad92c9] mt-1">Gunakan huruf kecil dan pisahkan dengan tanda hubung (-).</p>
+                            <p className="text-xs text-text-sub dark:text-[#ad92c9] mt-1">Gunakan huruf kecil dan pisahkan dengan tanda hubung (-).</p>
                         </div>
                         <div>
-                            <label className="block text-sm font-medium text-white mb-1">Deskripsi Singkat</label>
+                            <label className="block text-sm font-medium text-text-main dark:text-white mb-1">Deskripsi Singkat</label>
                             <textarea
                                 name="description"
                                 rows={3}
-                                className="w-full px-4 py-2 border border-[#362348] rounded-lg bg-[#150d1c] text-white focus:outline-none focus:ring-2 focus:ring-primary-purple/50 placeholder-[#ad92c9]/50"
+                                className="w-full px-4 py-2 border border-border-light dark:border-[#362348] rounded-lg bg-background-light dark:bg-[#150d1c] text-text-main dark:text-white focus:outline-none focus:ring-2 focus:ring-primary-purple/50 placeholder-gray-400 dark:placeholder-[#ad92c9]/50"
                                 placeholder="Jelaskan tentang kategori ini..."
                             ></textarea>
                         </div>
                         <div>
-                            <label className="block text-sm font-medium text-white mb-1">Nama Ikon (Material Symbols)</label>
+                            <label className="block text-sm font-medium text-text-main dark:text-white mb-1">Nama Ikon (Material Symbols)</label>
                             <input
                                 name="icon"
                                 type="text"
                                 required
-                                className="w-full px-4 py-2 border border-[#362348] rounded-lg bg-[#150d1c] text-white focus:outline-none focus:ring-2 focus:ring-primary-purple/50 placeholder-[#ad92c9]/50"
+                                className="w-full px-4 py-2 border border-border-light dark:border-[#362348] rounded-lg bg-background-light dark:bg-[#150d1c] text-text-main dark:text-white focus:outline-none focus:ring-2 focus:ring-primary-purple/50 placeholder-gray-400 dark:placeholder-[#ad92c9]/50"
                                 placeholder="Contoh: security"
                             />
-                            <p className="text-xs text-[#ad92c9] mt-1">
+                            <p className="text-xs text-text-sub dark:text-[#ad92c9] mt-1">
                                 Lihat daftar ikon di <a href="https://fonts.google.com/icons" target="_blank" className="text-primary-purple hover:underline">Google Fonts Icons</a>
                             </p>
                         </div>
                         <div className="pt-4 flex justify-end gap-3">
-                            <Link href="/superadmin/categories" className="px-4 py-2 border border-[#362348] rounded-lg text-white hover:bg-[#362348]/50 transition-colors font-medium text-sm">
+                            <Link href="/superadmin/categories" className="px-4 py-2 border border-border-light dark:border-[#362348] rounded-lg text-text-main dark:text-white hover:bg-black/5 dark:hover:bg-[#362348]/50 transition-colors font-medium text-sm">
                                 Batal
                             </Link>
                             <button

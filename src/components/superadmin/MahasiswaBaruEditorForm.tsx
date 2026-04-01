@@ -65,13 +65,13 @@ export default function MahasiswaBaruEditorForm({ initial }: Props) {
     `px-3 py-2 rounded-lg text-xs sm:text-sm font-semibold transition-colors whitespace-nowrap ${
       activeTab === tab
         ? "bg-primary-purple text-white"
-        : "text-[#ad92c9] hover:bg-white/5"
+        : "text-text-sub dark:text-[#ad92c9] hover:bg-black/5 dark:hover:bg-white/5"
     }`;
 
   const inputClass =
-    "w-full px-3 py-2 bg-[#1f1535] border border-[#3b2a6e] rounded-lg text-white placeholder-[#7a6ba0] text-sm focus:outline-none focus:ring-2 focus:ring-primary-purple/50 focus:border-primary-purple";
+    "w-full px-3 py-2 bg-background-light dark:bg-[#1f1535] border border-border-light dark:border-[#3b2a6e] rounded-lg text-text-main dark:text-white placeholder:text-gray-400 dark:placeholder-[#7a6ba0] text-sm focus:outline-none focus:ring-2 focus:ring-primary-purple/50 focus:border-primary-purple";
   const labelClass =
-    "block text-xs font-semibold text-[#ad92c9] uppercase tracking-wider mb-1";
+    "block text-xs font-semibold text-text-sub dark:text-[#ad92c9] uppercase tracking-wider mb-1";
 
   // Countdown helpers
   const updateCountdown = (
@@ -195,13 +195,13 @@ export default function MahasiswaBaruEditorForm({ initial }: Props) {
           {(["snbp", "snbt", "mandiri"] as const).map((key) => (
             <div
               key={key}
-              className="p-4 bg-[#1f1535] border border-[#3b2a6e] rounded-xl space-y-3"
+              className="p-4 bg-background-light dark:bg-[#1f1535] border border-border-light dark:border-[#3b2a6e] rounded-xl space-y-3"
             >
               {/* Header: label + toggle */}
               <div className="flex items-center justify-between">
-                <span className="text-sm font-semibold text-white uppercase">{key.toUpperCase()}</span>
+                <span className="text-sm font-semibold text-text-main dark:text-white uppercase">{key.toUpperCase()}</span>
                 <label className="flex items-center gap-2 cursor-pointer select-none">
-                  <span className="text-xs text-[#ad92c9]">
+                  <span className="text-xs text-text-sub dark:text-[#ad92c9]">
                     {(data.countdowns[key].active ?? true) ? "Aktif" : "Nonaktif"}
                   </span>
                   <div className="relative">
@@ -248,14 +248,14 @@ export default function MahasiswaBaruEditorForm({ initial }: Props) {
       {/* Artikel Rekomendasi Tab */}
       {activeTab === "artikel" && (
         <div className="space-y-4">
-          <p className="text-[#ad92c9] text-sm">
+          <p className="text-text-sub dark:text-[#ad92c9] text-sm">
             Pilih kategori yang isinya akan ditampilkan sebagai artikel rekomendasi di halaman Mahasiswa Baru.
             Semua artikel yang dipublikasikan dari kategori terpilih akan otomatis muncul.
           </p>
           {categoriesLoading ? (
-            <p className="text-[#7a6ba0] text-sm">Memuat daftar kategori...</p>
+            <p className="text-gray-400 dark:text-[#7a6ba0] text-sm">Memuat daftar kategori...</p>
           ) : allCategories.length === 0 ? (
-            <p className="text-[#7a6ba0] text-sm">Belum ada kategori tersedia.</p>
+            <p className="text-gray-400 dark:text-[#7a6ba0] text-sm">Belum ada kategori tersedia.</p>
           ) : (
             <div className="space-y-2 max-h-[420px] overflow-y-auto pr-1 custom-scrollbar">
               {allCategories.map((cat) => {
@@ -267,25 +267,25 @@ export default function MahasiswaBaruEditorForm({ initial }: Props) {
                     onClick={() => toggleCategory(cat.id)}
                     className={`w-full flex items-center gap-3 px-4 py-3 rounded-lg border transition-all text-left ${
                       selected
-                        ? "bg-primary-purple/20 border-primary-purple text-white"
-                        : "bg-[#1f1535] border-[#3b2a6e] text-[#ad92c9] hover:border-primary-purple/50"
+                        ? "bg-primary-purple/20 border-primary-purple text-text-main dark:text-white"
+                        : "bg-surface-light dark:bg-[#1f1535] border-border-light dark:border-[#3b2a6e] text-text-sub dark:text-[#ad92c9] hover:border-primary-purple/50 dark:hover:border-primary-purple/50"
                     }`}
                   >
                     <span
                       className={`material-symbols-outlined text-xl shrink-0 ${
-                        selected ? "text-primary-purple" : "text-[#5a4a7a]"
+                        selected ? "text-primary-purple" : "text-gray-400 dark:text-[#5a4a7a]"
                       }`}
                     >
                       {selected ? "check_circle" : "radio_button_unchecked"}
                     </span>
                     <div className="min-w-0 flex items-center gap-3">
-                      <span className="material-symbols-outlined text-lg shrink-0 text-[#7a6ba0]">
+                      <span className="material-symbols-outlined text-lg shrink-0 text-gray-400 dark:text-[#7a6ba0]">
                         {cat.icon || "folder"}
                       </span>
                       <div>
                         <p className="text-sm font-medium">{cat.title}</p>
                         {cat.description && (
-                          <p className="text-xs text-[#7a6ba0] mt-0.5 line-clamp-1">{cat.description}</p>
+                          <p className="text-xs text-gray-400 dark:text-[#7a6ba0] mt-0.5 line-clamp-1">{cat.description}</p>
                         )}
                       </div>
                     </div>
@@ -308,10 +308,10 @@ export default function MahasiswaBaruEditorForm({ initial }: Props) {
           {data.faq.map((item, i) => (
             <div
               key={i}
-              className="p-4 bg-[#1f1535] border border-[#3b2a6e] rounded-xl space-y-3"
+              className="p-4 bg-background-light dark:bg-[#1f1535] border border-border-light dark:border-[#3b2a6e] rounded-xl space-y-3"
             >
               <div className="flex justify-between items-center">
-                <span className="text-sm font-semibold text-white">
+                <span className="text-sm font-semibold text-text-main dark:text-white">
                   Pertanyaan #{i + 1}
                 </span>
                 <button
@@ -344,7 +344,7 @@ export default function MahasiswaBaruEditorForm({ initial }: Props) {
           ))}
           <button
             onClick={addFaq}
-            className="w-full py-3 border border-dashed border-[#3b2a6e] rounded-xl text-[#ad92c9] hover:border-primary-purple hover:text-white transition-colors text-sm"
+            className="w-full py-3 border border-dashed border-border-light dark:border-[#3b2a6e] rounded-xl text-text-sub dark:text-[#ad92c9] hover:border-primary-purple hover:text-text-main dark:hover:text-white transition-colors text-sm"
           >
             + Tambah Pertanyaan
           </button>
@@ -355,8 +355,8 @@ export default function MahasiswaBaruEditorForm({ initial }: Props) {
       {activeTab === "contact" && (
         <div className="space-y-4">
           {/* Banner Text */}
-          <div className="p-4 bg-[#1f1535] border border-[#3b2a6e] rounded-xl space-y-3">
-            <span className="text-sm font-semibold text-white">Teks Banner</span>
+          <div className="p-4 bg-background-light dark:bg-[#1f1535] border border-border-light dark:border-[#3b2a6e] rounded-xl space-y-3">
+            <span className="text-sm font-semibold text-text-main dark:text-white">Teks Banner</span>
             <div>
               <label className={labelClass}>Judul</label>
               <input
@@ -388,7 +388,7 @@ export default function MahasiswaBaruEditorForm({ initial }: Props) {
             </div>
           </div>
 
-          <p className="text-[#ad92c9] text-sm">
+          <p className="text-text-sub dark:text-[#ad92c9] text-sm">
             Tambahkan tombol kontak yang akan ditampilkan di bagian bawah halaman.
             Gunakan nama icon dari{" "}
             <a
@@ -404,10 +404,10 @@ export default function MahasiswaBaruEditorForm({ initial }: Props) {
           {data.contact_persons.map((cp, i) => (
             <div
               key={i}
-              className="p-4 bg-[#1f1535] border border-[#3b2a6e] rounded-xl space-y-3"
+              className="p-4 bg-background-light dark:bg-[#1f1535] border border-border-light dark:border-[#3b2a6e] rounded-xl space-y-3"
             >
               <div className="flex justify-between items-center">
-                <span className="text-sm font-semibold text-white">
+                <span className="text-sm font-semibold text-text-main dark:text-white">
                   Tombol #{i + 1}
                 </span>
                 <button
@@ -452,7 +452,7 @@ export default function MahasiswaBaruEditorForm({ initial }: Props) {
           ))}
           <button
             onClick={addContact}
-            className="w-full py-3 border border-dashed border-[#3b2a6e] rounded-xl text-[#ad92c9] hover:border-primary-purple hover:text-white transition-colors text-sm"
+            className="w-full py-3 border border-dashed border-border-light dark:border-[#3b2a6e] rounded-xl text-text-sub dark:text-[#ad92c9] hover:border-primary-purple hover:text-text-main dark:hover:text-white transition-colors text-sm"
           >
             + Tambah Tombol Kontak
           </button>

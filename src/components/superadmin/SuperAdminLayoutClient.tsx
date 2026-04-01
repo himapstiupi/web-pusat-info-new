@@ -13,9 +13,10 @@ export default function SuperAdminLayoutClient({
     const [isSidebarOpen, setIsSidebarOpen] = useState(false);
 
     return (
-        <div className="dark bg-bg-super-dark text-white font-display h-screen flex overflow-hidden selection:bg-primary-purple selection:text-white">
+        <div className="bg-background-light dark:bg-bg-super-dark text-text-main dark:text-white font-display h-screen flex overflow-hidden selection:bg-primary-purple selection:text-white transition-colors duration-300">
             <Toaster position="top-right" toastOptions={{
-                style: { background: '#1f1535', color: '#fff', border: '1px solid #3b2a6e' },
+                className: "bg-surface-light text-text-main border-border-light dark:bg-[#1f1535] dark:text-white dark:border-[#3b2a6e]",
+                style: { border: '1px solid currentColor' },
                 success: { iconTheme: { primary: '#a980e8', secondary: '#fff' } }
             }} />
 

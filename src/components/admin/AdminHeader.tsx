@@ -3,6 +3,7 @@
 import { usePathname } from 'next/navigation';
 import { createClient } from '@/lib/supabase/client';
 import { useEffect, useState } from 'react';
+import ThemeToggle from '@/components/common/ThemeToggle';
 
 interface AdminHeaderProps {
     onMenuClick?: () => void;
@@ -51,6 +52,7 @@ export default function AdminHeader({ onMenuClick }: AdminHeaderProps) {
                 <h2 className="text-lg md:text-xl font-bold text-text-main dark:text-white truncate max-w-[200px] md:max-w-none">{getPageTitle(pathname)}</h2>
             </div>
             <div className="flex items-center gap-4 md:gap-6">
+                <ThemeToggle />
                 <div className="flex items-center gap-3 cursor-pointer hover:opacity-80 transition-opacity">
                     <div className="text-right hidden sm:block">
                         <p className="text-sm font-bold text-text-main dark:text-white">{user?.name || "Memuat..."}</p>

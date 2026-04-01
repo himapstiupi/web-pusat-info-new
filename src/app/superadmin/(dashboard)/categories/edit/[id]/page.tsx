@@ -76,74 +76,74 @@ export default function SuperAdminEditCategoryPage() {
         }
     };
 
-    if (loading) return <div className="p-8 text-center text-[#ad92c9]">Memuat kategori...</div>;
+    if (loading) return <div className="p-8 text-center text-text-sub dark:text-[#ad92c9]">Memuat kategori...</div>;
 
     return (
         <main className="flex-1 overflow-x-hidden overflow-y-auto p-4 md:p-8">
             <div className="max-w-2xl mx-auto">
                 <div className="mb-6">
-                    <Link href="/superadmin/categories" className="text-sm text-[#ad92c9] hover:text-white mb-2 inline-block transition-colors">
+                    <Link href="/superadmin/categories" className="text-sm text-text-sub dark:text-[#ad92c9] hover:text-text-main dark:hover:text-white mb-2 inline-block transition-colors">
                         &larr; Kembali ke Daftar Kategori
                     </Link>
-                    <h1 className="text-2xl font-bold text-white">Edit Kategori</h1>
+                    <h1 className="text-2xl font-bold text-text-main dark:text-white">Edit Kategori</h1>
                 </div>
 
-                <div className="bg-[#1e1528] rounded-xl shadow-sm border border-[#362348] p-6">
+                <div className="bg-background-light dark:bg-[#1e1528] rounded-xl shadow-sm border border-border-light dark:border-[#362348] p-6">
                     {error && (
-                        <div className="mb-4 p-3 bg-red-900/20 text-red-400 text-sm rounded-lg border border-red-900/30">
+                        <div className="mb-4 p-3 bg-red-500/10 text-red-500 dark:text-red-400 text-sm rounded-lg border border-red-500/20">
                             {error}
                         </div>
                     )}
                     <form onSubmit={handleSubmit} className="space-y-4">
                         <div>
-                            <label className="block text-sm font-medium text-[#ad92c9] mb-1">Nama Kategori</label>
+                            <label className="block text-sm font-medium text-text-sub dark:text-[#ad92c9] mb-1">Nama Kategori</label>
                             <input
                                 type="text"
                                 required
                                 value={title}
                                 onChange={(e) => setTitle(e.target.value)}
-                                className="w-full px-4 py-2 border border-[#362348] rounded-lg bg-[#2a1f36] text-white focus:outline-none focus:ring-2 focus:ring-primary-purple/50 placeholder-gray-500"
+                                className="w-full px-4 py-2 border border-border-light dark:border-[#362348] rounded-lg bg-surface-light dark:bg-[#2a1f36] text-text-main dark:text-white focus:outline-none focus:ring-2 focus:ring-primary-purple/50 placeholder-gray-400 dark:placeholder-gray-500"
                                 placeholder="Nama kategori..."
                             />
                         </div>
                         <div>
-                            <label className="block text-sm font-medium text-[#ad92c9] mb-1">Slug URL</label>
+                            <label className="block text-sm font-medium text-text-sub dark:text-[#ad92c9] mb-1">Slug URL</label>
                             <input
                                 type="text"
                                 required
                                 value={slug}
                                 onChange={(e) => setSlug(e.target.value)}
-                                className="w-full px-4 py-2 border border-[#362348] rounded-lg bg-[#2a1f36] text-white focus:outline-none focus:ring-2 focus:ring-primary-purple/50 placeholder-gray-500"
+                                className="w-full px-4 py-2 border border-border-light dark:border-[#362348] rounded-lg bg-surface-light dark:bg-[#2a1f36] text-text-main dark:text-white focus:outline-none focus:ring-2 focus:ring-primary-purple/50 placeholder-gray-400 dark:placeholder-gray-500"
                                 placeholder="slug-url"
                             />
-                            <p className="text-xs text-[#ad92c9] mt-1">Gunakan huruf kecil dan pisahkan dengan tanda hubung (-).</p>
+                            <p className="text-xs text-text-sub dark:text-[#ad92c9] mt-1">Gunakan huruf kecil dan pisahkan dengan tanda hubung (-).</p>
                         </div>
                         <div>
-                            <label className="block text-sm font-medium text-[#ad92c9] mb-1">Deskripsi Singkat</label>
+                            <label className="block text-sm font-medium text-text-sub dark:text-[#ad92c9] mb-1">Deskripsi Singkat</label>
                             <textarea
                                 rows={3}
                                 value={description}
                                 onChange={(e) => setDescription(e.target.value)}
-                                className="w-full px-4 py-2 border border-[#362348] rounded-lg bg-[#2a1f36] text-white focus:outline-none focus:ring-2 focus:ring-primary-purple/50 placeholder-gray-500"
+                                className="w-full px-4 py-2 border border-border-light dark:border-[#362348] rounded-lg bg-surface-light dark:bg-[#2a1f36] text-text-main dark:text-white focus:outline-none focus:ring-2 focus:ring-primary-purple/50 placeholder-gray-400 dark:placeholder-gray-500"
                                 placeholder="Jelaskan tentang kategori ini..."
                             ></textarea>
                         </div>
                         <div>
-                            <label className="block text-sm font-medium text-[#ad92c9] mb-1">Nama Ikon (Material Symbols)</label>
+                            <label className="block text-sm font-medium text-text-sub dark:text-[#ad92c9] mb-1">Nama Ikon (Material Symbols)</label>
                             <input
                                 type="text"
                                 required
                                 value={icon}
                                 onChange={(e) => setIcon(e.target.value)}
-                                className="w-full px-4 py-2 border border-[#362348] rounded-lg bg-[#2a1f36] text-white focus:outline-none focus:ring-2 focus:ring-primary-purple/50 placeholder-gray-500"
+                                className="w-full px-4 py-2 border border-border-light dark:border-[#362348] rounded-lg bg-surface-light dark:bg-[#2a1f36] text-text-main dark:text-white focus:outline-none focus:ring-2 focus:ring-primary-purple/50 placeholder-gray-400 dark:placeholder-gray-500"
                                 placeholder="Contoh: security"
                             />
-                            <p className="text-xs text-[#ad92c9] mt-1">
-                                Lihat daftar ikon di <a href="https://fonts.google.com/icons" target="_blank" className="text-primary-purple hover:underline hover:text-[#d0bcff]">Google Fonts Icons</a>
+                            <p className="text-xs text-text-sub dark:text-[#ad92c9] mt-1">
+                                Lihat daftar ikon di <a href="https://fonts.google.com/icons" target="_blank" className="text-primary-purple hover:underline dark:hover:text-[#d0bcff]">Google Fonts Icons</a>
                             </p>
                         </div>
-                        <div className="pt-4 flex justify-end gap-3 border-t border-[#362348] mt-6">
-                            <Link href="/superadmin/categories" className="px-4 py-2 border border-[#362348] rounded-lg text-white hover:bg-[#362348] transition-colors font-medium text-sm">
+                        <div className="pt-4 flex justify-end gap-3 border-t border-border-light dark:border-[#362348] mt-6">
+                            <Link href="/superadmin/categories" className="px-4 py-2 border border-border-light dark:border-[#362348] rounded-lg text-text-main dark:text-white hover:bg-black/5 dark:hover:bg-[#362348] transition-colors font-medium text-sm">
                                 Batal
                             </Link>
                             <button

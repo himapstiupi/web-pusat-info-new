@@ -38,12 +38,22 @@ async function getStats() {
         .from("categories")
         .select("*", { count: "exact", head: true });
 
+    // 4. Total Likes and Dislikes
+    const { data: likesData } = await supabase
+        .from("articles")
+        .select("likes, dislikes");
+
+    const totalLikes = likesData?.reduce((acc, curr) => acc + (curr.likes || 0), 0) || 0;
+    const totalDislikes = likesData?.reduce((acc, curr) => acc + (curr.dislikes || 0), 0) || 0;
+
     return {
         totalAdmins: totalAdmins || 0,
         newAdminsToday: newAdminsToday || 0,
         totalArticles: totalArticles || 0,
         newArticlesToday: newArticlesToday || 0,
         totalCategories: totalCategories || 0,
+        totalLikes,
+        totalDislikes,
     };
 }
 
@@ -104,8 +114,8 @@ export default async function SuperAdminDashboard() {
                 {/* Welcome */}
                 <div className="flex flex-col md:flex-row md:items-end justify-between gap-4">
                     <div>
-                        <h2 className="text-white text-3xl font-black tracking-tight mb-2">Selamat Datang, Superadmin</h2>
-                        <p className="text-[#ad92c9] font-medium">Panel Kontrol Utama & Manajemen Admin</p>
+                        <h2 className="text-text-main dark:text-white text-3xl font-black tracking-tight mb-2">Selamat Datang, Superadmin</h2>
+                        <p className="text-text-sub dark:text-[#ad92c9] font-medium">Panel Kontrol Utama & Manajemen Admin</p>
                     </div>
                 </div>
 
@@ -115,76 +125,93 @@ export default async function SuperAdminDashboard() {
                 {/* Stats Grid */}
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                     {/* Stat Card 1 */}
-                    <div className="bg-surface-super-dark rounded-2xl p-6 border border-[#362348] relative overflow-hidden group">
+                    <div className="bg-surface-light dark:bg-surface-super-dark rounded-2xl p-6 border border-border-light dark:border-[#362348] relative overflow-hidden group">
                         <div className="absolute top-0 right-0 p-4 opacity-10 group-hover:opacity-20 transition-opacity">
-                            <span className="material-symbols-outlined text-6xl text-white">group</span>
+                            <span className="material-symbols-outlined text-6xl text-text-main dark:text-white">group</span>
                         </div>
-                        <p className="text-[#ad92c9] text-sm font-medium mb-1">Total Admin Aktif</p>
+                        <p className="text-text-sub dark:text-[#ad92c9] text-sm font-medium mb-1">Total Admin Aktif</p>
                         <div className="flex items-baseline gap-2">
-                            <h3 className="text-white text-3xl font-bold">{stats.totalAdmins}</h3>
+                            <h3 className="text-text-main dark:text-white text-3xl font-bold">{stats.totalAdmins}</h3>
                             {stats.newAdminsToday > 0 && (
-                                <span className="text-[#0bda73] text-sm font-semibold bg-[#0bda73]/10 px-2 py-0.5 rounded">+{stats.newAdminsToday} new</span>
+                                <span className="text-green-700 bg-green-100 dark:text-[#0bda73] text-sm font-semibold dark:bg-[#0bda73]/10 px-2 py-0.5 rounded">+{stats.newAdminsToday} new</span>
                             )}
                         </div>
                     </div>
                     {/* Stat Card 2 */}
-                    <div className="bg-surface-super-dark rounded-2xl p-6 border border-[#362348] relative overflow-hidden group">
+                    <div className="bg-surface-light dark:bg-surface-super-dark rounded-2xl p-6 border border-border-light dark:border-[#362348] relative overflow-hidden group">
                         <div className="absolute top-0 right-0 p-4 opacity-10 group-hover:opacity-20 transition-opacity">
-                            <span className="material-symbols-outlined text-6xl text-white">article</span>
+                            <span className="material-symbols-outlined text-6xl text-text-main dark:text-white">article</span>
                         </div>
-                        <p className="text-[#ad92c9] text-sm font-medium mb-1">Total Artikel</p>
+                        <p className="text-text-sub dark:text-[#ad92c9] text-sm font-medium mb-1">Total Artikel</p>
                         <div className="flex items-baseline gap-2">
-                            <h3 className="text-white text-3xl font-bold">{stats.totalArticles}</h3>
+                            <h3 className="text-text-main dark:text-white text-3xl font-bold">{stats.totalArticles}</h3>
                             {stats.newArticlesToday > 0 && (
-                                <span className="text-[#0bda73] text-sm font-semibold bg-[#0bda73]/10 px-2 py-0.5 rounded">+{stats.newArticlesToday} today</span>
+                                <span className="text-green-700 bg-green-100 dark:text-[#0bda73] text-sm font-semibold dark:bg-[#0bda73]/10 px-2 py-0.5 rounded">+{stats.newArticlesToday} today</span>
                             )}
                         </div>
                     </div>
                     {/* Stat Card 3 */}
-                    <div className="bg-surface-super-dark rounded-2xl p-6 border border-[#362348] relative overflow-hidden group">
+                    <div className="bg-surface-light dark:bg-surface-super-dark rounded-2xl p-6 border border-border-light dark:border-[#362348] relative overflow-hidden group">
                         <div className="absolute top-0 right-0 p-4 opacity-10 group-hover:opacity-20 transition-opacity">
-                            <span className="material-symbols-outlined text-6xl text-white">category</span>
+                            <span className="material-symbols-outlined text-6xl text-text-main dark:text-white">category</span>
                         </div>
-                        <p className="text-[#ad92c9] text-sm font-medium mb-1">Total Kategori</p>
+                        <p className="text-text-sub dark:text-[#ad92c9] text-sm font-medium mb-1">Total Kategori</p>
                         <div className="flex items-baseline gap-2">
-                            <h3 className="text-white text-3xl font-bold">{stats.totalCategories}</h3>
+                            <h3 className="text-text-main dark:text-white text-3xl font-bold">{stats.totalCategories}</h3>
+                        </div>
+                    </div>
+                    {/* Stat Card 4 - Likes */}
+                    <div className="bg-surface-light dark:bg-surface-super-dark rounded-2xl p-6 border border-border-light dark:border-[#362348] relative overflow-hidden group">
+                        <div className="absolute top-0 right-0 p-4 opacity-10 group-hover:opacity-20 transition-opacity flex">
+                            <span className="material-symbols-outlined text-6xl text-text-main dark:text-white">thumb_up</span>
+                        </div>
+                        <p className="text-text-sub dark:text-[#ad92c9] text-sm font-medium mb-1">Total Like</p>
+                        <div className="flex items-baseline gap-2">
+                            <h3 className="text-text-main dark:text-white text-3xl font-bold">{stats.totalLikes}</h3>
+                        </div>
+                    </div>
+                    {/* Stat Card 5 - Dislikes */}
+                    <div className="bg-surface-light dark:bg-surface-super-dark rounded-2xl p-6 border border-border-light dark:border-[#362348] relative overflow-hidden group">
+                        <div className="absolute top-0 right-0 p-4 opacity-10 group-hover:opacity-20 transition-opacity flex">
+                            <span className="material-symbols-outlined text-6xl text-text-main dark:text-white">thumb_down</span>
+                        </div>
+                        <p className="text-text-sub dark:text-[#ad92c9] text-sm font-medium mb-1">Total Dislike</p>
+                        <div className="flex items-baseline gap-2">
+                            <h3 className="text-text-main dark:text-white text-3xl font-bold">{stats.totalDislikes}</h3>
                         </div>
                     </div>
                 </div>
 
                 {/* Activity Widget */}
                 <div className="grid grid-cols-1 gap-6">
-                    <div className="bg-surface-super-dark rounded-2xl border border-[#362348] p-6 flex flex-col h-full">
+                    <div className="bg-surface-light dark:bg-surface-super-dark rounded-2xl border border-border-light dark:border-[#362348] p-6 flex flex-col h-full">
                         <div className="flex items-center justify-between mb-6">
-                            <h3 className="text-white text-lg font-bold">Aktivitas Terkini</h3>
-                            {/* <button className="text-[#ad92c9] hover:text-white transition-colors">
-                                <span className="material-symbols-outlined">more_horiz</span>
-                            </button> */}
+                            <h3 className="text-text-main dark:text-white text-lg font-bold">Aktivitas Terkini</h3>
                         </div>
                         <div className="flex flex-col gap-5 overflow-y-auto pr-2 max-h-[400px]">
                             {activities.length > 0 ? (
                                 activities.map((activity, index) => (
                                     <div key={index} className="flex gap-3 items-start group">
-                                        <div className={`size-10 rounded-full flex items-center justify-center shrink-0 border border-[#362348] group-hover:border-primary-purple transition-colors ${activity.type === 'article' ? 'bg-blue-500/10 text-blue-400' : 'bg-green-500/10 text-green-400'}`}>
+                                        <div className={`size-10 rounded-full flex items-center justify-center shrink-0 border border-border-light dark:border-[#362348] group-hover:border-primary-purple transition-colors ${activity.type === 'article' ? 'bg-primary/10 text-primary dark:bg-blue-500/10 dark:text-blue-400' : 'bg-green-100 text-green-700 dark:bg-green-500/10 dark:text-green-400'}`}>
                                             <span className="material-symbols-outlined text-xl">
                                                 {activity.type === 'article' ? 'article' : 'person_add'}
                                             </span>
                                         </div>
                                         <div className="flex flex-col flex-1 min-w-0">
                                             <div className="flex justify-between items-start">
-                                                <p className="text-white text-sm font-semibold truncate">{activity.user}</p>
-                                                <span className="text-[#ad92c9] text-xs whitespace-nowrap">
+                                                <p className="text-text-main dark:text-white text-sm font-semibold truncate">{activity.user}</p>
+                                                <span className="text-text-sub dark:text-[#ad92c9] text-xs whitespace-nowrap">
                                                     {new Date(activity.time).toLocaleDateString()}
                                                 </span>
                                             </div>
-                                            <p className="text-[#ad92c9] text-sm leading-tight mt-0.5 group-hover:text-white transition-colors">
+                                            <p className="text-text-sub dark:text-[#ad92c9] text-sm leading-tight mt-0.5 group-hover:text-text-main dark:group-hover:text-white transition-colors">
                                                 {activity.description} <span className="text-primary-purple font-medium">{activity.title}</span>
                                             </p>
                                         </div>
                                     </div>
                                 ))
                             ) : (
-                                <p className="text-[#ad92c9] text-center py-4">Belum ada aktivitas terkini.</p>
+                                <p className="text-text-sub dark:text-[#ad92c9] text-center py-4">Belum ada aktivitas terkini.</p>
                             )}
                         </div>
                     </div>

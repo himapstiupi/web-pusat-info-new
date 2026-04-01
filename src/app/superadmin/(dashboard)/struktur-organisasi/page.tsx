@@ -17,21 +17,21 @@ export default async function EditStrukturOrganisasiPage() {
           <span className="material-symbols-outlined text-primary-purple">account_tree</span>
         </div>
         <div>
-          <h1 className="text-xl font-bold text-white">Edit Struktur Organisasi</h1>
-          <p className="text-[#ad92c9] text-sm">Kelola konten yang tampil di halaman Struktur Organisasi.</p>
+          <h1 className="text-xl font-bold text-text-main dark:text-white">Edit Struktur Organisasi</h1>
+          <p className="text-text-sub dark:text-[#ad92c9] text-sm">Kelola konten yang tampil di halaman Struktur Organisasi.</p>
         </div>
         <a
           href="/struktur-organisasi"
           target="_blank"
           rel="noopener noreferrer"
-          className="ml-auto flex items-center gap-2 px-4 py-2 text-sm text-[#ad92c9] hover:text-white border border-[#3b2a6e] rounded-lg transition-colors"
+          className="ml-auto flex items-center gap-2 px-4 py-2 text-sm text-text-sub dark:text-[#ad92c9] hover:text-text-main dark:hover:text-white border border-border-light dark:border-[#3b2a6e] hover:bg-black/5 dark:hover:bg-[#3b2a6e]/50 rounded-lg transition-colors"
         >
           <span className="material-symbols-outlined text-base">open_in_new</span>
           Lihat Halaman
         </a>
       </div>
 
-      <div className="bg-[#180f2e] border border-[#3b2a6e] rounded-2xl p-6">
+      <div className="bg-surface-light dark:bg-[#180f2e] border border-border-light dark:border-[#3b2a6e] rounded-2xl p-6">
         <StrukturOrganisasiEditorForm initial={content} />
       </div>
     </div>

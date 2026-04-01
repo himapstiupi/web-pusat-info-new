@@ -59,11 +59,11 @@ export default function HomepageEditorForm({ initial }: Props) {
     `px-4 py-2 rounded-lg text-sm font-semibold transition-colors ${
       activeTab === tab
         ? "bg-primary-purple text-white"
-        : "text-[#ad92c9] hover:bg-white/5"
+        : "text-text-sub dark:text-[#ad92c9] hover:bg-black/5 dark:hover:bg-white/5"
     }`;
 
-  const inputClass = "w-full px-3 py-2 bg-[#1f1535] border border-[#3b2a6e] rounded-lg text-white placeholder-[#7a6ba0] text-sm focus:outline-none focus:ring-2 focus:ring-primary-purple/50 focus:border-primary-purple";
-  const labelClass = "block text-xs font-semibold text-[#ad92c9] uppercase tracking-wider mb-1";
+  const inputClass = "w-full px-3 py-2 bg-background-light dark:bg-[#1f1535] border border-border-light dark:border-[#3b2a6e] rounded-lg text-text-main dark:text-white placeholder-gray-400 dark:placeholder-[#7a6ba0] text-sm focus:outline-none focus:ring-2 focus:ring-primary-purple/50 focus:border-primary-purple";
+  const labelClass = "block text-xs font-semibold text-text-sub dark:text-[#ad92c9] uppercase tracking-wider mb-1";
 
   return (
     <div>
@@ -135,16 +135,16 @@ export default function HomepageEditorForm({ initial }: Props) {
       {activeTab === "values" && (
         <div className="space-y-4">
           {data.values.map((v, i) => (
-            <div key={i} className="p-4 bg-[#1f1535] border border-[#3b2a6e] rounded-xl space-y-3">
+            <div key={i} className="p-4 bg-background-light dark:bg-[#1f1535] border border-border-light dark:border-[#3b2a6e] rounded-xl space-y-3">
               <div className="flex justify-between items-center">
-                <span className="text-sm font-semibold text-white">Nilai #{i + 1}</span>
-                <button onClick={() => removeValue(i)} className="text-red-400 hover:text-red-300 text-xs transition-colors">Hapus</button>
+                <span className="text-sm font-semibold text-text-main dark:text-white">Nilai #{i + 1}</span>
+                <button onClick={() => removeValue(i)} className="text-red-500 dark:text-red-400 hover:text-red-600 dark:hover:text-red-300 text-xs transition-colors">Hapus</button>
               </div>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                 <div>
                   <label className={labelClass}>Ikon (Material Symbol)</label>
                   <input className={inputClass} value={v.icon} onChange={(e) => updateValue(i, "icon", e.target.value)} placeholder="mis: verified_user" />
-                  <p className="text-[#7a6ba0] text-xs mt-1">Lihat icon di <a href="https://fonts.google.com/icons" target="_blank" rel="noopener" className="underline">fonts.google.com/icons</a></p>
+                  <p className="text-gray-500 dark:text-[#7a6ba0] text-xs mt-1">Lihat icon di <a href="https://fonts.google.com/icons" target="_blank" rel="noopener" className="underline">fonts.google.com/icons</a></p>
                 </div>
                 <div>
                   <label className={labelClass}>Judul</label>
@@ -157,7 +157,7 @@ export default function HomepageEditorForm({ initial }: Props) {
               </div>
             </div>
           ))}
-          <button onClick={addValue} className="w-full py-3 border border-dashed border-[#3b2a6e] rounded-xl text-[#ad92c9] hover:border-primary-purple hover:text-white transition-colors text-sm">
+          <button onClick={addValue} className="w-full py-3 border border-dashed border-border-light dark:border-[#3b2a6e] rounded-xl text-text-sub dark:text-[#ad92c9] hover:border-primary-purple hover:text-text-main dark:hover:text-white transition-colors text-sm">
             + Tambah Nilai Baru
           </button>
         </div>

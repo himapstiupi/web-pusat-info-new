@@ -90,8 +90,8 @@ export default function SuperAdminArticlesPage() {
         <main className="flex-1 overflow-x-hidden overflow-y-auto p-4 md:p-8">
             <div className="flex justify-between items-center mb-6 max-w-[1400px] mx-auto">
                 <div>
-                    <h1 className="text-2xl font-bold text-white">Kelola Artikel</h1>
-                    <p className="text-sm text-[#ad92c9]">Daftar semua artikel di website HIMA PSTI.</p>
+                    <h1 className="text-2xl font-bold text-text-main dark:text-white">Kelola Artikel</h1>
+                    <p className="text-sm text-text-sub dark:text-[#ad92c9]">Daftar semua artikel di website HIMA PSTI.</p>
                 </div>
                 <Link href="/superadmin/articles/create" className="px-4 py-2 bg-primary-purple text-white text-sm font-bold rounded-lg hover:bg-[#56298b] transition-colors flex items-center gap-2 shadow-lg shadow-primary-purple/20">
                     <span className="material-symbols-outlined text-xl">add</span>
@@ -99,38 +99,38 @@ export default function SuperAdminArticlesPage() {
                 </Link>
             </div>
 
-            <div className="max-w-[1400px] mx-auto bg-surface-super-dark rounded-xl shadow-sm border border-[#362348] overflow-hidden">
+            <div className="max-w-[1400px] mx-auto bg-surface-light dark:bg-surface-super-dark rounded-xl shadow-sm border border-border-light dark:border-[#362348] overflow-hidden">
                 <div className="overflow-x-auto">
                     <table className="w-full text-left text-sm">
-                        <thead className="bg-[#1e1528] border-b border-[#362348]">
+                        <thead className="bg-background-light dark:bg-[#1e1528] border-b border-border-light dark:border-[#362348]">
                             <tr>
-                                <th className="px-6 py-3 font-semibold text-[#ad92c9]">Judul</th>
-                                <th className="px-6 py-3 font-semibold text-[#ad92c9]">Kategori</th>
-                                <th className="px-6 py-3 font-semibold text-[#ad92c9]">Tanggal Dibuat</th>
-                                <th className="px-6 py-3 text-right font-semibold text-[#ad92c9]">Aksi</th>
+                                <th className="px-6 py-3 font-semibold text-text-sub dark:text-[#ad92c9]">Judul</th>
+                                <th className="px-6 py-3 font-semibold text-text-sub dark:text-[#ad92c9]">Kategori</th>
+                                <th className="px-6 py-3 font-semibold text-text-sub dark:text-[#ad92c9]">Tanggal Dibuat</th>
+                                <th className="px-6 py-3 text-right font-semibold text-text-sub dark:text-[#ad92c9]">Aksi</th>
                             </tr>
                         </thead>
-                        <tbody className="divide-y divide-[#362348]">
+                        <tbody className="divide-y divide-border-light dark:divide-[#362348]">
                             {loading ? (
                                 <tr>
-                                    <td colSpan={5} className="px-6 py-4 text-center text-[#ad92c9]">Memuat data...</td>
+                                    <td colSpan={5} className="px-6 py-4 text-center text-text-sub dark:text-[#ad92c9]">Memuat data...</td>
                                 </tr>
                             ) : articles.length === 0 ? (
                                 <tr>
-                                    <td colSpan={5} className="px-6 py-4 text-center text-[#ad92c9]">Belum ada artikel.</td>
+                                    <td colSpan={5} className="px-6 py-4 text-center text-text-sub dark:text-[#ad92c9]">Belum ada artikel.</td>
                                 </tr>
                             ) : (
                                 articles.map((article) => (
-                                    <tr key={article.id} className="hover:bg-[#2a1f36] transition-colors">
-                                        <td className="px-6 py-4 font-medium text-white max-w-sm truncate">
+                                    <tr key={article.id} className="hover:bg-black/5 dark:hover:bg-[#2a1f36] transition-colors">
+                                        <td className="px-6 py-4 font-medium text-text-main dark:text-white max-w-sm truncate">
                                             {article.title}
                                         </td>
-                                        <td className="px-6 py-4 text-[#ad92c9]">
+                                        <td className="px-6 py-4 text-text-sub dark:text-[#ad92c9]">
                                             <span className="bg-primary-purple/20 text-primary-purple px-2 py-1 rounded-md text-xs font-semibold border border-primary-purple/20">
                                                 {article.categories?.title || "Umum"}
                                             </span>
                                         </td>
-                                        <td className="px-6 py-4 text-[#ad92c9]">
+                                        <td className="px-6 py-4 text-text-sub dark:text-[#ad92c9]">
                                             {new Date(article.created_at).toLocaleDateString("id-ID", {
                                                 day: "numeric",
                                                 month: "short",
@@ -141,17 +141,17 @@ export default function SuperAdminArticlesPage() {
                                             <Link 
                                                 href={`/informasi/${(article.categories as any)?.slug || 'public'}/${article.id}`} 
                                                 target="_blank"
-                                                className="p-1.5 text-[#ad92c9] hover:text-blue-400 transition-colors rounded-md hover:bg-blue-500/10"
+                                                className="p-1.5 text-text-sub dark:text-[#ad92c9] hover:text-blue-600 dark:hover:text-blue-400 transition-colors rounded-md hover:bg-blue-100 dark:hover:bg-blue-500/10"
                                                 title="Lihat Artikel"
                                             >
                                                 <span className="material-symbols-outlined text-xl">visibility</span>
                                             </Link>
-                                            <Link href={`/superadmin/articles/edit/${article.id}`} className="p-1.5 text-[#ad92c9] hover:text-primary-purple transition-colors rounded-md hover:bg-primary-purple/10">
+                                            <Link href={`/superadmin/articles/edit/${article.id}`} className="p-1.5 text-text-sub dark:text-[#ad92c9] hover:text-primary-purple dark:hover:text-primary-purple transition-colors rounded-md hover:bg-primary-purple/10 dark:hover:bg-primary-purple/10">
                                                 <span className="material-symbols-outlined text-xl">edit</span>
                                             </Link>
                                             <button
                                                 onClick={() => confirmDelete(article.id)}
-                                                className="p-1.5 text-[#ad92c9] hover:text-red-400 transition-colors rounded-md hover:bg-red-500/10"
+                                                className="p-1.5 text-text-sub dark:text-[#ad92c9] hover:text-red-600 dark:hover:text-red-400 transition-colors rounded-md hover:bg-red-100 dark:hover:bg-red-500/10"
                                             >
                                                 <span className="material-symbols-outlined text-xl">delete</span>
                                             </button>

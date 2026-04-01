@@ -133,8 +133,8 @@ export default function SuperAdminManageAdmins() {
             <div className="max-w-[1400px] mx-auto space-y-6">
                 <div className="flex flex-col md:flex-row md:items-end justify-between gap-4">
                     <div>
-                        <h2 className="text-white text-3xl font-black tracking-tight mb-2">Manajemen Admin</h2>
-                        <p className="text-[#ad92c9] font-medium">Kelola akses dan status administrator.</p>
+                        <h2 className="text-text-main dark:text-white text-3xl font-black tracking-tight mb-2">Manajemen Admin</h2>
+                        <p className="text-text-sub dark:text-[#ad92c9] font-medium">Kelola akses dan status administrator.</p>
                     </div>
                     <div>
                         <button
@@ -147,10 +147,10 @@ export default function SuperAdminManageAdmins() {
                     </div>
                 </div>
 
-                <div className="bg-surface-super-dark rounded-2xl border border-[#362348] overflow-hidden">
+                <div className="bg-surface-light dark:bg-surface-super-dark rounded-2xl border border-border-light dark:border-[#362348] overflow-hidden">
                     <div className="overflow-x-auto">
                         <table className="w-full text-left text-sm">
-                            <thead className="bg-[#1e1528] text-[#ad92c9]">
+                            <thead className="bg-background-light dark:bg-[#1e1528] text-text-sub dark:text-[#ad92c9]">
                                 <tr>
                                     <th className="px-6 py-3 font-medium">Nama</th>
                                     <th className="px-6 py-3 font-medium">Email</th>
@@ -159,21 +159,21 @@ export default function SuperAdminManageAdmins() {
                                     <th className="px-6 py-3 font-medium text-right">Aksi</th>
                                 </tr>
                             </thead>
-                            <tbody className="divide-y divide-[#362348]">
+                            <tbody className="divide-y divide-border-light dark:divide-[#362348]">
                                 {loading ? (
                                     <tr>
-                                        <td colSpan={5} className="px-6 py-4 text-center text-[#ad92c9]">Memuat data...</td>
+                                        <td colSpan={5} className="px-6 py-4 text-center text-text-sub dark:text-[#ad92c9]">Memuat data...</td>
                                     </tr>
                                 ) : admins.length === 0 ? (
                                     <tr>
-                                        <td colSpan={5} className="px-6 py-4 text-center text-[#ad92c9]">Tidak ada data admin.</td>
+                                        <td colSpan={5} className="px-6 py-4 text-center text-text-sub dark:text-[#ad92c9]">Tidak ada data admin.</td>
                                     </tr>
                                 ) : (
                                     admins.map((admin) => (
-                                        <tr key={admin.id} className="hover:bg-[#2a1f36] transition-colors">
-                                            <td className="px-6 py-4 text-white font-medium">{admin.full_name || "Tanpa Nama"}</td>
-                                            <td className="px-6 py-4 text-[#ad92c9]">{admin.email}</td>
-                                            <td className="px-6 py-4 text-[#ad92c9]">
+                                        <tr key={admin.id} className="hover:bg-black/5 dark:hover:bg-[#2a1f36] transition-colors">
+                                            <td className="px-6 py-4 text-text-main dark:text-white font-medium">{admin.full_name || "Tanpa Nama"}</td>
+                                            <td className="px-6 py-4 text-text-sub dark:text-[#ad92c9]">{admin.email}</td>
+                                            <td className="px-6 py-4 text-text-sub dark:text-[#ad92c9]">
                                                 {new Date(admin.created_at).toLocaleDateString("id-ID", {
                                                     day: "numeric",
                                                     month: "long",
@@ -181,9 +181,9 @@ export default function SuperAdminManageAdmins() {
                                                 })}
                                             </td>
                                             <td className="px-6 py-4">
-                                                <span className={`px-2 py-1 rounded text-xs font-bold ${admin.status === 'approved' ? 'bg-green-500/20 text-green-400' :
-                                                    admin.status === 'pending' ? 'bg-yellow-500/20 text-yellow-400' :
-                                                        'bg-red-500/20 text-red-400'
+                                                <span className={`px-2 py-1 rounded text-xs font-bold ${admin.status === 'approved' ? 'bg-green-500/10 dark:bg-green-500/20 text-green-600 dark:text-green-400' :
+                                                    admin.status === 'pending' ? 'bg-yellow-500/10 dark:bg-yellow-500/20 text-yellow-600 dark:text-yellow-400' :
+                                                        'bg-red-500/10 dark:bg-red-500/20 text-red-500 dark:text-red-400'
                                                     }`}>
                                                     {admin.status?.toUpperCase() || "UNKNOWN"}
                                                 </span>
@@ -192,7 +192,7 @@ export default function SuperAdminManageAdmins() {
                                                 {admin.status === 'approved' && (
                                                     <button
                                                         onClick={() => setResetPasswordUserId(admin.id)}
-                                                        className="inline-flex items-center px-3 py-1.5 rounded-lg border border-yellow-500/30 text-yellow-400 hover:bg-yellow-500/10 transition-colors text-xs font-bold"
+                                                        className="inline-flex items-center px-3 py-1.5 rounded-lg border border-yellow-500/30 text-yellow-600 dark:text-yellow-400 hover:bg-yellow-500/10 transition-colors text-xs font-bold"
                                                         title="Reset Password"
                                                     >
                                                         <span className="material-symbols-outlined text-sm md:mr-1">lock_reset</span>
@@ -212,7 +212,7 @@ export default function SuperAdminManageAdmins() {
                                                 {admin.status !== 'rejected' && (
                                                     <button
                                                         onClick={() => openStatusConfirm(admin.id, admin.full_name, 'rejected')}
-                                                        className="inline-flex items-center px-3 py-1.5 rounded-lg border border-red-500/30 text-red-400 hover:bg-red-500/10 transition-colors text-xs font-bold"
+                                                        className="inline-flex items-center px-3 py-1.5 rounded-lg border border-red-500/30 text-red-500 dark:text-red-400 hover:bg-red-500/10 transition-colors text-xs font-bold"
                                                         title={admin.status === 'approved' ? 'Blokir' : 'Tolak'}
                                                     >
                                                         <span className="material-symbols-outlined text-sm md:mr-1">
@@ -223,7 +223,7 @@ export default function SuperAdminManageAdmins() {
                                                 )}
                                                 <button
                                                     onClick={() => confirmDelete(admin.id, admin.full_name)}
-                                                    className="inline-flex items-center px-3 py-1.5 rounded-lg border border-red-500/30 text-red-400 hover:bg-red-500/10 transition-colors text-xs font-bold"
+                                                    className="inline-flex items-center px-3 py-1.5 rounded-lg border border-red-500/30 text-red-500 dark:text-red-400 hover:bg-red-500/10 transition-colors text-xs font-bold"
                                                     title="Hapus Permanen"
                                                 >
                                                     <span className="material-symbols-outlined text-sm">delete</span>

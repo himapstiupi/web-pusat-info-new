@@ -129,21 +129,21 @@ export default function SuperAdminEditArticlePage() {
         }
     };
 
-    if (loading) return <div className="p-8 text-center text-[#ad92c9]">Memuat artikel...</div>;
+    if (loading) return <div className="p-8 text-center text-text-sub dark:text-[#ad92c9]">Memuat artikel...</div>;
 
     return (
         <main className="flex-1 overflow-x-hidden overflow-y-auto p-4 md:p-8">
             <div className="max-w-4xl mx-auto">
                 <div className="mb-6">
-                    <Link href="/superadmin/articles" className="text-sm text-[#ad92c9] hover:text-white mb-2 inline-block transition-colors">
+                    <Link href="/superadmin/articles" className="text-sm text-text-sub dark:text-[#ad92c9] hover:text-text-main dark:hover:text-white mb-2 inline-block transition-colors">
                         &larr; Kembali ke Daftar Artikel
                     </Link>
-                    <h1 className="text-2xl font-bold text-white">Edit Artikel</h1>
+                    <h1 className="text-2xl font-bold text-text-main dark:text-white">Edit Artikel</h1>
                 </div>
 
-                <div className="bg-[#1e1528] rounded-xl shadow-sm border border-[#362348] p-6">
+                <div className="bg-background-light dark:bg-[#1e1528] rounded-xl shadow-sm border border-border-light dark:border-[#362348] p-6">
                     {error && (
-                        <div className="mb-4 p-3 bg-red-900/20 text-red-400 text-sm rounded-lg border border-red-900/30">
+                        <div className="mb-4 p-3 bg-red-500/10 text-red-500 dark:text-red-400 text-sm rounded-lg border border-red-500/20">
                             {error}
                         </div>
                     )}
@@ -151,26 +151,26 @@ export default function SuperAdminEditArticlePage() {
                         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                             <div className="space-y-4">
                                 <div>
-                                    <label className="block text-sm font-medium text-[#ad92c9] mb-1">Judul Artikel</label>
+                                    <label className="block text-sm font-medium text-text-sub dark:text-[#ad92c9] mb-1">Judul Artikel</label>
                                     <input
                                         type="text"
                                         required
                                         value={title}
                                         onChange={(e) => setTitle(e.target.value)}
-                                        className="w-full px-4 py-2 border border-[#362348] rounded-lg bg-[#2a1f36] text-white focus:outline-none focus:ring-2 focus:ring-primary-purple/50 placeholder-gray-500"
+                                        className="w-full px-4 py-2 border border-border-light dark:border-[#362348] rounded-lg bg-surface-light dark:bg-[#2a1f36] text-text-main dark:text-white focus:outline-none focus:ring-2 focus:ring-primary-purple/50 placeholder-gray-400 dark:placeholder-gray-500"
                                         placeholder="Judul artikel..."
                                     />
                                 </div>
                                 <div>
-                                    <label className="block text-sm font-medium text-[#ad92c9] mb-1">Kategori</label>
+                                    <label className="block text-sm font-medium text-text-sub dark:text-[#ad92c9] mb-1">Kategori</label>
                                     <select
                                         value={categoryId}
                                         onChange={(e) => setCategoryId(e.target.value ? Number(e.target.value) : "")}
-                                        className="w-full px-4 py-2 border border-[#362348] rounded-lg bg-[#2a1f36] text-white focus:outline-none focus:ring-2 focus:ring-primary-purple/50"
+                                        className="w-full px-4 py-2 border border-border-light dark:border-[#362348] rounded-lg bg-surface-light dark:bg-[#2a1f36] text-text-main dark:text-white focus:outline-none focus:ring-2 focus:ring-primary-purple/50"
                                     >
-                                        <option value="">Public (Tanpa Kategori)</option>
+                                        <option value="" className="bg-surface-light dark:bg-[#2a1f36]">Public (Tanpa Kategori)</option>
                                         {categories.map((cat) => (
-                                            <option key={cat.id} value={cat.id}>
+                                            <option key={cat.id} value={cat.id} className="bg-surface-light dark:bg-[#2a1f36]">
                                                 {cat.title}
                                             </option>
                                         ))}
@@ -184,10 +184,10 @@ export default function SuperAdminEditArticlePage() {
                                     <div className="flex items-center gap-3">
                                         <span className="material-symbols-outlined text-primary-purple">public</span>
                                         <div>
-                                            <label htmlFor="publish-toggle" className="block text-sm font-semibold text-white cursor-pointer">
+                                            <label htmlFor="publish-toggle" className="block text-sm font-semibold text-text-main dark:text-white cursor-pointer">
                                                 Status Publikasi
                                             </label>
-                                            <p className="text-xs text-[#ad92c9]">
+                                            <p className="text-xs text-text-sub dark:text-[#ad92c9]">
                                                 {isPublished ? "Artikel akan terlihat oleh publik" : "Artikel disembunyikan dari publik"}
                                             </p>
                                         </div>
@@ -209,7 +209,7 @@ export default function SuperAdminEditArticlePage() {
                         </div>
 
                         <div>
-                            <label className="block text-sm font-medium text-[#ad92c9] mb-3">Konten Artikel</label>
+                            <label className="block text-sm font-medium text-text-sub dark:text-[#ad92c9] mb-3">Konten Artikel</label>
                             <RichTextEditor
                                 value={content}
                                 onChange={setContent}
@@ -220,7 +220,7 @@ export default function SuperAdminEditArticlePage() {
                         {/* Related Links Section */}
                         <div>
                             <div className="flex items-center justify-between mb-2">
-                                <label className="block text-sm font-medium text-[#ad92c9]">
+                                <label className="block text-sm font-medium text-text-sub dark:text-[#ad92c9]">
                                     Link Terkait (Opsional, Maksimal 3)
                                 </label>
                                 {relatedLinks.length < 3 && (
@@ -243,21 +243,21 @@ export default function SuperAdminEditArticlePage() {
                                                 value={link.label}
                                                 onChange={(e) => handleLinkChange(index, "label", e.target.value)}
                                                 placeholder="Label Tombol"
-                                                className="w-full px-3 py-2 border border-[#362348] rounded-lg bg-[#2a1f36] text-white text-sm focus:outline-none focus:ring-1 focus:ring-primary-purple placeholder-gray-500"
+                                                className="w-full px-3 py-2 border border-border-light dark:border-[#362348] rounded-lg bg-surface-light dark:bg-[#2a1f36] text-text-main dark:text-white text-sm focus:outline-none focus:ring-1 focus:ring-primary-purple placeholder-gray-400 dark:placeholder-gray-500"
                                             />
                                             <input
                                                 type="url"
                                                 value={link.url}
                                                 onChange={(e) => handleLinkChange(index, "url", e.target.value)}
                                                 placeholder="URL (https://...)"
-                                                className="w-full px-3 py-2 border border-[#362348] rounded-lg bg-[#2a1f36] text-white text-sm focus:outline-none focus:ring-1 focus:ring-primary-purple placeholder-gray-500"
+                                                className="w-full px-3 py-2 border border-border-light dark:border-[#362348] rounded-lg bg-surface-light dark:bg-[#2a1f36] text-text-main dark:text-white text-sm focus:outline-none focus:ring-1 focus:ring-primary-purple placeholder-gray-400 dark:placeholder-gray-500"
                                             />
                                         </div>
                                         {relatedLinks.length > 0 && (
                                             <button
                                                 type="button"
                                                 onClick={() => removeLink(index)}
-                                                className="p-2 text-[#ad92c9] hover:text-red-400 rounded hover:bg-red-900/20"
+                                                className="p-2 text-text-sub dark:text-[#ad92c9] hover:text-red-500 dark:hover:text-red-400 rounded hover:bg-black/5 dark:hover:bg-red-900/20"
                                             >
                                                 <span className="material-symbols-outlined">delete</span>
                                             </button>
@@ -269,7 +269,7 @@ export default function SuperAdminEditArticlePage() {
 
                         {/* Posting Date Section */}
                         <div>
-                            <label className="block text-sm font-medium text-[#ad92c9] mb-2">Waktu Posting</label>
+                            <label className="block text-sm font-medium text-text-sub dark:text-[#ad92c9] mb-2">Waktu Posting</label>
                             <div className="flex flex-col gap-3">
                                 <label className="flex items-center gap-2 cursor-pointer">
                                     <input
@@ -278,9 +278,9 @@ export default function SuperAdminEditArticlePage() {
                                         value="auto"
                                         checked={postingMode === "auto"}
                                         onChange={() => setPostingMode("auto")}
-                                        className="text-primary-purple focus:ring-primary-purple bg-[#2a1f36] border-[#362348]"
+                                        className="text-primary-purple focus:ring-primary-purple bg-surface-light dark:bg-[#2a1f36] border-border-light dark:border-[#362348]"
                                     />
-                                    <span className="text-sm text-white">Otomatis (Saat ini)</span>
+                                    <span className="text-sm text-text-main dark:text-white">Otomatis (Saat ini)</span>
                                 </label>
                                 <label className="flex items-center gap-2 cursor-pointer">
                                     <input
@@ -289,9 +289,9 @@ export default function SuperAdminEditArticlePage() {
                                         value="custom"
                                         checked={postingMode === "custom"}
                                         onChange={() => setPostingMode("custom")}
-                                        className="text-primary-purple focus:ring-primary-purple bg-[#2a1f36] border-[#362348]"
+                                        className="text-primary-purple focus:ring-primary-purple bg-surface-light dark:bg-[#2a1f36] border-border-light dark:border-[#362348]"
                                     />
-                                    <span className="text-sm text-white">Atur Tanggal & Waktu</span>
+                                    <span className="text-sm text-text-main dark:text-white">Atur Tanggal & Waktu</span>
                                 </label>
                             </div>
 
@@ -302,14 +302,14 @@ export default function SuperAdminEditArticlePage() {
                                         required={postingMode === "custom"}
                                         value={customDate}
                                         onChange={(e) => setCustomDate(e.target.value)}
-                                        className="px-4 py-2 border border-[#362348] rounded-lg bg-[#2a1f36] text-white focus:outline-none focus:ring-2 focus:ring-primary-purple/50 text-sm"
+                                        className="px-4 py-2 border border-border-light dark:border-[#362348] rounded-lg bg-surface-light dark:bg-[#2a1f36] text-text-main dark:text-white focus:outline-none focus:ring-2 focus:ring-primary-purple/50 text-sm"
                                     />
                                 </div>
                             )}
                         </div>
 
-                        <div className="pt-4 flex justify-end gap-3 border-t border-[#362348] mt-6">
-                            <Link href="/superadmin/articles" className="px-4 py-2 border border-[#362348] rounded-lg text-white hover:bg-[#362348] transition-colors font-medium text-sm">
+                        <div className="pt-4 flex justify-end gap-3 border-t border-border-light dark:border-[#362348] mt-6">
+                            <Link href="/superadmin/articles" className="px-4 py-2 border border-border-light dark:border-[#362348] rounded-lg text-text-main dark:text-white hover:bg-black/5 dark:hover:bg-[#362348] transition-colors font-medium text-sm">
                                 Batal
                             </Link>
                             <button
