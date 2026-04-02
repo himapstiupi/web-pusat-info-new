@@ -37,13 +37,19 @@ export default function Navbar() {
                             href="/struktur-organisasi"
                             className="text-text-main dark:text-gray-300 hover:text-primary dark:hover:text-primary transition-colors text-sm font-medium"
                         >
-                            Struktur Organisasi
+                            Pengurus
                         </Link>
                         <Link
                             href="/informasi"
                             className="text-text-main dark:text-gray-300 hover:text-primary dark:hover:text-primary transition-colors text-sm font-medium"
                         >
                             Informasi
+                        </Link>
+                        <Link
+                            href="/aspirasi"
+                            className="text-text-main dark:text-gray-300 hover:text-primary dark:hover:text-primary transition-colors text-sm font-medium"
+                        >
+                            Aspirasi
                         </Link>
                     </nav>
                     <div className="h-6 w-px bg-border-light dark:bg-border-dark"></div>
@@ -100,6 +106,13 @@ export default function Navbar() {
                                 onClick={() => setIsMobileMenuOpen(false)}
                             >
                                 Informasi
+                            </Link>
+                            <Link
+                                href="/aspirasi"
+                                className="text-text-main dark:text-gray-200 hover:text-primary dark:hover:text-primary font-medium text-base py-2 border-b border-gray-100 dark:border-gray-800"
+                                onClick={() => setIsMobileMenuOpen(false)}
+                            >
+                                Aspirasi
                             </Link>
                         </nav>
 
